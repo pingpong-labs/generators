@@ -1,0 +1,30 @@
+{
+    "name": "pingpong/generators",
+    "description": "Simple generators package for Laravel framework",
+    "license": "BSD-3-Clause",
+    "keywords": ["laravel", "generators", "pingpong"],
+    "authors": [
+        {
+            "name": "Pingpong Labs",
+            "email": "pingpong.labs@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/filesystem": "4.2.*",
+        "illuminate/support": "4.2.*"
+    },
+    "require-dev": {
+        "mockery/mockery": "~0.9",
+        "phpunit/phpunit": "~4"
+    },
+    "autoload": {
+        "psr-0": {
+            "Pingpong\\Generators": "src/"
+        }
+    },
+    "autoload-dev": {
+        "files": ["tests/TestCase.php"]
+    },
+    "minimum-stability": "stable"
+}
