@@ -1,6 +1,7 @@
 <?php namespace Pingpong\Generators;
 
 use Illuminate\Support\ServiceProvider;
+use Pingpong\Generators\Stub;
 
 class GeneratorsServiceProvider extends ServiceProvider {
 
