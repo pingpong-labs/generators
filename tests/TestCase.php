@@ -8,5 +8,13 @@ class TestCase extends PHPUnit_Framework_TestCase {
 	{
 		Stub::setPath(__DIR__ . '/../src/Pingpong/Generators/Stubs');
 	}
-	
+
+	protected function assertGenerated($generator)
+	{
+		$this->assertTrue(file_exists($path = $generator->getDestinationFilePath()));
+		$this->assertSame(
+			file_get_contents($path),
+			$generator->getTemplateContents()->getContents()
+		);
+	}
 }

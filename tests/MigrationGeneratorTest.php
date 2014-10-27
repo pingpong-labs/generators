@@ -1,6 +1,8 @@
 <?php
 
 use Pingpong\Generators\MigrationGenerator;
+use Illuminate\Filesystem\Filesystem;
+use Mockery as m;
 
 class MigrationGeneratorTest extends TestCase {
 
@@ -13,12 +15,13 @@ class MigrationGeneratorTest extends TestCase {
 		$this->path = __DIR__ . '/../fixture';
 	}
 
-	protected function assertMigrationSame($generator)
+	public function tearDown()
 	{
-		$this->assertSame(
-			file_get_contents($generator->getDestinationFilePath()),
-			$generator->getTemplateContents()->getContents()
-		);
+		$filesystem  = new Filesystem;
+
+		$filesystem->cleanDirectory($this->path);
+
+		$filesystem->put($this->path . '/.gitignore', "*\n!.gitignore");
 	}
 
 	public function testGenerateMigrationTable()
@@ -27,18 +30,24 @@ class MigrationGeneratorTest extends TestCase {
 
 		$generator->generate();
 
-		$this->assertMigrationSame($generator);
+		$this->assertGenerated($generator);
 	}
 
 	public function testGenerateMigrationTableButThatFileAlreadyExist()
 	{
 		$this->setExpectedException('Pingpong\Generators\Exceptions\FileAlreadyExistException');
-
+		
 		$generator = new MigrationGenerator($this->path, 'create_users_table');
 
+		$filesystem = m::mock('Illuminate\Filesystem\Filesystem');
+
+		$generator->setFilesystem($filesystem);
+
+		$filesystem->shouldReceive('exists')->once()->andReturn(true);
+		
 		$generator->generate();
 		
-		$this->assertMigrationSame($generator);
+		$this->assertGenerated($generator);
 	}
 
 	public function testGenerateMigrationWithSpecifiedFields()
@@ -49,7 +58,7 @@ class MigrationGeneratorTest extends TestCase {
 
 		$generator->generate();
 		
-		$this->assertMigrationSame($generator);
+		$this->assertGenerated($generator);
 	}
 
 	public function testGenerateMigrationTableWithPlainFlag()
@@ -58,7 +67,7 @@ class MigrationGeneratorTest extends TestCase {
 
 		$generator->generate();
 		
-		$this->assertMigrationSame($generator);
+		$this->assertGenerated($generator);
 	}
 
 	public function testGenerateMigrationTableWithInvalidMigrationName()
@@ -69,7 +78,7 @@ class MigrationGeneratorTest extends TestCase {
 
 		$generator->generate();
 		
-		$this->assertMigrationSame($generator);
+		$this->assertGenerated($generator);
 	}
 
 	public function testGenerateMigrationTableWithOtherSchema()
@@ -77,45 +86,45 @@ class MigrationGeneratorTest extends TestCase {
 		// make
 		$generator = new MigrationGenerator($this->path, 'make_teachers_table', 'name:string');
 		$generator->generate();
-		$this->assertMigrationSame($generator);
+		$this->assertGenerated($generator);
 
 		// delete
 		$generator = new MigrationGenerator($this->path, 'delete_name_from_dogs_table', 'name:string');
 		$generator->generate();
-		$this->assertMigrationSame($generator);
+		$this->assertGenerated($generator);
 
 		// remove
 		$generator = new MigrationGenerator($this->path, 'remove_name_from_dogs_table', 'name:string');
 		$generator->generate();
-		$this->assertMigrationSame($generator);
+		$this->assertGenerated($generator);
 
 		// add
 		$generator = new MigrationGenerator($this->path, 'add_age_to_dogs_table', 'age:string');
 		$generator->generate();
-		$this->assertMigrationSame($generator);
+		$this->assertGenerated($generator);
 		
 		$generator = new MigrationGenerator($this->path, 'insert_age_to_dogs_table', 'age:string');
 		$generator->generate();
-		$this->assertMigrationSame($generator);
+		$this->assertGenerated($generator);
 		
 		
 		$generator = new MigrationGenerator($this->path, 'append_age_to_dogs_table', 'age:string');
 		$generator->generate();
-		$this->assertMigrationSame($generator);
+		$this->assertGenerated($generator);
 		
 		
 		$generator = new MigrationGenerator($this->path, 'update_age_to_dogs_table', 'age:string');
 		$generator->generate();
-		$this->assertMigrationSame($generator);
+		$this->assertGenerated($generator);
 
 		// drop
 		$generator = new MigrationGenerator($this->path, 'drop_dogs_table', 'name:string, age:string');
 		$generator->generate();
-		$this->assertMigrationSame($generator);
+		$this->assertGenerated($generator);
 
 		$generator = new MigrationGenerator($this->path, 'destroy_dogs_table', 'name:string, age:string');
 		$generator->generate();
-		$this->assertMigrationSame($generator);
+		$this->assertGenerated($generator);
 	}
 
 }
