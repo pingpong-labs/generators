@@ -8,29 +8,44 @@ use Illuminate\Support\Str;
 
 class MigrationGenerator extends FileGenerator {
 
+    /**
+     * The migration path.
+     * 
+     * @var string
+     */
     protected $path;
 
     /**
+     * The name of migration.
+     * 
      * @var string
      */
     protected $name;
 
     /**
+     * The specified migration fields.
+     * 
      * @var null|string
      */
     protected $fields;
 
     /**
+     * Create a plain migration.
+     * 
      * @var bool
      */
     protected $plain;
 
     /**
+     * The name of stub will be used.
+     * 
      * @var string
      */
     protected $type = 'migration';
 
     /**
+     * The constructor.
+     * 
      * @param string $path
      * @param string $name
      * @param string|null $fields
@@ -72,55 +87,112 @@ class MigrationGenerator extends FileGenerator {
      */
     public function getTemplateContents()
     {
-        $schema = new Parser($this->name);
+        $schema = $this->getSchemaParser();
+        
+        if ($this->plain) return $this->getPlainStubContents();
+        
+        elseif ($schema->isCreate()) return $this->getCreatingStubContents();
 
-        $fields = new Field($this->fields);
+        elseif ($schema->isAdd()) return $this->getAddingStubContents();
 
-        if ($this->plain)
-        {
-            return new Stub('migration/plain', [
-                'CLASS' => $this->getClassName()
-            ]);
-        }
-        elseif ($schema->isCreate())
-        {
-            return new Stub('migration/create', [
-                'CLASS' => $this->getClassName(),
-                'FIELDS' => $fields->getSchemaCreate(),
-                'TABLE' => $schema->getTableName()
-            ]);
-        }
-        elseif ($schema->isAdd())
-        {
-            return new Stub('migration/add', [
-                'CLASS' => $this->getClassName(),
-                'FIELDS_UP' => $fields->getSchemaCreate(),
-                'FIELDS_DOWN' => $fields->getSchemaDropColumn(),
-                'TABLE' => $schema->getTableName()
-            ]);
-        }
-        elseif ($schema->isDelete())
-        {
-            return new Stub('migration/delete', [
-                'CLASS' => $this->getClassName(),
-                'FIELDS_DOWN' => $fields->getSchemaCreate(),
-                'FIELDS_UP' => $fields->getSchemaDropColumn(),
-                'TABLE' => $schema->getTableName()
-            ]);
-        }
-        elseif ($schema->isDrop())
-        {
-            return new Stub('migration/drop', [
-                'CLASS' => $this->getClassName(),
-                'FIELDS' => $fields->getSchemaCreate(),
-                'TABLE' => $schema->getTableName()
-            ]);
-        }
+        elseif ($schema->isDelete()) return $this->getDeletingStubContents();
+
+        elseif ($schema->isDrop()) return $this->getDroppingStubContents();
 
         throw new InvalidMigrationNameException;
     }
 
     /**
+     * Get fields.
+     * 
+     * @return Field
+     */
+    public function getFields()
+    {
+        return new Field($this->fields);
+    }
+
+    /**
+     * Get schema parser.
+     * 
+     * @return Parser 
+     */
+    public function getSchemaParser()
+    {
+        return new Parser($this->name);
+    }
+
+    /**
+     * Get stub contents for dropping action.
+     * 
+     * @return Stub
+     */
+    protected function getPlainStubContents()
+    {
+        return new Stub('migration/plain', ['CLASS' => $this->getClassName()]);
+    }
+
+    /**
+     * Get stub contents for creating action.
+     * 
+     * @return Stub
+     */
+    protected function getCreatingStubContents()
+    {
+        return new Stub('migration/create', [
+            'CLASS' => $this->getClassName(),
+            'FIELDS' => $this->getFields()->getSchemaCreate(),
+            'TABLE' => $this->getSchemaParser()->getTableName()
+        ]);
+    }
+
+    /**
+     * Get stub contents for adding action.
+     * 
+     * @return Stub
+     */
+    protected function getAddingStubContents()
+    {
+        return new Stub('migration/add', [
+            'CLASS' => $this->getClassName(),
+            'FIELDS_UP' => $this->getFields()->getSchemaCreate(),
+            'FIELDS_DOWN' => $this->getFields()->getSchemaDropColumn(),
+            'TABLE' => $this->getSchemaParser()->getTableName()
+        ]);
+    }
+
+    /**
+     * Get stub contents for deleting action.
+     * 
+     * @return Stub
+     */
+    protected function getDeletingStubContents()
+    {
+        return new Stub('migration/delete', [
+            'CLASS' => $this->getClassName(),
+            'FIELDS_DOWN' => $this->getFields()->getSchemaCreate(),
+            'FIELDS_UP' => $this->getFields()->getSchemaDropColumn(),
+            'TABLE' => $this->getSchemaParser()->getTableName()
+        ]);
+    }
+
+    /**
+     * Get stub contents for dropping action.
+     * 
+     * @return Stub
+     */
+    protected function getDroppingStubContents()
+    { 
+        return new Stub('migration/drop', [
+            'CLASS' => $this->getClassName(),
+            'FIELDS' => $this->getFields()->getSchemaCreate(),
+            'TABLE' => $this->getSchemaParser()->getTableName()
+        ]);
+    }
+
+    /**
+     * Get filename.
+     * 
      * @return string
      */
     public function getFilename()
@@ -128,6 +200,11 @@ class MigrationGenerator extends FileGenerator {
         return date('Y_m_d_His_') . $this->name . '.php';
     }
 
+    /**
+     * Get destination filepath.
+     * 
+     * @return string
+     */
     public function getDestinationFilePath()
     {
         return $this->path . '/' . $this->getFilename();

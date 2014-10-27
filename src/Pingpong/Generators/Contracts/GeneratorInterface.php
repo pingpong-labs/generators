@@ -2,6 +2,11 @@
 
 interface GeneratorInterface {
 
+	/**
+	 * Generate something amazing.
+	 * 
+	 * @return void 
+	 */
     public function generate();
 
 } 

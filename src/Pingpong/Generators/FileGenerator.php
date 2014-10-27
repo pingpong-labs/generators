@@ -8,11 +8,8 @@ use Pingpong\Generators\Stub;
 abstract class FileGenerator extends Generator implements FileGeneratorInterface {
 
     /**
-     * @var string
-     */
-    protected $type;
-
-    /**
+     * The name of stub file (without extension) will be used.
+     * 
      * @var string
      */
     protected $stub;
@@ -58,9 +55,7 @@ abstract class FileGenerator extends Generator implements FileGeneratorInterface
      */
     public function getDefaultReplacements()
     {
-        return [
-            'CLASS_NAME' => $this->getClassName()
-        ];   
+        return ['CLASS_NAME' => $this->getClassName()];   
     }
 
     /**
