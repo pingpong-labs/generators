@@ -55,6 +55,16 @@ class Stub {
     }
 
     /**
+     * Register the default stub path.
+     * 
+     * @return void
+     */
+    public function register()
+    {
+        static::$path = __DIR__. '/Stubs';    
+    }
+
+    /**
      * Set stub path.
      * 
      * @param string $path

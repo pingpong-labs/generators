@@ -19,7 +19,7 @@ class GeneratorsServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		Stub::setPath(__DIR__ . '/Stubs');
+		Stub::register();
 	}
 
 	/**
