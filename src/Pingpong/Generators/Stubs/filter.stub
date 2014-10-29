@@ -1,0 +1,10 @@
+<?php $NAMESPACE$
+
+class $CLASS_NAME$ {
+
+	public function filter()
+	{
+		//
+	}
+
+} 
