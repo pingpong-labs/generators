@@ -39,6 +39,46 @@ $generator = new Pingpong\Generators\ModelGenerator($path, 'User');
 $generator->generate();
 ```
 
+**Generate a new seed**
+
+```php
+$generator = new Pingpong\Generators\SeedGenerator($path, 'UsersTableSeeder');
+
+$generator->generate();
+```
+
+**Generate a new filter**
+
+```php
+$generator = new Pingpong\Generators\FilterGenerator($path, 'AdminFilter');
+
+$generator->generate();
+```
+
+**Generate a new form request**
+
+```php
+$generator = new Pingpong\Generators\FormRequestGenerator($path, 'LoginRequest');
+
+$generator->generate();
+```
+
+**Generate a new command**
+
+```php
+$generator = new Pingpong\Generators\CommandGenerator($path, 'FooCommand');
+
+$generator->generate();
+```
+
+**Generate a new service provider**
+
+```php
+$generator = new Pingpong\Generators\ProviderGenerator($path, 'BarServiceProvider');
+
+$generator->generate();
+```
+
 ### License
 
 This package is open-sourced software licensed under [The BSD 3-Clause License](http://opensource.org/licenses/BSD-3-Clause)
