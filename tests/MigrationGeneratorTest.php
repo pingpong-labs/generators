@@ -1,28 +1,9 @@
 <?php
 
 use Pingpong\Generators\MigrationGenerator;
-use Illuminate\Filesystem\Filesystem;
 use Mockery as m;
 
 class MigrationGeneratorTest extends TestCase {
-
-	protected $path;
-
-	public function setUp()
-	{
-		parent::setUp();
-
-		$this->path = __DIR__ . '/../fixture';
-	}
-
-	public function tearDown()
-	{
-		$filesystem  = new Filesystem;
-
-		$filesystem->cleanDirectory($this->path);
-
-		$filesystem->put($this->path . '/.gitignore', "*\n!.gitignore");
-	}
 
 	public function testGenerateMigrationTable()
 	{

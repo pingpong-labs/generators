@@ -15,6 +15,48 @@ abstract class FileGenerator extends Generator implements FileGeneratorInterface
     protected $stub;
 
     /**
+     * The path.
+     * 
+     * @var string
+     */
+    protected $path;
+
+    /**
+     * Constructor.
+     * 
+     * @param string $path
+     */
+    public function __construct($path)
+    {
+        parent::__construct();
+
+        $this->path = $path;
+    }
+
+    /**
+     * Get base path.
+     * 
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * Set path.
+     * 
+     * @param  string $path
+     * @return $this
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
      * Get stub replacements.
      *
      * @return array
@@ -104,6 +146,16 @@ abstract class FileGenerator extends Generator implements FileGeneratorInterface
         {
             $this->filesystem->makeDirectory($dir);
         }
+    }
+
+    /**
+     * Get destination filepath.
+     * 
+     * @return string
+     */
+    public function getDestinationFilePath()
+    {
+        return $this->path . '/' . $this->getFilename();
     }
 
 }

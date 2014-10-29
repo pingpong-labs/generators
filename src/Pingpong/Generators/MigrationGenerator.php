@@ -9,13 +9,6 @@ use Illuminate\Support\Str;
 class MigrationGenerator extends FileGenerator {
 
     /**
-     * The migration path.
-     * 
-     * @var string
-     */
-    protected $path;
-
-    /**
      * The name of migration.
      * 
      * @var string
@@ -53,7 +46,7 @@ class MigrationGenerator extends FileGenerator {
      */
     public function __construct($path, $name, $fields = null, $plain = false)
     {
-        parent::__construct();
+        parent::__construct($path);
 
         $this->name = $name;
         $this->path = $path;
@@ -198,16 +191,6 @@ class MigrationGenerator extends FileGenerator {
     public function getFilename()
     {
         return date('Y_m_d_His_') . $this->name . '.php';
-    }
-
-    /**
-     * Get destination filepath.
-     * 
-     * @return string
-     */
-    public function getDestinationFilePath()
-    {
-        return $this->path . '/' . $this->getFilename();
     }
 
 }
