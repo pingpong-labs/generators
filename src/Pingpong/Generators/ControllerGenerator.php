@@ -1,11 +1,6 @@
 <?php namespace Pingpong\Generators;
 
-class ControllerGenerator extends FileGenerator {
-
-    /**
-     * @var string
-     */
-    protected $name;
+class ControllerGenerator extends FormRequestGenerator {
 
     /**
      * @var string
@@ -16,27 +11,5 @@ class ControllerGenerator extends FileGenerator {
      * @var string
      */
     protected $stub = 'controller';
-
-    /**
-     * @param string $name
-     * @param array  $options
-     */
-    public function __construct($path, $name, array $options = [])
-    {
-        parent::__construct($path);
-
-        $this->name = $name;
-        $this->options = $options;
-    }
-
-    /**
-     * Get stub replacements.
-     *
-     * @return array
-     */
-    public function getStubReplacements()
-    {
-        return $this->appendNamespaceStub();
-    }
 
 }
