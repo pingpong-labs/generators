@@ -79,6 +79,22 @@ $generator = new Pingpong\Generators\ProviderGenerator($path, 'BarServiceProvide
 $generator->generate();
 ```
 
+**Generate a new migration**
+
+```php
+use Pingpong\Generate\MigrationGenerator;
+
+$generator = new MigrationGenerator($path, 'create_users_table');
+
+$generator = new MigrationGenerator($path, 'create_users_table', 'name:string, username:string');
+
+$generator = new MigrationGenerator($path, 'add_remember_token_to_users_table', 'remember_token:string:nullable');
+
+$generator = new MigrationGenerator($path, 'remove_username_from_users_table', 'username:string');
+
+$generator = new MigrationGenerator($path, 'drop_users_table', 'name:string, username:string');
+```
+
 ### License
 
 This package is open-sourced software licensed under [The BSD 3-Clause License](http://opensource.org/licenses/BSD-3-Clause)
