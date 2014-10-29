@@ -36,9 +36,9 @@ class CommandGenerator extends FileGenerator {
      */
     public function getStubReplacements()
     {
-        return [
+        return $this->appendNamespaceStub([
             'COMMAND_NAME' => $this->option('command', 'command:name'),
-        ];
+        ]);
     }
 
 }
