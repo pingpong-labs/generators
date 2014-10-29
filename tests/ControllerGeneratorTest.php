@@ -4,7 +4,7 @@ use Pingpong\Generators\ControllerGenerator;
 
 class ControllerGeneratorTest extends TestCase {
 
-	public function testGenerateCommand()
+	public function testGenerateWithoutOptions()
 	{
 		$generator = new ControllerGenerator($this->path, 'HelloController');
 

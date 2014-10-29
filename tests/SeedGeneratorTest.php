@@ -4,7 +4,7 @@ use Pingpong\Generators\SeedGenerator;
 
 class SeedGeneratorTest extends TestCase {
 
-	public function testGenerateSeed()
+	public function testGenerateWithoutOptions()
 	{
 		$generator = new SeedGenerator($this->path, 'UsersTableSeeder');
 

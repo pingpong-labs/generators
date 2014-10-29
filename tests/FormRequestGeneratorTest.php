@@ -4,7 +4,7 @@ use Pingpong\Generators\FormRequestGenerator;
 
 class FormRequestGeneratorTest extends TestCase {
 
-	public function testGenerateCommand()
+	public function testGenerateWithoutOptions()
 	{
 		$generator = new FormRequestGenerator($this->path, 'LoginRequest');
 
