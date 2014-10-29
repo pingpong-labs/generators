@@ -1,7 +1,7 @@
 <?php namespace Pingpong\Generators;
 
-class CommandGenerator extends FileGenerator { 
-    
+class ControllerGenerator extends FileGenerator {
+
     /**
      * @var string
      */
@@ -10,16 +10,16 @@ class CommandGenerator extends FileGenerator {
     /**
      * @var string
      */
-    protected $type = 'command';
+    protected $type = 'controller';
 
     /**
      * @var string
      */
-    protected $stub = 'command';
+    protected $stub = 'controller';
 
     /**
      * @param string $name
-     * @param string $options
+     * @param array  $options
      */
     public function __construct($path, $name, array $options = [])
     {
@@ -36,9 +36,7 @@ class CommandGenerator extends FileGenerator {
      */
     public function getStubReplacements()
     {
-        return [
-            'COMMAND_NAME' => $this->option('command', 'command:name'),
-        ];
+        return $this->appendNamespaceStub();
     }
 
 }

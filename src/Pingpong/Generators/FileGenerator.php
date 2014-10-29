@@ -1,11 +1,16 @@
 <?php namespace Pingpong\Generators;
 
-use Pingpong\Generators\Exceptions\FileAlreadyExistException;
-use Pingpong\Generators\Contracts\FileGeneratorInterface;
-use Pingpong\Generators\Storage;
 use Pingpong\Generators\Stub;
+use Pingpong\Generators\Storage;
+use Pingpong\Generators\Traits\NamespaceTrait;
+use Pingpong\Generators\Traits\OptionableTrait;
+use Pingpong\Generators\Traits\StudlyClassNameTrait;
+use Pingpong\Generators\Contracts\FileGeneratorInterface;
+use Pingpong\Generators\Exceptions\FileAlreadyExistException;
 
 abstract class FileGenerator extends Generator implements FileGeneratorInterface {
+
+    use OptionableTrait, NamespaceTrait, StudlyClassNameTrait;
 
     /**
      * The name of stub file (without extension) will be used.
@@ -72,13 +77,6 @@ abstract class FileGenerator extends Generator implements FileGeneratorInterface
     {
         return $this->getClassName() . '.php';
     }
-
-    /**
-     * Get class name.
-     *
-     * @return string
-     */
-    abstract protected function getClassName();
 
     /**
      * Generate the file.
