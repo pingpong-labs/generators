@@ -9,6 +9,14 @@ Simple generators package for Laravel framework
 composer require "pingpong/generators:dev-master"
 ```
 
+Next, register new service provider to `providers` array in `app/config/app.php`.
+
+```php
+'Pingpong\Generators\GeneratorsServiceProvider'
+```
+
+Done.
+
 ### Documentation
 
 **Generate a new controller**
