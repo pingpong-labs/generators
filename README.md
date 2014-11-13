@@ -2,6 +2,10 @@ Simple generators package for Laravel framework
 ==========
 
 [![Build Status](https://travis-ci.org/pingpong-labs/generators.svg)](https://travis-ci.org/pingpong-labs/generators)
+[![Latest Stable Version](https://poser.pugx.org/pingpong/generators/v/stable.svg)](https://packagist.org/packages/pingpong/generators)
+[![Total Downloads](https://poser.pugx.org/pingpong/generators/downloads.svg)](https://packagist.org/packages/pingpong/generators)
+[![Latest Unstable Version](https://poser.pugx.org/pingpong/generators/v/unstable.svg)](https://packagist.org/packages/pingpong/generators)
+[![License](https://poser.pugx.org/pingpong/generators/license.svg)](https://packagist.org/packages/pingpong/generators)
 
 ### Quick Installation Via Composer
 
