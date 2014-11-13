@@ -1,4 +1,4 @@
-Simple generators package for Laravel framework
+Laravel Generators
 ==========
 
 [![Build Status](https://travis-ci.org/pingpong-labs/generators.svg)](https://travis-ci.org/pingpong-labs/generators)

@@ -1,6 +1,6 @@
 {
     "name": "pingpong/generators",
-    "description": "Simple generators package for Laravel framework",
+    "description": "Laravel Generators",
     "license": "BSD-3-Clause",
     "keywords": ["laravel", "generators", "pingpong"],
     "authors": [
