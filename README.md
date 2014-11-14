@@ -10,7 +10,7 @@ Laravel Generators
 ### Quick Installation Via Composer
 
 ```
-composer require "pingpong/generators:dev-master"
+composer require "pingpong/generators:1.*"
 ```
 
 Next, register new service provider to `providers` array in `app/config/app.php`.
