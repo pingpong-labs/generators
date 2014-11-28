@@ -1,6 +1,5 @@
 <?php namespace Pingpong\Generators;
 
-use Pingpong\Generators\Stub;
 use Pingpong\Generators\Storage;
 use Pingpong\Generators\Traits\NamespaceTrait;
 use Pingpong\Generators\Traits\OptionableTrait;
