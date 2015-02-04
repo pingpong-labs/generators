@@ -11,16 +11,16 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "illuminate/filesystem": "4.*|5.0.*",
-        "illuminate/support": "4.*|5.0.*"
+        "illuminate/filesystem": "~4.*",
+        "illuminate/support": "~4"
     },
     "require-dev": {
         "mockery/mockery": "~0.9",
         "phpunit/phpunit": "~4"
     },
     "autoload": {
-        "psr-0": {
-            "Pingpong\\Generators": "src/"
+        "psr-4": {
+            "Pingpong\\Generators\\": ""
         }
     },
     "autoload-dev": {

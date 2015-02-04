@@ -59,7 +59,7 @@ class Stub {
      * 
      * @return void
      */
-    public function register()
+    public static function register()
     {
         static::$path = __DIR__. '/Stubs';    
     }
