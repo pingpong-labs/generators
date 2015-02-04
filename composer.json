@@ -1,30 +1,34 @@
 {
-    "name": "pingpong/generators",
-    "description": "Laravel Generators",
-    "license": "BSD-3-Clause",
-    "keywords": ["laravel", "generators", "pingpong"],
-    "authors": [
-        {
-            "name": "Pingpong Labs",
-            "email": "pingpong.labs@gmail.com"
-        }
-    ],
-    "require": {
-        "php": ">=5.4.0",
-        "illuminate/filesystem": "~4.*",
-        "illuminate/support": "~4"
-    },
-    "require-dev": {
-        "mockery/mockery": "~0.9",
-        "phpunit/phpunit": "~4"
-    },
-    "autoload": {
-        "psr-4": {
-            "Pingpong\\Generators\\": ""
-        }
-    },
-    "autoload-dev": {
-        "files": ["tests/TestCase.php"]
-    },
-    "minimum-stability": "stable"
+  "name": "pingpong/generators",
+  "description": "Laravel Generators",
+  "license": "BSD-3-Clause",
+  "keywords": [
+    "laravel",
+    "generators",
+    "pingpong"
+  ],
+  "authors": [
+    {
+      "name": "Pingpong Labs",
+      "email": "pingpong.labs@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0",
+    "illuminate/filesystem": "~4",
+    "illuminate/support": "~4"
+  },
+  "require-dev": {
+    "mockery/mockery": "~0.9",
+    "phpunit/phpunit": "~4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Pingpong\\Generators\\": ""
+    }
+  },
+  "autoload-dev": {
+    "files": ["tests/TestCase.php"]
+  },
+  "minimum-stability": "stable"
 }
