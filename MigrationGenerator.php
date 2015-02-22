@@ -76,7 +76,7 @@ class MigrationGenerator extends FileGenerator {
 
     /**
      * @return Stub
-     * @throws Invalidname
+     * @throws InvalidMigrationNameException
      */
     public function getTemplateContents()
     {
