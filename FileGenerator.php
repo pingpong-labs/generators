@@ -128,7 +128,9 @@ abstract class FileGenerator extends Generator implements FileGeneratorInterface
 
         $this->autoCreateDirectory($path);
 
-        return $this->filesystem->put($path, $this->getTemplateContents());
+        $this->filesystem->put($path, $this->getTemplateContents());
+
+        return $path;
     }
 
     /**
