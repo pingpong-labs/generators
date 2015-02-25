@@ -1,0 +1,110 @@
+<?php namespace App\Http\Controllers$PREFIX_BACKSLASH$;
+
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+use Illuminate\Http\Request;
+use $MODEL$;
+use App\Http\Requests$PREFIX_BACKSLASH$\$STUDLY_PLURAL_ENTITY$\Create$STUDLY_ENTITY$Request;
+use App\Http\Requests$PREFIX_BACKSLASH$\$STUDLY_PLURAL_ENTITY$\Update$STUDLY_ENTITY$Request;
+
+class $STUDLY_PLURAL_ENTITY$Controller extends Controller {
+
+	public function __construct()
+	{
+		//
+	}
+
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function index()
+	{
+		$$LOWER_PLURAL_ENTITY$ = $STUDLY_ENTITY$::latest()->paginate(20);
+
+		$no = $$LOWER_PLURAL_ENTITY$->firstItem();
+
+		return view('$PREFIX_DOT$$LOWER_PLURAL_ENTITY$.index', compact('$LOWER_PLURAL_ENTITY$', 'no'));
+	}
+
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return Response
+	 */
+	public function create()
+	{
+		return view('$PREFIX_DOT$$LOWER_PLURAL_ENTITY$.create');
+	}
+
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @return Response
+	 */
+	public function store(Create$STUDLY_ENTITY$Request $request)
+	{
+		$$LOWER_SINGULAR_ENTITY$ = $STUDLY_ENTITY$::create($request->all());
+
+		return redirect()->route('$PREFIX_DOT$$LOWER_PLURAL_ENTITY$.index');
+	}
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function show($id)
+	{
+		$$LOWER_SINGULAR_ENTITY$ = $STUDLY_ENTITY$::findOrFail($id);
+
+		return view('$PREFIX_DOT$$LOWER_PLURAL_ENTITY$.show', compact('$LOWER_SINGULAR_ENTITY$'));
+	}
+
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function edit($id)
+	{
+		$$LOWER_SINGULAR_ENTITY$ = $STUDLY_ENTITY$::findOrFail($id);
+	
+		return view('$PREFIX_DOT$$LOWER_PLURAL_ENTITY$.edit', compact('$LOWER_SINGULAR_ENTITY$'));
+	}
+
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function update(Update$STUDLY_ENTITY$Request $request, $id)
+	{		
+		$$LOWER_SINGULAR_ENTITY$ = $STUDLY_ENTITY$::findOrFail($id);
+
+		$$LOWER_SINGULAR_ENTITY$->update($request->all());
+
+		return redirect()->route('$PREFIX_DOT$$LOWER_PLURAL_ENTITY$.index');
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function destroy($id)
+	{
+		$$LOWER_SINGULAR_ENTITY$ = $STUDLY_ENTITY$::findOrFail($id);
+		
+		$$LOWER_SINGULAR_ENTITY$->delete();
+	
+		return redirect()->route('$PREFIX_DOT$$LOWER_PLURAL_ENTITY$.index');
+	}
+
+}

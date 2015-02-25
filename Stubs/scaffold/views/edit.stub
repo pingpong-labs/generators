@@ -1,0 +1,17 @@
+@extends('$VIEW_LAYOUT$')
+
+@section('content')
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Edit $STUDLY_SINGULAR_ENTITY$
+            <div class="panel-nav">
+                <a href="{!! route('$PREFIX_DOT$$LOWER_PLURAL_ENTITY$.index') !!}" class="btn btn-default">Back</a>
+            </div>
+        </div>
+        <div class="panel-body">
+            @include('$PREFIX_DOT$$LOWER_PLURAL_ENTITY$.form', ['model' => $$LOWER_SINGULAR_ENTITY$)
+        </div>
+    </div>
+
+@stop

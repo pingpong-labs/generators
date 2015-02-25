@@ -1,0 +1,6 @@
+	<div class="form-group">
+	    {!! Form::label('$NAME$', '$LABEL$:', ['class' => 'col-md-2 control-label']) !!}
+	    <div class="col-sm-9">
+	        {!! Form::$TYPE$('$NAME$', null, ['class' => 'form-control']) !!}
+	    </div>
+	</div>

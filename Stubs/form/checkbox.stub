@@ -1,0 +1,7 @@
+	<div class="form-group">
+	    {!! Form::label('$NAME$', '', ['class' => 'col-md-2 control-label']) !!}
+	    <div class="col-sm-9">
+	        {!! Form::checkbox('$NAME$') !!}
+	        $LABEL$
+	    </div>
+	</div>

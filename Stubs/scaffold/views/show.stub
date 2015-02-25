@@ -1,0 +1,24 @@
+@extends('$VIEW_LAYOUT$')
+
+@section('content')
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Show $STUDLY_SINGULAR_ENTITY$
+            <div class="panel-nav">
+                <a href="{!! route('$PREFIX_DOT$$LOWER_PLURAL_ENTITY$.edit', $$LOWER_SINGULAR_ENTITY$->id) !!}" class="btn btn-default">Edit</a>
+                <a href="{!! route('$PREFIX_DOT$$LOWER_PLURAL_ENTITY$.index') !!}" class="btn btn-default">Back</a>
+            </div>
+        </div>
+        <table class="table table-stripped table-bordered">
+            <tr>
+                <td><b>ID</b></td>
+                <td>{!! $$LOWER_SINGULAR_ENTITY$->id !!}</td>
+            </tr>
+            $SHOW_BODY$
+            <tr>
+                <td><b>Created At</b></td>
+                <td>{!! $$LOWER_SINGULAR_ENTITY$->created_at !!}</td>
+            </tr>
+        </table>
+    </div>
+@stop

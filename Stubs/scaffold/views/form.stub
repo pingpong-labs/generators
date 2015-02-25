@@ -1,0 +1,17 @@
+@include('errors.validation')
+
+<div class="form-horizontal">
+    @if (isset($model))
+        {!! Form::model($model, ['files' => true, 'method' => 'PUT', 'route' => ['$PREFIX_DOT$$LOWER_PLURAL_ENTITY$.update', $model->id]]) !!}
+    @else
+        {!! Form::open(['files' => true, 'route' => '$PREFIX_DOT$$LOWER_PLURAL_ENTITY$.store']) !!}
+    @endif
+    $FORM_FIELDS$
+    <div class="form-group">
+        <label class="col-md-2 control-label"></label>
+        <div class="col-sm-9">
+            {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+        </div>
+    </div>
+    {!! Form::close() !!}
+</div>

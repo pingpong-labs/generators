@@ -1,0 +1,45 @@
+@extends('$VIEW_LAYOUT$')
+
+@section('content')
+  <div class="panel panel-default">
+	<div class="panel-heading">
+		All $STUDLY_PLURAL_ENTITY$
+		<div class="panel-nav">
+			<a href="{!! route('$PREFIX_DOT$$LOWER_PLURAL_ENTITY$.create') !!}" class="btn btn-default">Add New</a>
+		</div>
+	</div>
+	<table class="table table-stripped table-bordered">
+		<thead>
+			<th class="text-center">#</th>
+			$TABLE_HEADING$
+			<th>Created At</th>
+			<th class="text-center">Action</th>
+		</thead>
+		<tbody>
+			@foreach ($$LOWER_PLURAL_ENTITY$ as $$LOWER_SINGULAR_ENTITY$)
+				<tr>
+					<td class="text-center">{!! $no !!}</td>
+					$TABLE_BODY$
+					<td class="text-center">
+						<div class="btn-group">
+							<a href="{!! route('$PREFIX_DOT$$LOWER_PLURAL_ENTITY$.show', $$LOWER_SINGULAR_ENTITY$->id) !!}" class="btn btn-default" title="View" data-toggle="tooltip"><i class="fa fa-eye"></i></a>
+							<a href="{!! route('$PREFIX_DOT$$LOWER_PLURAL_ENTITY$.edit', $$LOWER_SINGULAR_ENTITY$->id) !!}" class="btn btn-default" title="Edit" data-toggle="tooltip"><i class="fa fa-edit"></i></a>
+							<a data-toggle="modal" href="#delete{{ $$LOWER_SINGULAR_ENTITY$->id }}" class="btn btn-default" title="Delete" data-toggle="tooltip"><i class="fa fa-times"></i></a>
+							@include('modals.delete', [
+								'url' => route('$PREFIX_DOT$$LOWER_PLURAL_ENTITY$.destroy', $$LOWER_SINGULAR_ENTITY$->id),
+								'model' => $$LOWER_SINGULAR_ENTITY$
+							])
+						</div>
+					</td>
+				</tr>
+				<?php $no++; ?>
+			@endforeach
+		</tbody>
+	</table>
+	@if($$LOWER_PLURAL_ENTITY$->hasMorePages())
+	<div class="panel-footer">
+		<div class="text-center">{!! $$LOWER_PLURAL_ENTITY$ !!}</div>
+	</div>
+	@endif
+</div>
+@stop
