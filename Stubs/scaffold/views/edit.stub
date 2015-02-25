@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="panel-body">
-            @include('$PREFIX_DOT$$LOWER_PLURAL_ENTITY$.form', ['model' => $$LOWER_SINGULAR_ENTITY$)
+            @include('$PREFIX_DOT$$LOWER_PLURAL_ENTITY$.form', ['model' => $$LOWER_SINGULAR_ENTITY$])
         </div>
     </div>
 
