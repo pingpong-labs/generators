@@ -5,8 +5,11 @@ use Illuminate\Console\Command;
 use Pingpong\Generators\MigrationGenerator;
 use Pingpong\Generators\Scaffold\ControllerGenerator;
 use Pingpong\Generators\Exceptions\FileAlreadyExistException;
+use Illuminate\Console\AppNamespaceDetectorTrait;
 
 class CrudGenerator {
+
+    use AppNamespaceDetectorTrait;
 
     /**
      * @var array
@@ -161,7 +164,9 @@ class CrudGenerator {
 
         if ($this->confirm("Do you want me to create a new model: {$name} ? [yes|no]"))
         {
-            $this->call('make:model', compact('name'));
+            $namespace = str_replace('\\', '', $this->getAppNamespace());
+
+            (new ModelGenerator(app_path(), $name, compact('namespace')))->generate();
         }
     }
 
