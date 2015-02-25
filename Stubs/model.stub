@@ -1,4 +1,4 @@
-<?php $NAMESPACE$
+<?php $NAMESPACE$;
    
 use Illuminate\Database\Eloquent\Model;
 
