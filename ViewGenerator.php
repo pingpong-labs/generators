@@ -120,7 +120,7 @@ class ViewGenerator extends Generator {
     {
         $result = '';
 
-        $var = $this->getLowerPluralEntityName();
+        $var = $this->getLowerSingularEntityName();
 
         $heading = explode(',', $this->option('table-heading'));
 
