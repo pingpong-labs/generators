@@ -48,6 +48,8 @@ class CrudGenerator {
      */
     public function confirm($message)
     {
+        if($this->option('force')) return true;
+        
         return $this->console->confirm($message);
     }
 
