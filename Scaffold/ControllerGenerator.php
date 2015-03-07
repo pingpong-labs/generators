@@ -11,57 +11,115 @@ class ControllerGenerator extends Generator {
 
 	use OptionableTrait, AppNamespaceDetectorTrait;
 
+    /**
+     * The shortname of stub file path.
+     * 
+     * @var string
+     */
 	protected $stub = 'scaffold/controller';
 
+    /**
+     * The path of controllers.
+     * 
+     * @var string
+     */
 	protected $path = 'app/Http/Controllers';
 
-	public function __construct(array $options = [])
+    /**
+     * Create new instance of this class.
+     * 
+     * @param array $options
+     */
+	public function __construct(array $options = array())
 	{		
 		parent::__construct();
 
 		$this->options = $options;
 	}
 
+    /**
+     * Get class name.
+     * 
+     * @return string
+     */
 	public function getClassName()
 	{
 		return Str::studly(Str::plural(str_replace('Controller', '', $this->option('name')))) . 'Controller';
 	}
 
+    /**
+     * Get prefix path.
+     * 
+     * @return string
+     */
 	public function getPrefixBackSlash()
 	{
 		return $this->prefix ? '\\' . $this->prefix : null;
 	}
 
+    /**
+     * Get prefix dot.
+     * 
+     * @return string
+     */
 	public function getPrefixDot()
 	{
 		return Str::lower($this->prefix ? $this->prefix . '.' : null);
 	}
 
+    /**
+     * Get entity name in singular with studly case convention.
+     * 
+     * @return string
+     */
 	public function getStudlyEntityName()
 	{
 		return Str::studly(Str::singular($this->entity));
 	}
 
+    /**
+     * Get entity name in plural with studly case convention.
+     * 
+     * @return string
+     */
 	public function getStudlyPluralEntityName()
 	{
 		return Str::studly(Str::plural($this->entity));
 	}
-
+    /**
+     * Get entity name in plural with lower case convention.
+     * 
+     * @return string
+     */
 	public function getLowerPluralEntityName()
 	{
 		return Str::lower(Str::plural($this->entity));
 	}
-
+    /**
+     * Get entity name in singular with lower case convention.
+     * 
+     * @return string
+     */
 	public function getLowerSingularEntityName()
 	{
 		return Str::lower(Str::singular($this->entity));
 	}
 
+    /**
+     * Get model name.
+     * 
+     * @return string
+     */
 	public function getModel()
 	{
 		return $this->getAppNamespace() . $this->model;
 	}
 
+    /**
+     * Get stub replacements.
+     * 
+     * @return array
+     */
 	public function getStubReplacements()
 	{
 		return [
