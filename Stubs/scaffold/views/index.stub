@@ -36,10 +36,8 @@
 			@endforeach
 		</tbody>
 	</table>
-	@if($$LOWER_PLURAL_ENTITY$->hasMorePages())
 	<div class="panel-footer">
 		<div class="text-center">{!! $$LOWER_PLURAL_ENTITY$ !!}</div>
 	</div>
-	@endif
 </div>
 @stop
