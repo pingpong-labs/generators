@@ -4,7 +4,7 @@ trait NamespaceTrait {
 
     /**
      * Get class namespace.
-     * 
+     *
      * @return string
      */
     public function getNamespace()
@@ -20,7 +20,7 @@ trait NamespaceTrait {
      */
     public function appendNamespaceStub(array $replacements = [])
     {
-		return array_merge(['NAMESPACE' => $this->getNamespace()], $replacements);    	
+        return array_merge(['NAMESPACE' => $this->getNamespace()], $replacements);
     }
 
 }

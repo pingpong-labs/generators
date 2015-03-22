@@ -1,7 +1,7 @@
 <?php namespace Pingpong\Generators;
 
-class CommandGenerator extends FileGenerator { 
-    
+class CommandGenerator extends FileGenerator {
+
     /**
      * @var string
      */

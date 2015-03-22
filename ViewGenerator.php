@@ -1,12 +1,9 @@
 <?php namespace Pingpong\Generators;
 
 use Illuminate\Support\Str;
-use Pingpong\Generators\Stub;
-use Pingpong\Generators\Generator;
+use Pingpong\Generators\Exceptions\FileAlreadyExistException;
 use Pingpong\Generators\Scaffold\FormGenerator;
 use Pingpong\Generators\Traits\OptionableTrait;
-use Illuminate\Console\AppNamespaceDetectorTrait;
-use Pingpong\Generators\Exceptions\FileAlreadyExistException;
 
 class ViewGenerator extends Generator {
 
@@ -146,7 +143,10 @@ class ViewGenerator extends Generator {
      */
     public function getTable()
     {
-        if ($table = $this->option('table')) return Str::plural($table);
+        if ($table = $this->option('table'))
+        {
+            return Str::plural($table);
+        }
 
         return $this->getLowerPluralEntityName();
     }

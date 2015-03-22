@@ -1,11 +1,10 @@
 <?php namespace Pingpong\Generators;
 
-use Illuminate\Support\Str;
-use Illuminate\Console\Command;
-use Pingpong\Generators\MigrationGenerator;
-use Pingpong\Generators\Scaffold\ControllerGenerator;
-use Pingpong\Generators\Exceptions\FileAlreadyExistException;
 use Illuminate\Console\AppNamespaceDetectorTrait;
+use Illuminate\Console\Command;
+use Illuminate\Support\Str;
+use Pingpong\Generators\Exceptions\FileAlreadyExistException;
+use Pingpong\Generators\Scaffold\ControllerGenerator;
 
 class CrudGenerator {
 
@@ -48,8 +47,11 @@ class CrudGenerator {
      */
     public function confirm($message)
     {
-        if($this->option('force')) return true;
-        
+        if ($this->option('force'))
+        {
+            return true;
+        }
+
         return $this->console->confirm($message);
     }
 
@@ -290,10 +292,10 @@ class CrudGenerator {
             $this->call('migrate', []);
         }
     }
-    
+
     /**
      * Dump autoload.
-     * 
+     *
      * @return void
      */
     protected function dumpAutoload()

@@ -1,11 +1,11 @@
 <?php namespace Pingpong\Generators;
 
+use Pingpong\Generators\Contracts\FileGeneratorInterface;
+use Pingpong\Generators\Exceptions\FileAlreadyExistException;
 use Pingpong\Generators\Storage;
 use Pingpong\Generators\Traits\NamespaceTrait;
 use Pingpong\Generators\Traits\OptionableTrait;
 use Pingpong\Generators\Traits\StudlyClassNameTrait;
-use Pingpong\Generators\Contracts\FileGeneratorInterface;
-use Pingpong\Generators\Exceptions\FileAlreadyExistException;
 
 abstract class FileGenerator extends Generator implements FileGeneratorInterface {
 
@@ -13,21 +13,21 @@ abstract class FileGenerator extends Generator implements FileGeneratorInterface
 
     /**
      * The name of stub file (without extension) will be used.
-     * 
+     *
      * @var string
      */
     protected $stub;
 
     /**
      * The path.
-     * 
+     *
      * @var string
      */
     protected $path;
 
     /**
      * Constructor.
-     * 
+     *
      * @param string $path
      */
     public function __construct($path)
@@ -39,7 +39,7 @@ abstract class FileGenerator extends Generator implements FileGeneratorInterface
 
     /**
      * Get base path.
-     * 
+     *
      * @return string
      */
     public function getPath()
@@ -49,7 +49,7 @@ abstract class FileGenerator extends Generator implements FileGeneratorInterface
 
     /**
      * Set path.
-     * 
+     *
      * @param  string $path
      * @return $this
      */
@@ -89,12 +89,12 @@ abstract class FileGenerator extends Generator implements FileGeneratorInterface
 
     /**
      * Get default replacements.
-     * 
-     * @return array 
+     *
+     * @return array
      */
     public function getDefaultReplacements()
     {
-        return ['CLASS_NAME' => $this->getClassName()];   
+        return ['CLASS_NAME' => $this->getClassName()];
     }
 
     /**
@@ -105,8 +105,8 @@ abstract class FileGenerator extends Generator implements FileGeneratorInterface
     public function getTemplateContents()
     {
         return new Stub($this->stub, array_merge(
-            $this->getDefaultReplacements(),
-            $this->getStubReplacements()
+                $this->getDefaultReplacements(),
+                $this->getStubReplacements()
             )
         );
     }
@@ -121,7 +121,7 @@ abstract class FileGenerator extends Generator implements FileGeneratorInterface
     {
         $path = $this->getDestinationFilePath();
 
-        if($this->filesystem->exists($path))
+        if ($this->filesystem->exists($path))
         {
             throw new FileAlreadyExistException("File already exist : {$path}");
         }
@@ -135,13 +135,13 @@ abstract class FileGenerator extends Generator implements FileGeneratorInterface
 
     /**
      * Auto create directory.
-     * 
-     * @param  string $path 
-     * @return void       
+     *
+     * @param  string $path
+     * @return void
      */
     protected function autoCreateDirectory($path)
     {
-        if( ! is_dir($dir = dirname($path)))
+        if ( ! is_dir($dir = dirname($path)))
         {
             $this->filesystem->makeDirectory($dir);
         }
@@ -149,7 +149,7 @@ abstract class FileGenerator extends Generator implements FileGeneratorInterface
 
     /**
      * Get destination filepath.
-     * 
+     *
      * @return string
      */
     public function getDestinationFilePath()

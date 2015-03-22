@@ -9,9 +9,9 @@ trait OptionableTrait {
 
     /**
      * Get the specified option by given key.
-     * 
-     * @param  string $key     
-     * @param  mixed  $default 
+     *
+     * @param  string $key
+     * @param  mixed $default
      * @return mixed
      */
     public function option($key, $default = null)

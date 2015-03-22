@@ -1,8 +1,8 @@
 <?php namespace Pingpong\Generators\Console;
 
-use Pingpong\Generators\Stub;
 use Illuminate\Console\Command;
 use Pingpong\Generators\CrudGenerator;
+use Pingpong\Generators\Stub;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -30,7 +30,7 @@ class CrudCommand extends Command {
     public function fire()
     {
         Stub::register();
-        
+
         $options = [
             'entity' => $this->argument('entity'),
             'form' => $this->option('form'),

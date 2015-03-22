@@ -1,44 +1,43 @@
 <?php namespace Pingpong\Generators;
 
+use Illuminate\Support\Str;
 use Pingpong\Generators\Exceptions\InvalidMigrationNameException;
 use Pingpong\Generators\Schema\Field;
 use Pingpong\Generators\Schema\Parser;
-use Pingpong\Generators\Stub;
-use Illuminate\Support\Str;
 
 class MigrationGenerator extends FileGenerator {
 
     /**
      * The name of migration.
-     * 
+     *
      * @var string
      */
     protected $name;
 
     /**
      * The specified migration fields.
-     * 
+     *
      * @var null|string
      */
     protected $fields;
 
     /**
      * Create a plain migration.
-     * 
+     *
      * @var bool
      */
     protected $plain;
 
     /**
      * The name of stub will be used.
-     * 
+     *
      * @var string
      */
     protected $type = 'migration';
 
     /**
      * The constructor.
-     * 
+     *
      * @param string $path
      * @param string $name
      * @param string|null $fields
@@ -81,23 +80,34 @@ class MigrationGenerator extends FileGenerator {
     public function getTemplateContents()
     {
         $schema = $this->getSchemaParser();
-        
-        if ($this->plain) return $this->getPlainStubContents();
-        
-        elseif ($schema->isCreate()) return $this->getCreatingStubContents();
 
-        elseif ($schema->isAdd()) return $this->getAddingStubContents();
-
-        elseif ($schema->isDelete()) return $this->getDeletingStubContents();
-
-        elseif ($schema->isDrop()) return $this->getDroppingStubContents();
+        if ($this->plain)
+        {
+            return $this->getPlainStubContents();
+        }
+        elseif ($schema->isCreate())
+        {
+            return $this->getCreatingStubContents();
+        }
+        elseif ($schema->isAdd())
+        {
+            return $this->getAddingStubContents();
+        }
+        elseif ($schema->isDelete())
+        {
+            return $this->getDeletingStubContents();
+        }
+        elseif ($schema->isDrop())
+        {
+            return $this->getDroppingStubContents();
+        }
 
         throw new InvalidMigrationNameException;
     }
 
     /**
      * Get fields.
-     * 
+     *
      * @return Field
      */
     public function getFields()
@@ -107,8 +117,8 @@ class MigrationGenerator extends FileGenerator {
 
     /**
      * Get schema parser.
-     * 
-     * @return Parser 
+     *
+     * @return Parser
      */
     public function getSchemaParser()
     {
@@ -117,7 +127,7 @@ class MigrationGenerator extends FileGenerator {
 
     /**
      * Get stub contents for dropping action.
-     * 
+     *
      * @return Stub
      */
     protected function getPlainStubContents()
@@ -127,7 +137,7 @@ class MigrationGenerator extends FileGenerator {
 
     /**
      * Get stub contents for creating action.
-     * 
+     *
      * @return Stub
      */
     protected function getCreatingStubContents()
@@ -141,7 +151,7 @@ class MigrationGenerator extends FileGenerator {
 
     /**
      * Get stub contents for adding action.
-     * 
+     *
      * @return Stub
      */
     protected function getAddingStubContents()
@@ -156,7 +166,7 @@ class MigrationGenerator extends FileGenerator {
 
     /**
      * Get stub contents for deleting action.
-     * 
+     *
      * @return Stub
      */
     protected function getDeletingStubContents()
@@ -171,11 +181,11 @@ class MigrationGenerator extends FileGenerator {
 
     /**
      * Get stub contents for dropping action.
-     * 
+     *
      * @return Stub
      */
     protected function getDroppingStubContents()
-    { 
+    {
         return new Stub('migration/drop', [
             'CLASS' => $this->getClassName(),
             'FIELDS' => $this->getFields()->getSchemaCreate(),
@@ -185,7 +195,7 @@ class MigrationGenerator extends FileGenerator {
 
     /**
      * Get filename.
-     * 
+     *
      * @return string
      */
     public function getFilename()

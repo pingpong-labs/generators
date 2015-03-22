@@ -4,14 +4,14 @@ use Illuminate\Support\ServiceProvider;
 
 class ConsoleServiceProvider extends ServiceProvider {
 
-	/**
-	 * Register the commands.
-	 * 
-	 * @return void
-	 */
-	public function register()
-	{
-		$this->commands('Pingpong\Generators\Console\CrudCommand');
-	}
+    /**
+     * Register the commands.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->commands('Pingpong\Generators\Console\CrudCommand');
+    }
 
 }

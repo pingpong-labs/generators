@@ -18,14 +18,14 @@ class Stub {
 
     /**
      * The stub path.
-     * 
+     *
      * @var string
      */
     protected static $path;
 
     /**
      * The stub extension.
-     * 
+     *
      * @var string
      */
     protected $extension = '.stub';
@@ -56,17 +56,17 @@ class Stub {
 
     /**
      * Register the default stub path.
-     * 
+     *
      * @return void
      */
     public static function register()
     {
-        static::$path = __DIR__. '/Stubs';    
+        static::$path = __DIR__ . '/Stubs';
     }
 
     /**
      * Set stub path.
-     * 
+     *
      * @param string $path
      */
     public static function setPath($path)
@@ -76,7 +76,7 @@ class Stub {
 
     /**
      * Get stub path.
-     * 
+     *
      * @return string
      */
     public static function getPath()

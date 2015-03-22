@@ -1,3 +1,5 @@
 <?php namespace Pingpong\Generators\Exceptions;
 
-class FileAlreadyExistException extends \Exception {}
+class FileAlreadyExistException extends \Exception {
+
+}

@@ -7,7 +7,7 @@ abstract class Generator implements GeneratorInterface {
 
     /**
      * The filesystem instance.
-     * 
+     *
      * @var \Illuminate\Filesystem\Filesystem
      */
     protected $filesystem;
@@ -22,7 +22,7 @@ abstract class Generator implements GeneratorInterface {
 
     /**
      * Get the filesystem instance.
-     * 
+     *
      * @return \Illuminate\Filesystem\Filesystem
      */
     public function getFilesystem()
@@ -32,7 +32,7 @@ abstract class Generator implements GeneratorInterface {
 
     /**
      * Set the filesystem instance.
-     * 
+     *
      * @param \Illuminate\Filesystem\Filesystem $filesystem
      * @return $this
      */

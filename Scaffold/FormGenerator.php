@@ -1,34 +1,34 @@
 <?php namespace Pingpong\Generators\Scaffold;
 
-use Pingpong\Generators\Stub;
 use Pingpong\Generators\Contracts\GeneratorInterface;
+use Pingpong\Generators\Stub;
 
 class FormGenerator implements GeneratorInterface {
 
-	/**
-	 * The list of form fields will be created.
-	 * 
-	 * @var string
-	 */
-	protected $fields;
+    /**
+     * The list of form fields will be created.
+     *
+     * @var string
+     */
+    protected $fields;
 
-	/**
-	 * Create a new instance.
-	 * 
-	 * @param void
-	 */
-	public function __construct($fields)
-	{
-		$this->fields = $fields;
-	}
+    /**
+     * Create a new instance.
+     *
+     * @param void
+     */
+    public function __construct($fields)
+    {
+        $this->fields = $fields;
+    }
 
-	/**
-	 * Generate the form.
-	 * 
-	 * @return string
-	 */
-	public function generate()
-	{		
+    /**
+     * Generate the form.
+     *
+     * @return string
+     */
+    public function generate()
+    {
         $fields = explode(',', $this->fields);
 
         $result = '';
@@ -39,17 +39,17 @@ class FormGenerator implements GeneratorInterface {
 
             $label = ucfirst($name);
 
-            $result .= PHP_EOL.$this->getStub($type, compact('name', 'label', 'type'))->getContents().PHP_EOL;
+            $result .= PHP_EOL . $this->getStub($type, compact('name', 'label', 'type'))->getContents() . PHP_EOL;
         }
 
         return $result;
-	}
+    }
 
     /**
      * Get stub for specified form type.
-     * 
+     *
      * @param  string $type
-     * @param  array  $replacements
+     * @param  array $replacements
      * @return string
      */
     protected function getStub($type, array $replacements)

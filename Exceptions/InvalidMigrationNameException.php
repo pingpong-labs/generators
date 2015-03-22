@@ -1,3 +1,5 @@
 <?php namespace Pingpong\Generators\Exceptions;
 
-class InvalidMigrationNameException extends \Exception {}
+class InvalidMigrationNameException extends \Exception {
+
+}
