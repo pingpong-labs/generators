@@ -160,7 +160,11 @@ abstract class Generator {
 
         array_pop($segments);
 
-        return $this->getRootNamespace() . implode($segments, '\\');
+        $rootNamespace = $this->getRootNamespace();
+
+        if ($rootNamespace == false) return null;
+
+        return 'namespace ' . rtrim($rootNamespace . implode($segments, '\\'), '\\') . ';';
     }
 
     /**
