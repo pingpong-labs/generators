@@ -4,7 +4,7 @@ namespace Pingpong\Generators;
 
 use Illuminate\Support\ServiceProvider;
 
-class GeneratorServiceProvider extends ServiceProvider {
+class GeneratorsServiceProvider extends ServiceProvider {
 
 	/**
 	 * The array of consoles.
