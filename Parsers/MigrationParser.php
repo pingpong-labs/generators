@@ -118,7 +118,9 @@ class MigrationParser implements Arrayable {
 	 */
 	protected function formatField($key, $field, $column)
 	{
-		if($key == 0)
+		if ($this->hasCustomAttribute($column)) return '->' . $field;
+
+		if ($key == 0)
 		{
 			return '->' . $field . "('". $column."')";	
 		}
@@ -169,7 +171,7 @@ class MigrationParser implements Arrayable {
 	 * Get custom attributes value.
 	 * 
 	 * @param  string $column
-	 * @return string|array
+	 * @return array
 	 */
 	public function getCustomAttribute($column)
 	{
