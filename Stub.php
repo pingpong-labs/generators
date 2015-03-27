@@ -112,6 +112,16 @@ class Stub {
     }
 
     /**
+     * Get stub contents.
+     * 
+     * @return string
+     */
+    public function render()
+    {
+        return $this->getContents();
+    }
+
+    /**
      * Set replacements array.
      *
      * @param  array $replaces
