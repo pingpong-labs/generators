@@ -4,6 +4,11 @@ namespace Pingpong\Generators\Parsers;
 
 class MigrationParser {
 
+	/**
+	 * The array of custom migrtions.
+	 * 
+	 * @var array
+	 */
 	protected $customAttributes = [
 		'remember_token' => 'rememberToken()',
 		'soft_delete' => 'softDeletes()',
