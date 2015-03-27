@@ -16,6 +16,7 @@ class GeneratorsServiceProvider extends ServiceProvider {
 		'Controller',
 		'Console',
 		'View',
+		'Seed',
 	];
 
 	/**
