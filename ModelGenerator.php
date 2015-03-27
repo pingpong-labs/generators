@@ -1,15 +1,24 @@
-<?php namespace Pingpong\Generators;
+<?php
 
-class ModelGenerator extends FormRequestGenerator {
+namespace Pingpong\Generators;
 
-    /**
-     * @var string
-     */
-    protected $type = 'model';
+class ModelGenerator extends Generator {
 
     /**
+     * Get stub name.
+     * 
      * @var string
      */
     protected $stub = 'model';
+
+    /**
+     * Get destination path for generated file.
+     *
+     * @return string
+     */
+    public function getPath()
+    {
+        return app_path() . '/' . $this->getName() . '.php';
+    }
 
 }

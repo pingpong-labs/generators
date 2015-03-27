@@ -1,24 +1,24 @@
-<?php $NAMESPACE$
+<?php namespace $NAMESPACE$
 
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
-class $CLASS_NAME$ extends Command {
+class $CLASS$ extends Command {
 
 	/**
 	 * The console command name.
 	 *
 	 * @var string
 	 */
-	protected $name = '$COMMAND_NAME$';
+	protected $name = '$COMMAND$';
 
 	/**
 	 * The console command description.
 	 *
 	 * @var string
 	 */
-	protected $description = 'Command description.';
+	protected $description = '$DESCRIPTION$';
 
 	/**
 	 * Create a new command instance.

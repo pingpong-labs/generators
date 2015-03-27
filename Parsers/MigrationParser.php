@@ -36,7 +36,7 @@ class MigrationParser implements Arrayable {
 	/**
 	 * Parse a string to array of formatted schema.
 	 * 
-	 * @param  string $migration]
+	 * @param  string $migration
 	 * @return array
 	 */
 	public function parse($migration)
@@ -57,6 +57,11 @@ class MigrationParser implements Arrayable {
 		return $parsed;
 	}
 
+	/**
+	 * Get array of schema.
+	 * 
+	 * @return array
+	 */
 	public function getSchemas()
 	{
 		return explode(',', str_replace(' ', '', $this->migration));

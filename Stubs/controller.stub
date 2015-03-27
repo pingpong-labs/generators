@@ -1,7 +1,9 @@
-<?php $NAMESPACE$
+<?php namespace $NAMESPACE$
 
 use Illuminate\Routing\Controller;
 
-class $CLASS_NAME$ extends Controller {
+class $CLASS$ extends Controller {
 
+	//
+	
 }
