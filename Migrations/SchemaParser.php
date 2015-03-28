@@ -130,7 +130,7 @@ class SchemaParser implements Arrayable {
 	 */
 	public function createField($column, $attributes, $type = 'add')
 	{
-		$results = '$table';
+		$results = "\t\t\t" . '$table';
 
 		foreach ($attributes as $key => $field)
 		{
