@@ -3,11 +3,11 @@
 class Stub {
 
     /**
-     * The short stub name.
+     * The stub path.
      *
      * @var string
      */
-    protected $name;
+    protected $path;
 
     /**
      * The replacements array.
@@ -17,61 +17,40 @@ class Stub {
     protected $replaces = [];
 
     /**
-     * The stub path.
-     *
-     * @var string
-     */
-    protected static $path;
-
-    /**
-     * The stub extension.
-     *
-     * @var string
-     */
-    protected $extension = '.stub';
-
-    /**
      * The contructor.
      *
-     * @param string $name
-     * @param array $replaces
+     * @param string $path
+     * @param array  $replaces
      */
-    public function __construct($name, array $replaces = [])
+    public function __construct($path, array $replaces = [])
     {
-        $this->name = $name;
+        $this->path = $path;
         $this->replaces = $replaces;
     }
 
     /**
      * Create new self instance.
      *
-     * @param  string $name
+     * @param  string $path
      * @param  array $replaces
      * @return self
      */
-    public static function create($name, array $replaces = [])
+    public static function create($path, array $replaces = [])
     {
-        return new static($name, $replaces);
-    }
-
-    /**
-     * Register the default stub path.
-     *
-     * @return void
-     */
-    public static function register()
-    {
-        static::$path = __DIR__ . '/Stubs';
+        return new static($path, $replaces);
     }
 
     /**
      * Set stub path.
      *
      * @param string $path
+     * @return self
      */
-    public static function setPath($path)
+    public function setPath($path)
     {
-        static::$path = $path;
+        $this->path = $path;
+
+        return $this;
     }
 
     /**
@@ -79,19 +58,9 @@ class Stub {
      *
      * @return string
      */
-    public static function getPath()
+    public function getPath()
     {
-        return static::$path;
-    }
-
-    /**
-     * Get stub path.
-     *
-     * @return string
-     */
-    protected function getStubPath()
-    {
-        return static::$path . '/' . $this->name . $this->extension;
+        return $this->path;
     }
 
     /**
@@ -101,7 +70,7 @@ class Stub {
      */
     public function getContents()
     {
-        $contents = file_get_contents($this->getStubPath());
+        $contents = file_get_contents($this->getPath());
 
         foreach ($this->replaces as $search => $replace)
         {
@@ -147,11 +116,11 @@ class Stub {
     /**
      * Handle magic method __toString.
      *
-     * @return mixed|string
+     * @return string
      */
     public function __toString()
     {
-        return $this->getContents();
+        return $this->render();
     }
 
 } 

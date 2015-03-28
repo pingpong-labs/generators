@@ -71,7 +71,11 @@ abstract class Generator {
      */
     public function getStub()
     {
-        return (new Stub(__DIR__ . '/Stubs/'.$this->stub, $this->getReplacements()))->getContents();
+        return (new Stub(
+            __DIR__ . '/Stubs/'.$this->stub .'.stub',
+            $this->getReplacements()
+            )
+        )->render();
     }
 
     /**
