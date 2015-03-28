@@ -28,8 +28,5 @@
       "Pingpong\\Generators\\": ""
     }
   },
-  "autoload-dev": {
-    "files": ["tests/TestCase.php"]
-  },
   "minimum-stability": "stable"
 }
