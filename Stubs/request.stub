@@ -1,20 +1,8 @@
 <?php $NAMESPACE$
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\Request;
 
-class $CLASS_NAME$ extends FormRequest {
-
-	/**
-	 * Get the validation rules that apply to the request.
-	 *
-	 * @return array
-	 */
-	public function rules()
-	{
-		return [
-			//
-		];
-	}
+class $CLASS$ extends Request {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -23,7 +11,17 @@ class $CLASS_NAME$ extends FormRequest {
 	 */
 	public function authorize()
 	{
-		return false;
+		$AUTH$
+	}
+
+	/**
+	 * Get the validation rules that apply to the request.
+	 *
+	 * @return array
+	 */
+	public function rules()
+	{
+		$RULES$
 	}
 
 }
