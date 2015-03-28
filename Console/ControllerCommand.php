@@ -32,7 +32,9 @@ class ControllerCommand extends Command {
     {
         $generator = new ControllerGenerator([
             'name' => $this->argument('name'),
-            'force' => $this->option('force')
+            'resource' => $this->option('resource'),
+            'scaffold' => $this->option('scaffold'),
+            'force' => $this->option('force'),
         ]);
 
         $generator->run();
@@ -58,6 +60,8 @@ class ControllerCommand extends Command {
     public function getOptions()
     {
         return [
+          ['resource', 'r', InputOption::VALUE_NONE, 'Generate a resource controller.', null],
+          ['scaffold', 's', InputOption::VALUE_NONE, 'Generate a scaffold controller.', null],
           ['force', 'f', InputOption::VALUE_NONE, 'Force the creation if file already exists.', null],
         ];
     }
