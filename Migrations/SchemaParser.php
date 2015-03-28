@@ -1,10 +1,10 @@
 <?php
 
-namespace Pingpong\Generators\Parsers;
+namespace Pingpong\Generators\Migrations;
 
 use Illuminate\Contracts\Support\Arrayable;
 
-class MigrationParser implements Arrayable {
+class SchemaParser implements Arrayable {
 
 	/**
 	 * The array of custom migrtions.
@@ -95,19 +95,46 @@ class MigrationParser implements Arrayable {
 	}
 
 	/**
+	 * Render up migration fields.
+	 * 
+	 * @return string
+	 */
+	public function up()
+	{
+		return $this->render();
+	}
+
+	/**
+	 * Render down migration fields.
+	 * 
+	 * @return string
+	 */
+	public function down()
+	{
+		$results = '';
+
+		foreach ($this->toArray() as $column => $attributes)
+		{
+			$results .= $this->createField($column, $attributes, 'remove'); 
+		}
+
+		return $results;		
+	}
+
+	/**
 	 * Create field.
 	 * 
 	 * @param  string $column
 	 * @param  array $attributes
 	 * @return string
 	 */
-	public function createField($column, $attributes)
+	public function createField($column, $attributes, $type = 'add')
 	{
 		$results = '$table';
 
 		foreach ($attributes as $key => $field)
 		{
-			$results .= $this->formatField($key, $field, $column);
+			$results .= $this->{"{$type}Column"}($key, $field, $column);
 		}
 
 		return $results .= ';'.PHP_EOL;
@@ -121,7 +148,7 @@ class MigrationParser implements Arrayable {
 	 * @param  string $column
 	 * @return string
 	 */
-	protected function formatField($key, $field, $column)
+	protected function addColumn($key, $field, $column)
 	{
 		if ($this->hasCustomAttribute($column)) return '->' . $field;
 
@@ -131,6 +158,21 @@ class MigrationParser implements Arrayable {
 		}
 
 		return '->' . $field . '()';
+	}
+
+	/**
+	 * Format field to script.
+	 * 
+	 * @param  int $key
+	 * @param  string $field
+	 * @param  string $column
+	 * @return string
+	 */
+	protected function removeColumn($key, $field, $column)
+	{
+		if ($this->hasCustomAttribute($column)) return '->' . $field;
+
+		return '->dropColumn('."'". $column."')";	
 	}
 
 	/**

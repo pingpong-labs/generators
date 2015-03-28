@@ -17,6 +17,7 @@ class GeneratorsServiceProvider extends ServiceProvider {
 		'Console',
 		'View',
 		'Seed',
+		'Migration',
 	];
 
 	/**
