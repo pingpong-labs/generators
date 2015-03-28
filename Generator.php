@@ -172,6 +172,16 @@ abstract class Generator {
     }
 
     /**
+     * Setup some hook.
+     *
+     * @return void
+     */
+    public function setUp()
+    {
+        //
+    }
+
+    /**
      * Run the generator.
      *
      * @return int
@@ -179,6 +189,8 @@ abstract class Generator {
      */
     public function run()
     {
+        $this->setUp();
+
         if ($this->filesystem->exists($path = $this->getPath()) && ! $this->force)
         {
             throw new FileAlreadyExistsException($path);
