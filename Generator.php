@@ -87,7 +87,8 @@ abstract class Generator {
     {
         return [
             'class' => $this->getClass(),
-            'namespace' => $this->getNamespace()
+            'namespace' => $this->getNamespace(),
+            'root_namespace' => $this->getRootNamespace()
         ];
     }
 
