@@ -32,7 +32,8 @@ class SeedCommand extends Command {
     {
         $generator = new SeedGenerator([
             'name' => $this->argument('name'),
-            'force' => $this->option('force')
+            'master' => $this->option('master'),
+            'force' => $this->option('force'),
         ]);
 
         $generator->run();
@@ -58,6 +59,7 @@ class SeedCommand extends Command {
     public function getOptions()
     {
         return [
+          ['master', 'm', InputOption::VALUE_NONE, 'Generate master database seeder.', null],
           ['force', 'f', InputOption::VALUE_NONE, 'Force the creation if file already exists.', null],
         ];
     }

@@ -22,6 +22,20 @@ class SeedGenerator extends Generator {
     }
 
     /**
+     * Get name of class.
+     * 
+     * @return string
+     */
+    public function getName()
+    {
+        $name = parent::getName();
+
+        $suffix = $this->master ? 'DatabaseSeeder' : 'TableSeeder';
+        
+        return $name . $suffix;
+    }
+
+    /**
      * Get root namespace.
      * 
      * @return string
