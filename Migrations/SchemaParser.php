@@ -7,7 +7,7 @@ use Illuminate\Contracts\Support\Arrayable;
 class SchemaParser implements Arrayable {
 
     /**
-     * The array of custom migrtions.
+     * The array of custom attributes.
      *
      * @var array
      */
