@@ -66,7 +66,14 @@ class ScaffoldGenerator {
 	 */
 	public function getControllerName()
 	{
-		return Str::studly($this->getEntity()) . 'Controller';
+		$controller = Str::studly($this->getEntity()) . 'Controller';
+		
+		if ($this->console->option('prefix'))
+		{
+			$controller = Str::studly($this->getPrefix('/')) . $controller;
+		}
+
+		return $controller;
 	}
 
 	/**
@@ -120,7 +127,7 @@ class ScaffoldGenerator {
         foreach ($this->views as $view)
         {
             $this->console->call('generate:view', [
-                'name' => $this->getEntities() . '/' . $view,
+                'name' => $this->getPrefix('/') . $this->getEntities() . '/' . $view,
                 '--with-layout' => true,
                 '--force' => $this->console->option('force')
             ]);
@@ -135,9 +142,37 @@ class ScaffoldGenerator {
 	public function appendRoute()
 	{
         $contents = $this->laravel['files']->get($path = app_path('Http/routes.php'));
-        $contents.= PHP_EOL."Route::resource('{$this->getEntities()}', '{$this->getControllerName()}');";
+        $contents.= PHP_EOL."Route::resource('{$this->getRouteName()}', '{$this->getControllerName()}');";
 
         $this->laravel['files']->put($path, $contents);	
+	}
+
+	/**
+	 * Get route name.
+	 * 
+	 * @return string
+	 */
+	public function getRouteName()
+	{
+		$route = $this->getEntities();
+
+		if ($this->console->option('prefix'))
+		{
+			$route = strtolower($this->getPrefix('/')) . $route;
+		}
+
+		return $route;
+	}
+
+	/**
+	 * Get prefix name.
+	 * 
+	 * @param  string|null $suffix
+	 * @return string|null
+	 */
+	public function getPrefix($suffix = null)
+	{
+		return $this->console->option('prefix') . $suffix;
 	}
 
 	/**
