@@ -137,11 +137,19 @@ class ScaffoldGenerator {
 	 */
 	public function generateViews()
 	{
+		$layout = $this->getPrefix('/') . 'layouts/master';
+
+		$this->console->call('generate:view', [
+			'name' => $layout,
+			'--master' => true,
+			'--force' => $this->console->option('force')
+		]);
+
         foreach ($this->views as $view)
         {
             $this->console->call('generate:view', [
                 'name' => $this->getPrefix('/') . $this->getEntities() . '/' . $view,
-                '--with-layout' => true,
+        		'--extends' => str_replace('/', '.', $layout),
                 '--force' => $this->console->option('force')
             ]);
         }
