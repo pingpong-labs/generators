@@ -31,7 +31,7 @@ class FormCommand extends Command {
     public function fire()
     {
         $generator = new FormGenerator(
-            $this->argument('name'),
+            $this->argument('table'),
             $this->option('fields')
         );
 
@@ -46,7 +46,7 @@ class FormCommand extends Command {
     public function getArguments()
     {
         return [
-          ['name', InputArgument::OPTIONAL, 'The name of entity being used.', null],
+          ['table', InputArgument::OPTIONAL, 'The name of table being used.', null],
         ];
     }
 
