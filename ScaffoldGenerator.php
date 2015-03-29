@@ -90,6 +90,19 @@ class ScaffoldGenerator {
 	}
 
 	/**
+	 * Generate seed.
+	 * 
+	 * @return void
+	 */
+	public function generateSeed()
+	{
+        $this->console->call('generate:seed', [
+            'name' => $this->getEntities(),
+            '--force' => $this->console->option('force')
+        ]);
+	}
+
+	/**
 	 * Generate migration.
 	 * 
 	 * @return void
@@ -184,6 +197,7 @@ class ScaffoldGenerator {
 	{
 		$this->generateModel();
 		$this->generateMigration();
+		$this->generateSeed();
 		$this->generateController();
 		$this->generateViews();
 		$this->appendRoute();
