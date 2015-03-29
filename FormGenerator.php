@@ -2,7 +2,8 @@
 
 namespace Pingpong\Generators;
 
-use Pingpong\Generators\Migrations\SchemaParser;
+use Pingpong\Generators\FormDumpers\FieldsDumper;
+use Pingpong\Generators\FormDumpers\TableDumper;
 use Pingpong\Generators\Stub;
 
 class FormGenerator {
@@ -22,58 +23,15 @@ class FormGenerator {
     protected $fields;
 
     /**
-     * The schema parser.
-     * 
-     * @var SchemaParser.
-     */
-    protected $parser;
-
-    /**
-     * The array of types.
-     * 
-     * @var array
-     */
-    protected $types = [
-        'string' => 'text',
-        'text' => 'textarea',
-        'boolean' => 'checkbox',
-    ];
-
-    /**
-     * The supported inputs.
-     * 
-     * @var array
-     */
-    protected $inputs = [
-        'text',
-        'textarea',
-        'checkbox',
-        'select',
-        'radio',
-        'password',
-    ];
-
-    /**
-     * The array of special input/type.
-     * 
-     * @var array
-     */
-    protected $specials = [
-        'email',
-        'password',
-    ];
-
-    /**
      * The constructor.
      * 
      * @param string $name
      * @param string $fields
      */
-    public function __construct($name, $fields)
+    public function __construct($name = null, $fields = null)
     {
         $this->name = $name;
         $this->fields = $fields;
-        $this->parser = new SchemaParser($fields);
     }
 
     /**
@@ -83,67 +41,29 @@ class FormGenerator {
      */
     public function render()
     {
-        $results = '';
-
-        foreach ($this->parser->toArray() as $name => $types)
-        {
-            $results .= $this->getStub($this->getFieldType($types), $name) . PHP_EOL;
-        }
-
-        return $results;
+        if ($this->fields) return $this->renderFromFields();
+        
+        return $this->renderFromDb();
     }
 
     /**
-     * Get stub template.
+     * Render form from database.
      * 
-     * @param  string $type
-     * @param  string $name
      * @return string
      */
-    public function getStub($type, $name)
+    public function renderFromDb()
     {
-        $type = $this->getInputType($type, $name);
-
-        return Stub::create(__DIR__ . '/Stubs/form/' . $type . '.stub', [
-            'name' => $name,
-            'label' => ucwords($name),
-        ])->render();
+        return (new TableDumper($this->name))->render();
     }
 
     /**
-     * Get input type.
+     * Render form from fields option.
      * 
-     * @param  string $type
-     * @param  string $name
      * @return string
      */
-    public function getInputType($type, $name)
+    public function renderFromFields()
     {
-        if (in_array($name, $this->specials))
-        {
-            return $name;
-        }
-
-        if (array_key_exists($type, $this->types))
-        {
-            return $this->types[$type];
-        }
-
-        return in_array($type, $this->inputs) ? $type : 'text';
-    }
-
-    /**
-     * Get field type.
-     * 
-     * @param  array $types
-     * @return string
-     */
-    public function getFieldType($types)
-    {
-        return array_first($types, function ($key, $value)
-        {
-            return $value;
-        });
+        return (new FieldsDumper($this->fields))->render();
     }
 
 }
