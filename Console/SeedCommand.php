@@ -37,6 +37,8 @@ class SeedCommand extends Command {
         ]);
 
         $generator->run();
+
+        $this->info("Seed created successfully.");
     }
 
     /**

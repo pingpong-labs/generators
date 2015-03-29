@@ -38,6 +38,8 @@ class ControllerCommand extends Command {
         ]);
 
         $generator->run();
+        
+        $this->info("Controller created successfully.");
     }
 
     /**

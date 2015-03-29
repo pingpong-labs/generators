@@ -38,6 +38,8 @@ class ConsoleCommand extends Command {
         ]);
 
         $generator->run();
+        
+        $this->info("Console created successfully.");
     }
 
     /**

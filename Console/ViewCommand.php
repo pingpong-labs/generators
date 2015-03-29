@@ -39,6 +39,8 @@ class ViewCommand extends Command {
         ]);
 
         $generator->run();
+
+        $this->info("View created successfully.");
     }
 
     /**

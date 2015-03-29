@@ -38,6 +38,8 @@ class RequestCommand extends Command {
         ]);
 
         $generator->run();
+
+        $this->info("Form request created successfully.");
     }
 
     /**

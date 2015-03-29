@@ -37,6 +37,8 @@ class MigrationCommand extends Command {
         ]);
 
         $generator->run();
+        
+        $this->info("Migration created successfully.");
     }
 
     /**
