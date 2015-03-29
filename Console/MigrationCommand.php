@@ -3,6 +3,7 @@
 namespace Pingpong\Generators\Console;
 
 use Illuminate\Console\Command;
+use Illuminate\Foundation\Composer;
 use Pingpong\Generators\MigrationGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
@@ -28,7 +29,7 @@ class MigrationCommand extends Command {
      * 
      * @return void
      */
-    public function fire()
+    public function fire(Composer $composer)
     {
         $generator = new MigrationGenerator([
             'name' => $this->argument('name'),
@@ -39,6 +40,8 @@ class MigrationCommand extends Command {
         $generator->run();
         
         $this->info("Migration created successfully.");
+
+        $composer->dumpAutoloads();
     }
 
     /**
