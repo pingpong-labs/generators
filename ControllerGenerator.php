@@ -74,7 +74,12 @@ class ControllerGenerator extends Generator {
     {
         $replacements = array_merge(parent::getReplacements(), ['root_namespace' => $this->getAppNamespace()]);
         
-        return array_merge($replacements, $this->scaffolder->toArray());
+        if ($this->scaffold)
+        {
+            return array_merge($replacements, $this->scaffolder->toArray());
+        }
+
+        return $replacements;
     }
 
 }
