@@ -20,6 +20,7 @@ class GeneratorsServiceProvider extends ServiceProvider {
 		'Migration',
 		'Request',
 		'Pivot',
+		'Scaffold'
 	];
 
 	/**
