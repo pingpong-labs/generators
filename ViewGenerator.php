@@ -2,6 +2,8 @@
 
 namespace Pingpong\Generators;
 
+use Pingpong\Generators\Stub;
+
 class ViewGenerator extends Generator {
 
     /**
@@ -43,6 +45,9 @@ class ViewGenerator extends Generator {
     {
         if ($this->plain)
             return $this->getPath();
+
+        if ($template = $this->template)
+            return Stub::create($template, $this->getReplacements())->render();
 
         return parent::getStub();
     }
