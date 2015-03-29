@@ -36,6 +36,7 @@ class ViewCommand extends Command {
             'section' => $this->option('section'),
             'master' => $this->option('master'),
             'plain' => $this->option('plain'),
+            'content' => $this->option('content'),
             'force' => $this->option('force'),
         ]))->run();
         
@@ -64,6 +65,7 @@ class ViewCommand extends Command {
         return [
           ['extends', 'e', InputOption::VALUE_OPTIONAL, 'The name of view layout being used.', 'layouts.master'],
           ['section', 's', InputOption::VALUE_OPTIONAL, 'The name of section being used.', 'content'],
+          ['content', 'c', InputOption::VALUE_OPTIONAL, 'The view content.', null],
           ['master', 'm', InputOption::VALUE_NONE, 'Create a master view.', null],
           ['plain', 'p', InputOption::VALUE_NONE, 'Create a blank view.', null],
           ['force', 'f', InputOption::VALUE_NONE, 'Force the creation if file already exists.', null],

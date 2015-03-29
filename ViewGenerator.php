@@ -66,6 +66,7 @@ class ViewGenerator extends Generator {
         return [
             'extends' => $this->extends,
             'section' => $this->section,
+            'content' => $this->content,
         ];
     }
 
