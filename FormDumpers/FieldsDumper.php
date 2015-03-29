@@ -51,4 +51,44 @@ class FieldsDumper {
 
         return $results;
     }
+
+    /**
+     * Convert the fields to html heading.
+     * 
+     * @return string
+     */
+    public function toHeading()
+    {
+        $results = '';
+
+        foreach ($this->getParser()->toArray() as $name => $types)
+        {
+            if (in_array($name, $this->ignores)) continue;
+            
+            $results .= "\t\t\t".'<th>' . ucwords($name) . '</th>'.PHP_EOL;
+        }
+
+        return $results;
+    }
+
+    /**
+     * Convert the fields to formatted php script.
+     *
+     * @param  string $var
+     * @return string
+     */
+    public function toBody($var)
+    {
+        $results = '';
+
+        foreach ($this->getParser()->toArray() as $name => $types)
+        {
+            if (in_array($name, $this->ignores)) continue;
+
+            $results .= "\t\t\t\t\t".'<td>{!! $'.$var.'->' . $name . ' !!}</td>'.PHP_EOL;    
+        }
+
+        return $results;   
+    }
+
 }

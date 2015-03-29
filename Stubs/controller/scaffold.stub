@@ -4,7 +4,7 @@ use $ROOT_NAMESPACE$Http\Requests;
 use $ROOT_NAMESPACE$Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use $STUDLY_ENTITY$;
+use $ROOT_NAMESPACE$$STUDLY_ENTITY$;
 use $ROOT_NAMESPACE$Http\Requests\$PREFIX_SLASH$$STUDLY_PLURAL_ENTITY$\Create$STUDLY_ENTITY$Request;
 use $ROOT_NAMESPACE$Http\Requests\$PREFIX_SLASH$$STUDLY_PLURAL_ENTITY$\Update$STUDLY_ENTITY$Request;
 

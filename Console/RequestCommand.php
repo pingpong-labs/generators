@@ -34,6 +34,7 @@ class RequestCommand extends Command {
             'name' => $this->argument('name'),
             'rules' => $this->option('rules'),
             'auth' => $this->option('auth'),
+            'scaffold' => $this->option('scaffold'),
             'force' => $this->option('force'),
         ]);
 
@@ -63,8 +64,10 @@ class RequestCommand extends Command {
     {
         return [
             ['rules', 'r', InputOption::VALUE_OPTIONAL, 'The rules.', null],
+            ['scaffold', 's', InputOption::VALUE_NONE, 'Determine whether the request class generated with scaffold.', null],
             ['auth', 'a', InputOption::VALUE_NONE, 'Determine whether the request class needs authorized.', null],
             ['force', 'f', InputOption::VALUE_NONE, 'Force the creation if file already exists.', null],
         ];
     }
+    
 }

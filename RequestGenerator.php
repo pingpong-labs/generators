@@ -30,7 +30,7 @@ class RequestGenerator extends Generator {
      */
     public function getRootNamespace()
     {
-        return $this->getAppNamespace() . 'Http\Requests';
+        return $this->getAppNamespace() . 'Http\Requests\\';
     }
 
     /**
@@ -89,6 +89,8 @@ class RequestGenerator extends Generator {
     protected function createRules($field, $rules)
     {
         $rule = str_replace(['(', ')', ';'], [':', '', ','], implode('|', $rules));
+
+        if ($this->scaffold) $rule = 'required';
 
         return "\t\t\t'{$field}' => '" . $rule . "'," . PHP_EOL;
     }

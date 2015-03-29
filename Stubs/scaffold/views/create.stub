@@ -1,10 +1,10 @@
-@extends('$VIEW_LAYOUT$')
+@extends('$EXTENDS$')
 
 @section('content')
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            Add New  $STUDLY_SINGULAR_ENTITY$
+            Add New $STUDLY_SINGULAR_ENTITY$
             <div class="panel-nav">
                 <a href="{!! route('$PREFIX_DOT$$LOWER_PLURAL_ENTITY$.index') !!}" class="btn btn-default">Back</a>
             </div>

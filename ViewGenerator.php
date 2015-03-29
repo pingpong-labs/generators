@@ -13,6 +13,8 @@ class ViewGenerator extends Generator {
      */
     protected $stub = 'view';
 
+    protected $customReplacements = [];
+
     /**
      * Setup.
      *
@@ -68,12 +70,27 @@ class ViewGenerator extends Generator {
      * @return array
      */
     public function getReplacements()
-    {
-        return [
+    {        
+        $replaces = [
             'extends' => $this->extends,
             'section' => $this->section,
             'content' => $this->content,
         ];
+
+        return $this->customReplacements + $replaces;
+    }
+
+    /**
+     * Append a custom replacements to this instance.
+     * 
+     * @param  array $replacements
+     * @return self
+     */
+    public function appendReplacement(array $replacements)
+    {
+        $this->customReplacements = $replacements;
+
+        return $this;
     }
 
 }

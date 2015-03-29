@@ -4,6 +4,10 @@ namespace Pingpong\Generators;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
+use Pingpong\Generators\FormDumpers\FieldsDumper;
+use Pingpong\Generators\FormDumpers\TableDumper;
+use Pingpong\Generators\FormGenerator;
+use Pingpong\Generators\Scaffolders\ControllerScaffolder;
 
 class ScaffoldGenerator {
 
@@ -26,7 +30,14 @@ class ScaffoldGenerator {
      *
      * @var array
      */
-    protected $views = ['index', 'edit', 'show', 'create'];
+    protected $views = ['index', 'edit', 'show', 'create', 'form'];
+
+    /**
+     * Indicates the migration has been migrated.
+     * 
+     * @var boolean
+     */
+    protected $migrated = false;
 
     /**
      * The constructor.
@@ -164,36 +175,113 @@ class ScaffoldGenerator {
     }
 
     /**
+     * Get view layout.
+     * 
+     * @return string
+     */
+    public function getViewLayout()
+    {
+        return $this->getPrefix('/') . 'layouts/master';
+    }
+
+    /**
+     * Generate a view layout.
+     * 
+     * @return void
+     */
+    public function generateViewLayout()
+    {
+        if ($this->confirm('Do you want to create master view?'))
+        {
+            $this->console->call('generate:view', [
+                'name' => $this->getViewLayout(),
+                '--master' => true,
+                '--force' => $this->console->option('force')
+            ]);
+        }
+    }
+
+    /**
+     * Get controller scaffolder instance.
+     * 
+     * @return string
+     */
+    public function getControllerScaffolder()
+    {
+        return new ControllerScaffolder($this->getEntity(), $this->getPrefix());
+    }
+
+    /**
+     * Get form generator instance.
+     * 
+     * @return string
+     */
+    public function getFormGenerator()
+    {
+        return new FormGenerator($this->getEntities(), $this->console->option('fields'));
+    }
+
+    /**
+     * Get table dumper.
+     * 
+     * @return mixed
+     */
+    public function getTableDumper()
+    {   
+        if ($this->migrated)
+        {
+            return new TableDumper($this->getEntities());
+        }
+
+        return new FieldsDumper($this->console->option('fields'));
+    }
+
+    /**
      * Generate views.
      *
      * @return void
      */
     public function generateViews()
     {
-        $layout = $this->getPrefix('/') . 'layouts/master';
-        
-        if ($this->confirm('Do you want to create master view?'))
-        {
-            $this->console->call('generate:view', [
-                'name' => $layout,
-                '--master' => true,
-                '--force' => $this->console->option('force')
-            ]);
-        }
+        $this->generateViewLayout();
 
         if ( ! $this->confirm('Do you want to create view resources?'))
         {
             return;
-        }
+        }     
 
         foreach ($this->views as $view)
         {
-            $this->console->call('generate:view', [
-                'name' => $this->getPrefix('/') . $this->getEntities() . '/' . $view,
-                '--extends' => str_replace('/', '.', $layout),
-                '--force' => $this->console->option('force')
-            ]);
+            $this->generateView($view);
         }
+    }
+
+    /**
+     * Generate a scaffold view.
+     * 
+     * @param  string $view
+     * @return void
+     */
+    public function generateView($view)
+    {
+        $generator = new ViewGenerator([
+            'name' => $this->getPrefix('/') . $this->getEntities() . '/' . $view,
+            'extends' => str_replace('/', '.', $this->getViewLayout()),
+            'template' => __DIR__ . '/Stubs/scaffold/views/' . $view . '.stub',
+            'force' => $this->console->option('force')
+        ]);
+
+        $generator->appendReplacement(array_merge($this->getControllerScaffolder()->toArray(), [
+            'lower_plural_entity' => strtolower($this->getEntities()),
+            'studly_singular_entity' => Str::studly($this->getEntity()),
+            'form' => $this->getFormGenerator()->render(),
+            'table_heading' => $this->getTableDumper()->toHeading(),
+            'table_body' => $this->getTableDumper()->toBody($this->getEntity())
+        ]));
+
+        $generator->run();
+
+        $this->console->info("View created successfully.");
     }
 
     /**
@@ -241,7 +329,52 @@ class ScaffoldGenerator {
      */
     public function getPrefix($suffix = null)
     {
-        return $this->console->option('prefix') . $suffix;
+        $prefix = $this->console->option('prefix');
+
+        return $prefix ? $prefix . $suffix : null;
+    }
+
+    /**
+     * Run the migrations.
+     * 
+     * @return void
+     */
+    public function runMigration()
+    {
+        if ($this->confirm('Do you want to run all migration now?'))
+        {
+            $this->migrated = true;
+            
+            $this->console->call('migrate', [
+                '--force' => $this->console->option('force')
+            ]);
+        }
+    }
+
+    /**
+     * Generate request classes.
+     * 
+     * @return void
+     */
+    public function generateRequest()
+    {
+        if ( ! $this->confirm('Do you want to create form request classes?'))
+        {
+            return;
+        }
+
+        foreach (['Create', 'Update'] as $request)
+        {
+            $name = $this->getPrefix('/') . $this->getEntities() . '/'. $request . Str::studly($this->getEntity()) . 'Request';
+
+            $this->console->call('generate:request', [
+                'name' => $name,
+                '--scaffold' => true,
+                '--auth' => true,
+                '--rules' => $this->console->option('fields'),
+                '--force' => $this->console->option('force')
+            ]);
+        }
     }
 
     /**
@@ -254,7 +387,9 @@ class ScaffoldGenerator {
         $this->generateModel();
         $this->generateMigration();
         $this->generateSeed();
+        $this->generateRequest();
         $this->generateController();
+        $this->runMigration();
         $this->generateViews();
         $this->appendRoute();
     }
