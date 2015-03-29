@@ -12,6 +12,19 @@ class ViewGenerator extends Generator {
     protected $stub = 'view';
 
     /**
+     * Setup.
+     *
+     * @return void
+     */
+    public function setUp()
+    {
+        if ($this->master)
+        {
+            $this->stub = 'views/master';
+        }
+    }
+
+    /**
      * Get destination path for generated file.
      *
      * @return string
