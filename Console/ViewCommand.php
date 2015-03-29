@@ -38,16 +38,7 @@ class ViewCommand extends Command {
             'plain' => $this->option('plain'),
             'force' => $this->option('force'),
         ]))->run();
-
-        if ($this->option('with-layout'))
-        {
-            (new ViewGenerator([
-                'name' => 'layouts/master',
-                'master' => true,
-                'force' => $this->option('force'),
-            ]))->run();
-        }
-
+        
         $this->info("View created successfully.");
     }
 
@@ -75,7 +66,6 @@ class ViewCommand extends Command {
           ['section', 's', InputOption::VALUE_OPTIONAL, 'The name of section being used.', 'content'],
           ['master', 'm', InputOption::VALUE_NONE, 'Create a master view.', null],
           ['plain', 'p', InputOption::VALUE_NONE, 'Create a blank view.', null],
-          ['with-layout', null, InputOption::VALUE_NONE, 'Create a view with layout view.', null],
           ['force', 'f', InputOption::VALUE_NONE, 'Force the creation if file already exists.', null],
         ];
     }
