@@ -20,7 +20,7 @@ class Stub {
      * The contructor.
      *
      * @param string $path
-     * @param array  $replaces
+     * @param array $replaces
      */
     public function __construct($path, array $replaces = [])
     {
@@ -82,7 +82,7 @@ class Stub {
 
     /**
      * Get stub contents.
-     * 
+     *
      * @return string
      */
     public function render()

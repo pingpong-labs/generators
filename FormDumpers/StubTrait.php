@@ -8,7 +8,7 @@ trait StubTrait {
 
     /**
      * The array of types.
-     * 
+     *
      * @var array
      */
     protected $types = [
@@ -19,7 +19,7 @@ trait StubTrait {
 
     /**
      * The supported inputs.
-     * 
+     *
      * @var array
      */
     protected $inputs = [
@@ -33,7 +33,7 @@ trait StubTrait {
 
     /**
      * The array of special input/type.
-     * 
+     *
      * @var array
      */
     protected $specials = [
@@ -43,7 +43,7 @@ trait StubTrait {
 
     /**
      * The array of ignores columns.
-     * 
+     *
      * @var array
      */
     protected $ignores = [
@@ -56,15 +56,16 @@ trait StubTrait {
 
     /**
      * Get stub template.
-     * 
+     *
      * @param  string $type
      * @param  string $name
      * @return string
      */
     public function getStub($type, $name)
     {
-        if (in_array($name, $this->ignores)) return null;
-        
+        if (in_array($name, $this->ignores))
+            return null;
+
         $type = $this->getInputType($type, $name);
 
         return Stub::create(__DIR__ . '/../Stubs/form/' . $type . '.stub', [
@@ -75,13 +76,13 @@ trait StubTrait {
 
     /**
      * Get input type.
-     * 
+     *
      * @param  string $type
      * @param  string $name
      * @return string
      */
     public function getInputType($type, $name)
-    {        
+    {
         if (in_array($name, $this->specials))
         {
             return $name;
@@ -97,7 +98,7 @@ trait StubTrait {
 
     /**
      * Get field type.
-     * 
+     *
      * @param  array $types
      * @return string
      */

@@ -6,7 +6,7 @@ class ConsoleGenerator extends Generator {
 
     /**
      * Get stub name.
-     * 
+     *
      * @var string
      */
     protected $stub = 'console';
@@ -23,7 +23,7 @@ class ConsoleGenerator extends Generator {
 
     /**
      * Get root namespace.
-     * 
+     *
      * @return string
      */
     public function getRootNamespace()
@@ -33,7 +33,7 @@ class ConsoleGenerator extends Generator {
 
     /**
      * Get template replacements.
-     * 
+     *
      * @return array
      */
     public function getReplacements()

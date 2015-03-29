@@ -3,66 +3,65 @@
 namespace Pingpong\Generators\FormDumpers;
 
 use Illuminate\Support\Facades\DB;
-use Pingpong\Generators\FormDumpers\StubTrait;
 
 class TableDumper {
 
-	use StubTrait;
+    use StubTrait;
 
-	/**
-	 * The table name.
-	 * 
-	 * @var string
-	 */
-	protected $table;
+    /**
+     * The table name.
+     *
+     * @var string
+     */
+    protected $table;
 
-	/**
-	 * The constructor.
-	 * 
-	 * @param string $table
-	 */
-	public function __construct($table)
-	{
-		$this->table = $table;
-	}
+    /**
+     * The constructor.
+     *
+     * @param string $table
+     */
+    public function __construct($table)
+    {
+        $this->table = $table;
+    }
 
-	/**
-	 * Get table name.
-	 * 
-	 * @return string
-	 */
-	public function getTable()
-	{
-		return $this->table;
-	}
+    /**
+     * Get table name.
+     *
+     * @return string
+     */
+    public function getTable()
+    {
+        return $this->table;
+    }
 
-	/**
-	 * Get column.
-	 * 
-	 * @return string
-	 */
-	public function getColumns()
-	{
-		return DB::getDoctrineSchemaManager()->listTableDetails($this->getTable())->getColumns();
-	}
+    /**
+     * Get column.
+     *
+     * @return string
+     */
+    public function getColumns()
+    {
+        return DB::getDoctrineSchemaManager()->listTableDetails($this->getTable())->getColumns();
+    }
 
-	/**
-	 * Render the form.
-	 * 
-	 * @return string
-	 */
-	public function render()
-	{
-		$columns = $this->getColumns();
+    /**
+     * Render the form.
+     *
+     * @return string
+     */
+    public function render()
+    {
+        $columns = $this->getColumns();
 
-		$results = '';
+        $results = '';
 
-		foreach ($columns as $column)
-		{
-			$results .= $this->getStub($column->getType()->getName(), $column->getName());
-		}
+        foreach ($columns as $column)
+        {
+            $results .= $this->getStub($column->getType()->getName(), $column->getName());
+        }
 
-		return $results;
-	}
+        return $results;
+    }
 
 }

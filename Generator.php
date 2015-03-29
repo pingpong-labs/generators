@@ -1,9 +1,8 @@
 <?php namespace Pingpong\Generators;
 
+use Illuminate\Console\AppNamespaceDetectorTrait;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
-use Pingpong\Generators\Stub;
-use Illuminate\Console\AppNamespaceDetectorTrait;
 
 abstract class Generator {
 
@@ -18,21 +17,21 @@ abstract class Generator {
 
     /**
      * The array of options.
-     * 
+     *
      * @var array
      */
     protected $options;
 
     /**
      * The shortname of stub.
-     * 
+     *
      * @var string
      */
     protected $stub;
 
     /**
      * Create new instance of this class.
-     * 
+     *
      * @param array $options
      */
     public function __construct(array $options = array())
@@ -72,15 +71,15 @@ abstract class Generator {
     public function getStub()
     {
         return (new Stub(
-            __DIR__ . '/Stubs/'.$this->stub .'.stub',
+            __DIR__ . '/Stubs/' . $this->stub . '.stub',
             $this->getReplacements()
-            )
+        )
         )->render();
     }
 
     /**
      * Get template replacements.
-     * 
+     *
      * @return array
      */
     public function getReplacements()
@@ -101,19 +100,19 @@ abstract class Generator {
 
     /**
      * Get name input.
-     * 
+     *
      * @return string
      */
     public function getName()
     {
         $name = $this->name;
 
-        if(str_contains($this->name, '\\'))
+        if (str_contains($this->name, '\\'))
         {
             $name = str_replace('\\', '/', $this->name);
         }
 
-        if(str_contains($this->name, '/'))
+        if (str_contains($this->name, '/'))
         {
             $name = str_replace('/', '/', $this->name);
         }
@@ -123,7 +122,7 @@ abstract class Generator {
 
     /**
      * Get class name.
-     * 
+     *
      * @return string
      */
     public function getClass()
@@ -136,7 +135,7 @@ abstract class Generator {
 
     /**
      * Get paths of namespace.
-     * 
+     *
      * @return array
      */
     public function getSegments()
@@ -146,7 +145,7 @@ abstract class Generator {
 
     /**
      * Get root namespace.
-     * 
+     *
      * @return string
      */
     public function getRootNamespace()
@@ -156,7 +155,7 @@ abstract class Generator {
 
     /**
      * Get class namespace.
-     * 
+     *
      * @return string
      */
     public function getNamespace()
@@ -167,7 +166,8 @@ abstract class Generator {
 
         $rootNamespace = $this->getRootNamespace();
 
-        if ($rootNamespace == false) return null;
+        if ($rootNamespace == false)
+            return null;
 
         return 'namespace ' . rtrim($rootNamespace . implode($segments, '\\'), '\\') . ';';
     }
@@ -197,7 +197,7 @@ abstract class Generator {
             throw new FileAlreadyExistsException($path);
         }
 
-        if( ! $this->filesystem->isDirectory($dir = dirname($path)))
+        if ( ! $this->filesystem->isDirectory($dir = dirname($path)))
         {
             $this->filesystem->makeDirectory($dir, 0777, true, true);
         }
@@ -207,7 +207,7 @@ abstract class Generator {
 
     /**
      * Get options.
-     * 
+     *
      * @return string
      */
     public function getOptions()
@@ -217,8 +217,8 @@ abstract class Generator {
 
     /**
      * Determinte whether the given key exist in options array.
-     * 
-     * @param  string  $key
+     *
+     * @param  string $key
      * @return boolean
      */
     public function hasOption($key)
@@ -228,21 +228,22 @@ abstract class Generator {
 
     /**
      * Get value from options by given key.
-     * 
+     *
      * @param  string $key
      * @param  string|null $default
      * @return string
      */
     public function getOption($key, $default = null)
     {
-        if( ! $this->hasOption($key)) return $default;
+        if ( ! $this->hasOption($key))
+            return $default;
 
         return $this->options[$key] ?: $default;
     }
 
     /**
      * Helper method for "getOption".
-     * 
+     *
      * @param  string $key
      * @param  string|null $default
      * @return string
@@ -254,7 +255,7 @@ abstract class Generator {
 
     /**
      * Handle call to __get method.
-     * 
+     *
      * @param  string $key
      * @return string|mixed
      */

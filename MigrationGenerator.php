@@ -4,13 +4,12 @@ namespace Pingpong\Generators;
 
 use Pingpong\Generators\Migrations\NameParser;
 use Pingpong\Generators\Migrations\SchemaParser;
-use Pingpong\Generators\Stub;
 
 class MigrationGenerator extends Generator {
 
     /**
      * Get stub name.
-     * 
+     *
      * @var string
      */
     protected $stub = 'migration/plain';
@@ -27,7 +26,7 @@ class MigrationGenerator extends Generator {
 
     /**
      * Get root namespace.
-     * 
+     *
      * @return string
      */
     public function getRootNamespace()
@@ -37,7 +36,7 @@ class MigrationGenerator extends Generator {
 
     /**
      * Get migration name.
-     * 
+     *
      * @return string
      */
     public function getMigrationName()
@@ -47,7 +46,7 @@ class MigrationGenerator extends Generator {
 
     /**
      * Get file name.
-     * 
+     *
      * @return string
      */
     public function getFileName()
@@ -57,7 +56,7 @@ class MigrationGenerator extends Generator {
 
     /**
      * Get schema parser.
-     * 
+     *
      * @return SchemaParser
      */
     public function getSchemaParser()
@@ -67,7 +66,7 @@ class MigrationGenerator extends Generator {
 
     /**
      * Get name parser.
-     * 
+     *
      * @return NameParser
      */
     public function getNameParser()
@@ -77,7 +76,7 @@ class MigrationGenerator extends Generator {
 
     /**
      * Get stub templates.
-     * 
+     *
      * @return string
      */
     public function getStub()
@@ -86,7 +85,7 @@ class MigrationGenerator extends Generator {
 
         if ($parser->isCreate())
         {
-            return Stub::create(__DIR__ .'/Stubs/migration/create.stub', [
+            return Stub::create(__DIR__ . '/Stubs/migration/create.stub', [
                 'class' => $this->getClass(),
                 'table' => $parser->getTable(),
                 'fields' => $this->getSchemaParser()->render()
@@ -94,7 +93,7 @@ class MigrationGenerator extends Generator {
         }
         elseif ($parser->isAdd())
         {
-            return Stub::create(__DIR__ .'/Stubs/migration/add.stub', [
+            return Stub::create(__DIR__ . '/Stubs/migration/add.stub', [
                 'class' => $this->getClass(),
                 'table' => $parser->getTable(),
                 'fields_up' => $this->getSchemaParser()->up(),
@@ -103,7 +102,7 @@ class MigrationGenerator extends Generator {
         }
         elseif ($parser->isDelete())
         {
-            return Stub::create(__DIR__ .'/Stubs/migration/delete.stub', [
+            return Stub::create(__DIR__ . '/Stubs/migration/delete.stub', [
                 'class' => $this->getClass(),
                 'table' => $parser->getTable(),
                 'fields_down' => $this->getSchemaParser()->up(),
@@ -112,7 +111,7 @@ class MigrationGenerator extends Generator {
         }
         elseif ($parser->isDrop())
         {
-            return Stub::create(__DIR__ .'/Stubs/migration/drop.stub', [
+            return Stub::create(__DIR__ . '/Stubs/migration/drop.stub', [
                 'class' => $this->getClass(),
                 'table' => $parser->getTable(),
                 'fields' => $this->getSchemaParser()->render()

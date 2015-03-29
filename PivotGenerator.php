@@ -8,7 +8,7 @@ class PivotGenerator extends Generator {
 
     /**
      * Get stub name.
-     * 
+     *
      * @var string
      */
     protected $stub = 'migration/pivot';
@@ -25,7 +25,7 @@ class PivotGenerator extends Generator {
 
     /**
      * Get filename.
-     * 
+     *
      * @return string
      */
     public function getFilename()
@@ -35,7 +35,7 @@ class PivotGenerator extends Generator {
 
     /**
      * Get migration name.
-     * 
+     *
      * @return string
      */
     public function getMigrationName()
@@ -45,7 +45,7 @@ class PivotGenerator extends Generator {
 
     /**
      * Get class name.
-     * 
+     *
      * @return string
      */
     public function getClass()
@@ -65,7 +65,7 @@ class PivotGenerator extends Generator {
 
     /**
      * Get sorted table names.
-     * 
+     *
      * @return array
      */
     public function getSortedTableNames()
@@ -82,7 +82,7 @@ class PivotGenerator extends Generator {
 
     /**
      * Get stub replacements.
-     * 
+     *
      * @return array
      */
     public function getReplacements()
@@ -98,7 +98,7 @@ class PivotGenerator extends Generator {
 
     /**
      * Get column one.
-     * 
+     *
      * @return string
      */
     public function getColumnOne()
@@ -108,7 +108,7 @@ class PivotGenerator extends Generator {
 
     /**
      * Get column two.
-     * 
+     *
      * @return string
      */
     public function getColumnTwo()

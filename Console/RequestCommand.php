@@ -11,21 +11,21 @@ class RequestCommand extends Command {
 
     /**
      * The name of command.
-     * 
+     *
      * @var string
      */
     protected $name = 'generate:request';
 
     /**
      * The description of command.
-     * 
+     *
      * @var string
      */
     protected $description = 'Generate a new form request class.';
 
     /**
      * Execute the command.
-     * 
+     *
      * @return void
      */
     public function fire()
@@ -44,27 +44,27 @@ class RequestCommand extends Command {
 
     /**
      * The array of command arguments.
-     * 
+     *
      * @return array
      */
     public function getArguments()
     {
         return [
-          ['name', InputArgument::REQUIRED, 'The name of class being generated.', null],
+            ['name', InputArgument::REQUIRED, 'The name of class being generated.', null],
         ];
     }
 
     /**
      * The array of command options.
-     * 
+     *
      * @return array
      */
     public function getOptions()
     {
         return [
-          ['rules', 'r', InputOption::VALUE_OPTIONAL, 'The rules.', null],
-          ['auth', 'a', InputOption::VALUE_NONE, 'Determine whether the request class needs authorized.', null],
-          ['force', 'f', InputOption::VALUE_NONE, 'Force the creation if file already exists.', null],
+            ['rules', 'r', InputOption::VALUE_OPTIONAL, 'The rules.', null],
+            ['auth', 'a', InputOption::VALUE_NONE, 'Determine whether the request class needs authorized.', null],
+            ['force', 'f', InputOption::VALUE_NONE, 'Force the creation if file already exists.', null],
         ];
     }
 }

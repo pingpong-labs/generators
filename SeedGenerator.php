@@ -6,7 +6,7 @@ class SeedGenerator extends Generator {
 
     /**
      * Get stub name.
-     * 
+     *
      * @var string
      */
     protected $stub = 'seed';
@@ -23,7 +23,7 @@ class SeedGenerator extends Generator {
 
     /**
      * Get name of class.
-     * 
+     *
      * @return string
      */
     public function getName()
@@ -31,13 +31,13 @@ class SeedGenerator extends Generator {
         $name = parent::getName();
 
         $suffix = $this->master ? 'DatabaseSeeder' : 'TableSeeder';
-        
+
         return $name . $suffix;
     }
 
     /**
      * Get root namespace.
-     * 
+     *
      * @return string
      */
     public function getRootNamespace()

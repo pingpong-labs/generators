@@ -6,7 +6,7 @@ class ModelGenerator extends Generator {
 
     /**
      * Get stub name.
-     * 
+     *
      * @var string
      */
     protected $stub = 'model';

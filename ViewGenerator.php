@@ -6,7 +6,7 @@ class ViewGenerator extends Generator {
 
     /**
      * Get stub name.
-     * 
+     *
      * @var string
      */
     protected $stub = 'view';
@@ -41,14 +41,15 @@ class ViewGenerator extends Generator {
      */
     public function getStub()
     {
-        if ($this->plain) return $this->getPath();
+        if ($this->plain)
+            return $this->getPath();
 
         return parent::getStub();
     }
 
     /**
      * Get root namespace.
-     * 
+     *
      * @return string
      */
     public function getRootNamespace()
@@ -58,7 +59,7 @@ class ViewGenerator extends Generator {
 
     /**
      * Get template replacements.
-     * 
+     *
      * @return array
      */
     public function getReplacements()

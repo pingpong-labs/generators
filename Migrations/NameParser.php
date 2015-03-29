@@ -77,7 +77,7 @@ class NameParser {
 
     /**
      * Get table name.
-     * 
+     *
      * @return string
      */
     public function getTable()

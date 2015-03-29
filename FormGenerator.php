@@ -4,27 +4,26 @@ namespace Pingpong\Generators;
 
 use Pingpong\Generators\FormDumpers\FieldsDumper;
 use Pingpong\Generators\FormDumpers\TableDumper;
-use Pingpong\Generators\Stub;
 
 class FormGenerator {
 
     /**
      * The name of entity.
-     * 
+     *
      * @var string
      */
     protected $name;
 
     /**
      * The form fields.
-     * 
+     *
      * @var string
      */
     protected $fields;
 
     /**
      * The constructor.
-     * 
+     *
      * @param string $name
      * @param string $fields
      */
@@ -36,19 +35,20 @@ class FormGenerator {
 
     /**
      * Render the form.
-     * 
+     *
      * @return string
      */
     public function render()
     {
-        if ($this->fields) return $this->renderFromFields();
-        
+        if ($this->fields)
+            return $this->renderFromFields();
+
         return $this->renderFromDb();
     }
 
     /**
      * Render form from database.
-     * 
+     *
      * @return string
      */
     public function renderFromDb()
@@ -58,7 +58,7 @@ class FormGenerator {
 
     /**
      * Render form from fields option.
-     * 
+     *
      * @return string
      */
     public function renderFromFields()

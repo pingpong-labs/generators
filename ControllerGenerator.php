@@ -8,7 +8,7 @@ class ControllerGenerator extends Generator {
 
     /**
      * Get stub name.
-     * 
+     *
      * @var string
      */
     protected $stub = 'controller/plain';
@@ -33,7 +33,7 @@ class ControllerGenerator extends Generator {
 
     /**
      * Get prefix class.
-     * 
+     *
      * @return string
      */
     public function getPrefix()
@@ -57,7 +57,7 @@ class ControllerGenerator extends Generator {
 
     /**
      * Get root namespace.
-     * 
+     *
      * @return string
      */
     public function getRootNamespace()
@@ -67,13 +67,13 @@ class ControllerGenerator extends Generator {
 
     /**
      * Get template replacements.
-     * 
+     *
      * @return array
      */
     public function getReplacements()
     {
         $replacements = array_merge(parent::getReplacements(), ['root_namespace' => $this->getAppNamespace()]);
-        
+
         if ($this->scaffold)
         {
             return array_merge($replacements, $this->scaffolder->toArray());

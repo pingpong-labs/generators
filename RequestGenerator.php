@@ -8,7 +8,7 @@ class RequestGenerator extends Generator {
 
     /**
      * Get stub name.
-     * 
+     *
      * @var string
      */
     protected $stub = 'request';
@@ -25,7 +25,7 @@ class RequestGenerator extends Generator {
 
     /**
      * Get root namespace.
-     * 
+     *
      * @return string
      */
     public function getRootNamespace()
@@ -35,7 +35,7 @@ class RequestGenerator extends Generator {
 
     /**
      * Get stub replacements.
-     * 
+     *
      * @return array
      */
     public function getReplacements()
@@ -48,7 +48,7 @@ class RequestGenerator extends Generator {
 
     /**
      * Get auth replacement.
-     * 
+     *
      * @return string
      */
     public function getAuth()
@@ -60,28 +60,28 @@ class RequestGenerator extends Generator {
 
     /**
      * Get replacement for "$RULES$".
-     * 
+     *
      * @return string
      */
     public function getRules()
     {
         $parser = new SchemaParser($this->rules);
 
-        $results = 'return ['.PHP_EOL;
+        $results = 'return [' . PHP_EOL;
 
         foreach ($parser->toArray() as $field => $rules)
         {
-            $results.= $this->createRules($field, $rules);
+            $results .= $this->createRules($field, $rules);
         }
 
-        $results.= "\t\t];";
+        $results .= "\t\t];";
 
         return $results;
     }
 
     /**
      * Create a rule.
-     * 
+     *
      * @param  string $field
      * @param  string $rules
      * @return string
@@ -90,7 +90,7 @@ class RequestGenerator extends Generator {
     {
         $rule = str_replace(['(', ')', ';'], [':', '', ','], implode('|', $rules));
 
-        return "\t\t\t'{$field}' => '" . $rule . "',".PHP_EOL;
+        return "\t\t\t'{$field}' => '" . $rule . "'," . PHP_EOL;
     }
 
 }

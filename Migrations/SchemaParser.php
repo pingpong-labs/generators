@@ -6,223 +6,225 @@ use Illuminate\Contracts\Support\Arrayable;
 
 class SchemaParser implements Arrayable {
 
-	/**
-	 * The array of custom migrtions.
-	 * 
-	 * @var array
-	 */
-	protected $customAttributes = [
-		'remember_token' => 'rememberToken()',
-		'soft_delete' => 'softDeletes()',
-	];
+    /**
+     * The array of custom migrtions.
+     *
+     * @var array
+     */
+    protected $customAttributes = [
+        'remember_token' => 'rememberToken()',
+        'soft_delete' => 'softDeletes()',
+    ];
 
-	/**
-	 * The migration schema.
-	 *
-	 * @var string
-	 */
-	protected $migration;
+    /**
+     * The migration schema.
+     *
+     * @var string
+     */
+    protected $migration;
 
-	/**
-	 * Create new instance.
-	 * 
-	 * @param string|null $migration
-	 */
-	public function __construct($migration = null)
-	{
-		$this->migration = $migration;
-	}
+    /**
+     * Create new instance.
+     *
+     * @param string|null $migration
+     */
+    public function __construct($migration = null)
+    {
+        $this->migration = $migration;
+    }
 
-	/**
-	 * Parse a string to array of formatted schema.
-	 * 
-	 * @param  string $migration
-	 * @return array
-	 */
-	public function parse($migration)
-	{
-		$this->migration = $migration;
+    /**
+     * Parse a string to array of formatted schema.
+     *
+     * @param  string $migration
+     * @return array
+     */
+    public function parse($migration)
+    {
+        $this->migration = $migration;
 
-		$parsed = [];
+        $parsed = [];
 
-		foreach ($this->getSchemas() as $schema)
-		{
-			$column = $this->getColumn($schema);
-			
-			$attributes = $this->getAttributes($column, $schema);
+        foreach ($this->getSchemas() as $schema)
+        {
+            $column = $this->getColumn($schema);
 
-			$parsed[$column] = $attributes;	
-		}
+            $attributes = $this->getAttributes($column, $schema);
 
-		return $parsed;
-	}
+            $parsed[$column] = $attributes;
+        }
 
-	/**
-	 * Get array of schema.
-	 * 
-	 * @return array
-	 */
-	public function getSchemas()
-	{
-		return explode(',', str_replace(' ', '', $this->migration));
-	}
+        return $parsed;
+    }
 
-	/**
-	 * Convert string migration to array.
-	 * 
-	 * @return array
-	 */
-	public function toArray()
-	{
-		return $this->parse($this->migration);
-	}
+    /**
+     * Get array of schema.
+     *
+     * @return array
+     */
+    public function getSchemas()
+    {
+        return explode(',', str_replace(' ', '', $this->migration));
+    }
 
-	/**
-	 * Render the migration to formatted script.
-	 * 
-	 * @return string
-	 */
-	public function render()
-	{
-		$results = '';
+    /**
+     * Convert string migration to array.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return $this->parse($this->migration);
+    }
 
-		foreach ($this->toArray() as $column => $attributes)
-		{
-			$results .= $this->createField($column, $attributes); 
-		}
+    /**
+     * Render the migration to formatted script.
+     *
+     * @return string
+     */
+    public function render()
+    {
+        $results = '';
 
-		return $results;
-	}
+        foreach ($this->toArray() as $column => $attributes)
+        {
+            $results .= $this->createField($column, $attributes);
+        }
 
-	/**
-	 * Render up migration fields.
-	 * 
-	 * @return string
-	 */
-	public function up()
-	{
-		return $this->render();
-	}
+        return $results;
+    }
 
-	/**
-	 * Render down migration fields.
-	 * 
-	 * @return string
-	 */
-	public function down()
-	{
-		$results = '';
+    /**
+     * Render up migration fields.
+     *
+     * @return string
+     */
+    public function up()
+    {
+        return $this->render();
+    }
 
-		foreach ($this->toArray() as $column => $attributes)
-		{
-			$results .= $this->createField($column, $attributes, 'remove'); 
-		}
+    /**
+     * Render down migration fields.
+     *
+     * @return string
+     */
+    public function down()
+    {
+        $results = '';
 
-		return $results;		
-	}
+        foreach ($this->toArray() as $column => $attributes)
+        {
+            $results .= $this->createField($column, $attributes, 'remove');
+        }
 
-	/**
-	 * Create field.
-	 * 
-	 * @param  string $column
-	 * @param  array $attributes
-	 * @return string
-	 */
-	public function createField($column, $attributes, $type = 'add')
-	{
-		$results = "\t\t\t" . '$table';
+        return $results;
+    }
 
-		foreach ($attributes as $key => $field)
-		{
-			$results .= $this->{"{$type}Column"}($key, $field, $column);
-		}
+    /**
+     * Create field.
+     *
+     * @param  string $column
+     * @param  array $attributes
+     * @return string
+     */
+    public function createField($column, $attributes, $type = 'add')
+    {
+        $results = "\t\t\t" . '$table';
 
-		return $results .= ';'.PHP_EOL;
-	}
+        foreach ($attributes as $key => $field)
+        {
+            $results .= $this->{"{$type}Column"}($key, $field, $column);
+        }
 
-	/**
-	 * Format field to script.
-	 * 
-	 * @param  int $key
-	 * @param  string $field
-	 * @param  string $column
-	 * @return string
-	 */
-	protected function addColumn($key, $field, $column)
-	{
-		if ($this->hasCustomAttribute($column)) return '->' . $field;
+        return $results .= ';' . PHP_EOL;
+    }
 
-		if ($key == 0)
-		{
-			return '->' . $field . "('". $column."')";	
-		}
+    /**
+     * Format field to script.
+     *
+     * @param  int $key
+     * @param  string $field
+     * @param  string $column
+     * @return string
+     */
+    protected function addColumn($key, $field, $column)
+    {
+        if ($this->hasCustomAttribute($column))
+            return '->' . $field;
 
-		return '->' . $field . '()';
-	}
+        if ($key == 0)
+        {
+            return '->' . $field . "('" . $column . "')";
+        }
 
-	/**
-	 * Format field to script.
-	 * 
-	 * @param  int $key
-	 * @param  string $field
-	 * @param  string $column
-	 * @return string
-	 */
-	protected function removeColumn($key, $field, $column)
-	{
-		if ($this->hasCustomAttribute($column)) return '->' . $field;
+        return '->' . $field . '()';
+    }
 
-		return '->dropColumn('."'". $column."')";	
-	}
+    /**
+     * Format field to script.
+     *
+     * @param  int $key
+     * @param  string $field
+     * @param  string $column
+     * @return string
+     */
+    protected function removeColumn($key, $field, $column)
+    {
+        if ($this->hasCustomAttribute($column))
+            return '->' . $field;
 
-	/**
-	 * Get column name from schema.
-	 * 
-	 * @param  string $schema
-	 * @return string
-	 */
-	public function getColumn($schema)
-	{
-		return array_first(explode(':', $schema), function ($key, $value)
-		{
-			return $value;
-		});
-	}
+        return '->dropColumn(' . "'" . $column . "')";
+    }
 
-	/**
-	 * Get column attributes.
-	 * 
-	 * @param  string $column
-	 * @param  string $schema
-	 * @return array
-	 */
-	public function getAttributes($column, $schema)
-	{
-		$fields = str_replace($column.':', '', $schema);
+    /**
+     * Get column name from schema.
+     *
+     * @param  string $schema
+     * @return string
+     */
+    public function getColumn($schema)
+    {
+        return array_first(explode(':', $schema), function ($key, $value)
+        {
+            return $value;
+        });
+    }
 
-		return $this->hasCustomAttribute($column) ? $this->getCustomAttribute($column) : explode(':', $fields);
-	}
+    /**
+     * Get column attributes.
+     *
+     * @param  string $column
+     * @param  string $schema
+     * @return array
+     */
+    public function getAttributes($column, $schema)
+    {
+        $fields = str_replace($column . ':', '', $schema);
 
-	/**
-	 * Determinte whether the given column is exist in customAttributes array.
-	 * 
-	 * @param  string  $column
-	 * @return boolean
-	 */
-	public function hasCustomAttribute($column)
-	{
-		return array_key_exists($column, $this->customAttributes);
-	}
+        return $this->hasCustomAttribute($column) ? $this->getCustomAttribute($column) : explode(':', $fields);
+    }
 
-	/**
-	 * Get custom attributes value.
-	 * 
-	 * @param  string $column
-	 * @return array
-	 */
-	public function getCustomAttribute($column)
-	{
-		return (array) $this->customAttributes[$column];
-	}
+    /**
+     * Determinte whether the given column is exist in customAttributes array.
+     *
+     * @param  string $column
+     * @return boolean
+     */
+    public function hasCustomAttribute($column)
+    {
+        return array_key_exists($column, $this->customAttributes);
+    }
+
+    /**
+     * Get custom attributes value.
+     *
+     * @param  string $column
+     * @return array
+     */
+    public function getCustomAttribute($column)
+    {
+        return (array)$this->customAttributes[$column];
+    }
 
 }

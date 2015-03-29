@@ -11,21 +11,21 @@ class SeedCommand extends Command {
 
     /**
      * The name of command.
-     * 
+     *
      * @var string
      */
     protected $name = 'generate:seed';
 
     /**
      * The description of command.
-     * 
+     *
      * @var string
      */
     protected $description = 'Generate a new seed.';
 
     /**
      * Execute the command.
-     * 
+     *
      * @return void
      */
     public function fire()
@@ -43,26 +43,26 @@ class SeedCommand extends Command {
 
     /**
      * The array of command arguments.
-     * 
+     *
      * @return array
      */
     public function getArguments()
     {
         return [
-          ['name', InputArgument::REQUIRED, 'The name of class being generated.', null],
+            ['name', InputArgument::REQUIRED, 'The name of class being generated.', null],
         ];
     }
 
     /**
      * The array of command options.
-     * 
+     *
      * @return array
      */
     public function getOptions()
     {
         return [
-          ['master', 'm', InputOption::VALUE_NONE, 'Generate master database seeder.', null],
-          ['force', 'f', InputOption::VALUE_NONE, 'Force the creation if file already exists.', null],
+            ['master', 'm', InputOption::VALUE_NONE, 'Generate master database seeder.', null],
+            ['force', 'f', InputOption::VALUE_NONE, 'Force the creation if file already exists.', null],
         ];
     }
 }
