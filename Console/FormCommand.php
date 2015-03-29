@@ -46,7 +46,7 @@ class FormCommand extends Command {
     public function getArguments()
     {
         return [
-          ['name', InputArgument::REQUIRED, 'The name of entity being used.', null],
+          ['name', InputArgument::OPTIONAL, 'The name of entity being used.', null],
         ];
     }
 
