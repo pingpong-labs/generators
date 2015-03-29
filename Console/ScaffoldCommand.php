@@ -55,6 +55,7 @@ class ScaffoldCommand extends Command {
         return [
             ['fields', null, InputOption::VALUE_OPTIONAL, 'The fields of migration. Separated with comma (,).', null],
             ['prefix', null, InputOption::VALUE_OPTIONAL, 'The prefix path & routes.', null],
+            ['no-question', null, InputOption::VALUE_NONE, 'Don\'t ask any question.', null],
             ['force', 'f', InputOption::VALUE_NONE, 'Force the creation if file already exists.', null],
         ];
     }

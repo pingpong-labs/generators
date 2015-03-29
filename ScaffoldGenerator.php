@@ -77,12 +77,30 @@ class ScaffoldGenerator {
     }
 
     /**
+     * Confirm a question with the user.
+     * 
+     * @param  string $message
+     * @return string
+     */
+    public function confirm($message)
+    {
+        if ($this->console->option('no-question')) return true;
+        
+        return $this->console->confirm($message) && $this->console->option('force');
+    }
+
+    /**
      * Generate model.
      *
      * @return void
      */
     public function generateModel()
     {
+        if ( ! $this->confirm('Do you want to create a model?'))
+        {
+            return;
+        }
+
         $this->console->call('generate:model', [
             'name' => $this->getEntity(),
             '--force' => $this->console->option('force')
@@ -96,6 +114,11 @@ class ScaffoldGenerator {
      */
     public function generateSeed()
     {
+        if ( ! $this->confirm('Do you want to create a database seeder class?'))
+        {
+            return;
+        }
+
         $this->console->call('generate:seed', [
             'name' => $this->getEntities(),
             '--force' => $this->console->option('force')
@@ -109,6 +132,11 @@ class ScaffoldGenerator {
      */
     public function generateMigration()
     {
+        if ( ! $this->confirm('Do you want to create a migration?'))
+        {
+            return;
+        }
+
         $this->console->call('generate:migration', [
             'name' => "create_{$this->getEntities()}_table",
             '--fields' => $this->console->option('fields'),
@@ -123,6 +151,11 @@ class ScaffoldGenerator {
      */
     public function generateController()
     {
+        if ( ! $this->confirm('Do you want to generate a controller?'))
+        {
+            return;
+        }
+
         $this->console->call('generate:controller', [
             'name' => $this->getControllerName(),
             '--force' => $this->console->option('force'),
@@ -138,12 +171,20 @@ class ScaffoldGenerator {
     public function generateViews()
     {
         $layout = $this->getPrefix('/') . 'layouts/master';
+        
+        if ($this->confirm('Do you want to create master view?'))
+        {
+            $this->console->call('generate:view', [
+                'name' => $layout,
+                '--master' => true,
+                '--force' => $this->console->option('force')
+            ]);
+        }
 
-        $this->console->call('generate:view', [
-            'name' => $layout,
-            '--master' => true,
-            '--force' => $this->console->option('force')
-        ]);
+        if ( ! $this->confirm('Do you want to create view resources?'))
+        {
+            return;
+        }
 
         foreach ($this->views as $view)
         {
@@ -162,10 +203,17 @@ class ScaffoldGenerator {
      */
     public function appendRoute()
     {
+        if ( ! $this->confirm('Do you want to append new route?'))
+        {
+            return;
+        }
+
         $contents = $this->laravel['files']->get($path = app_path('Http/routes.php'));
         $contents .= PHP_EOL . "Route::resource('{$this->getRouteName()}', '{$this->getControllerName()}');";
 
         $this->laravel['files']->put($path, $contents);
+
+        $this->console->info("Route appended successfully.");
     }
 
     /**
