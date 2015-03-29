@@ -22,7 +22,7 @@ class ScaffoldGenerator {
     protected $laravel;
 
     /**
-     * The array fo view names being created.
+     * The array of view names being created.
      *
      * @var array
      */
