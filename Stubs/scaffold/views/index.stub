@@ -4,7 +4,7 @@
   <div class="panel panel-default">
 	<div class="panel-heading">
 		All $STUDLY_PLURAL_ENTITY$
-		<div class="panel-nav">
+		<div class="panel-nav pull-right" style="margin-top: -7px;">
 			<a href="{!! route('$PREFIX_DOT$$LOWER_PLURAL_ENTITY$.create') !!}" class="btn btn-default">Add New</a>
 		</div>
 	</div>
@@ -19,8 +19,7 @@ $TABLE_HEADING$
 			@foreach ($$LOWER_PLURAL_ENTITY$ as $$LOWER_SINGULAR_ENTITY$)
 				<tr>
 					<td class="text-center">{!! $no !!}</td>
-$TABLE_BODY$
-					<td class="text-center">{!! $$LOWER_PLURAL_ENTITY$->created_at !!}</td>
+$TABLE_BODY$		<td class="text-center">{!! $$LOWER_SINGULAR_ENTITY$->created_at !!}</td>
 					<td class="text-center">
 						<div class="btn-group">
 							<a href="{!! route('$PREFIX_DOT$$LOWER_PLURAL_ENTITY$.show', $$LOWER_SINGULAR_ENTITY$->id) !!}" class="btn btn-default" title="View" data-toggle="tooltip"><i class="fa fa-eye"></i></a>

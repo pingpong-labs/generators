@@ -5,7 +5,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             Edit $STUDLY_SINGULAR_ENTITY$
-            <div class="panel-nav">
+            <div class="panel-nav pull-right" style="margin-top: -7px;">
                 <a href="{!! route('$PREFIX_DOT$$LOWER_PLURAL_ENTITY$.index') !!}" class="btn btn-default">Back</a>
             </div>
         </div>
