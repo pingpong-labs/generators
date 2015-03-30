@@ -14,7 +14,7 @@
                 <td><b>ID</b></td>
                 <td>{!! $$LOWER_SINGULAR_ENTITY$->id !!}</td>
             </tr>
-            $SHOW_BODY$
+$SHOW_BODY$
             <tr>
                 <td><b>Created At</b></td>
                 <td>{!! $$LOWER_SINGULAR_ENTITY$->created_at !!}</td>
