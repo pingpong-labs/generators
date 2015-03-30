@@ -277,7 +277,8 @@ class ScaffoldGenerator {
             'studly_singular_entity' => Str::studly($this->getEntity()),
             'form' => $this->getFormGenerator()->render(),
             'table_heading' => $this->getTableDumper()->toHeading(),
-            'table_body' => $this->getTableDumper()->toBody($this->getEntity())
+            'table_body' => $this->getTableDumper()->toBody($this->getEntity()),
+            'show_body' => $this->getTableDumper()->toRows($this->getEntity())
         ]));
 
         $generator->run();

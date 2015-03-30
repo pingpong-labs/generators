@@ -3,6 +3,7 @@
 namespace Pingpong\Generators\FormDumpers;
 
 use Pingpong\Generators\Migrations\SchemaParser;
+use Pingpong\Generators\Stub;
 
 class FieldsDumper {
 
@@ -89,6 +90,30 @@ class FieldsDumper {
         }
 
         return $results;   
+    }
+
+    /**
+     * Get replacements for $SHOW_BODY$.
+     * 
+     * @param  string $var
+     * @return string
+     */
+    public function toRows($var)
+    {
+        $results = PHP_EOL;
+
+        foreach ($this->getParser()->toArray() as $name => $types)
+        {
+            if (in_array($name, $this->ignores)) continue;
+
+            $results .= Stub::create(__DIR__ . '/../Stubs/scaffold/row.stub', [
+                'label' => ucwords($name),
+                'column' => $name,
+                'var' => $var
+            ])->render();  
+        }
+
+        return $results . PHP_EOL;
     }
 
 }

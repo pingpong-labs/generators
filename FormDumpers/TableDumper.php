@@ -3,6 +3,7 @@
 namespace Pingpong\Generators\FormDumpers;
 
 use Illuminate\Support\Facades\DB;
+use Pingpong\Generators\Stub;
 
 class TableDumper {
 
@@ -101,6 +102,30 @@ class TableDumper {
         }
 
         return $results;   
+    }
+
+    /**
+     * Get replacements for $SHOW_BODY$.
+     * 
+     * @param  string $var
+     * @return string
+     */
+    public function toRows($var)
+    {
+        $results = PHP_EOL;
+
+        foreach ($this->getColumns() as $column)
+        {
+            if (in_array($name = $column->getName(), $this->ignores)) continue;
+
+            $results .= Stub::create(__DIR__ . '/../Stubs/scaffold/row.stub', [
+                'label' => ucwords($name),
+                'column' => $name,
+                'var' => $var
+            ])->render();  
+        }
+
+        return $results . PHP_EOL;
     }
 
 }

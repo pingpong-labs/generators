@@ -20,7 +20,7 @@ $TABLE_HEADING$
 				<tr>
 					<td class="text-center">{!! $no !!}</td>
 $TABLE_BODY$		
-					<td class="text-center">{!! $$LOWER_SINGULAR_ENTITY$->created_at !!}</td>
+					<td>{!! $$LOWER_SINGULAR_ENTITY$->created_at !!}</td>
 					<td class="text-center">
 						<div class="btn-group">
 							{!! Form::open(['method' => 'DELETE', 'route' => ['$LOWER_PLURAL_ENTITY$.destroy', $$LOWER_SINGULAR_ENTITY$->id]]) !!}

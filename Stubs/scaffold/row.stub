@@ -1,0 +1,4 @@
+			<tr>
+                <td><b>$LABEL$</b></td>
+                <td>{!! $$VAR$->$COLUMN$ !!}</td>
+            </tr>
