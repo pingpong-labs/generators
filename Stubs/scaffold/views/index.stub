@@ -19,12 +19,15 @@ $TABLE_HEADING$
 			@foreach ($$LOWER_PLURAL_ENTITY$ as $$LOWER_SINGULAR_ENTITY$)
 				<tr>
 					<td class="text-center">{!! $no !!}</td>
-$TABLE_BODY$		<td class="text-center">{!! $$LOWER_SINGULAR_ENTITY$->created_at !!}</td>
+$TABLE_BODY$		
+					<td class="text-center">{!! $$LOWER_SINGULAR_ENTITY$->created_at !!}</td>
 					<td class="text-center">
 						<div class="btn-group">
-							<a href="{!! route('$PREFIX_DOT$$LOWER_PLURAL_ENTITY$.show', $$LOWER_SINGULAR_ENTITY$->id) !!}" class="btn btn-default" title="View" data-toggle="tooltip"><i class="fa fa-eye"></i></a>
-							<a href="{!! route('$PREFIX_DOT$$LOWER_PLURAL_ENTITY$.edit', $$LOWER_SINGULAR_ENTITY$->id) !!}" class="btn btn-default" title="Edit" data-toggle="tooltip"><i class="fa fa-edit"></i></a>
-							<a data-toggle="modal" href="#delete{{ $$LOWER_SINGULAR_ENTITY$->id }}" class="btn btn-default" title="Delete" data-toggle="tooltip"><i class="fa fa-times"></i></a>
+							{!! Form::open(['method' => 'DELETE', 'route' => ['$LOWER_PLURAL_ENTITY$.destroy', $$LOWER_SINGULAR_ENTITY$->id]]) !!}
+							<a href="{!! route('$PREFIX_DOT$$LOWER_PLURAL_ENTITY$.show', $$LOWER_SINGULAR_ENTITY$->id) !!}" class="btn btn-sm btn-default" title="View" data-toggle="tooltip"><i class="glyphicon glyphicon-eye-open"></i></a>
+							<a href="{!! route('$PREFIX_DOT$$LOWER_PLURAL_ENTITY$.edit', $$LOWER_SINGULAR_ENTITY$->id) !!}" class="btn btn-sm btn-default" title="Edit" data-toggle="tooltip"><i class="glyphicon glyphicon-edit"></i></a>
+							<button type="submit" class="btn btn-sm btn-default" title="Delete" data-toggle="tooltip"><i class="glyphicon glyphicon-trash"></i></button>
+							{!! Form::close() !!}
 						</div>
 					</td>
 				</tr>

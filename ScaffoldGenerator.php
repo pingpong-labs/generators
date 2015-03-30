@@ -114,6 +114,7 @@ class ScaffoldGenerator {
 
         $this->console->call('generate:model', [
             'name' => $this->getEntity(),
+            '--fillable' => $this->console->option('fields'),
             '--force' => $this->console->option('force')
         ]);
     }
