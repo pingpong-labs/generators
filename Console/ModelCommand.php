@@ -32,7 +32,8 @@ class ModelCommand extends Command {
     {
         $generator = new ModelGenerator([
             'name' => $this->argument('name'),
-            'force' => $this->option('force')
+            'fillable' => $this->option('fillable'),
+            'force' => $this->option('force'),
         ]);
 
         $generator->run();
@@ -60,6 +61,7 @@ class ModelCommand extends Command {
     public function getOptions()
     {
         return [
+            ['fillable', null, InputOption::VALUE_OPTIONAL, 'The fillable attributes.', null],
             ['force', 'f', InputOption::VALUE_NONE, 'Force the creation if file already exists.', null],
         ];
     }
