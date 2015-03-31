@@ -84,7 +84,7 @@ class ScaffoldGenerator {
             $controller = Str::studly($this->getPrefix('/')) . $controller;
         }
 
-        return $controller;
+        return str_replace('/', '\\', $controller);
     }
 
     /**
@@ -96,8 +96,6 @@ class ScaffoldGenerator {
     public function confirm($message)
     {
         if ($this->console->option('no-question')) return true;
-
-        if ($this->console->option('force')) return true;
         
         return $this->console->confirm($message);
     }
