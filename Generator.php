@@ -117,7 +117,7 @@ abstract class Generator {
             $name = str_replace('/', '/', $this->name);
         }
 
-        return Str::studly($name);
+        return Str::studly(str_replace(' ', '/', ucwords(str_replace('/', ' ', $name))));
     }
 
     /**
@@ -127,10 +127,7 @@ abstract class Generator {
      */
     public function getClass()
     {
-        return array_last($this->getSegments(), function ($key, $value)
-        {
-            return $value;
-        });
+        return Str::studly(class_basename($this->getName()));
     }
 
     /**
