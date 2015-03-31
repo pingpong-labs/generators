@@ -23,7 +23,7 @@ $TABLE_BODY$
 					<td>{!! $$LOWER_SINGULAR_ENTITY$->created_at !!}</td>
 					<td class="text-center">
 						<div class="btn-group">
-							{!! Form::open(['method' => 'DELETE', 'route' => ['$LOWER_PLURAL_ENTITY$.destroy', $$LOWER_SINGULAR_ENTITY$->id]]) !!}
+							{!! Form::open(['method' => 'DELETE', 'route' => ['$PREFIX_DOT$$LOWER_PLURAL_ENTITY$.destroy', $$LOWER_SINGULAR_ENTITY$->id]]) !!}
 							<a href="{!! route('$PREFIX_DOT$$LOWER_PLURAL_ENTITY$.show', $$LOWER_SINGULAR_ENTITY$->id) !!}" class="btn btn-sm btn-default" title="View" data-toggle="tooltip"><i class="glyphicon glyphicon-eye-open"></i></a>
 							<a href="{!! route('$PREFIX_DOT$$LOWER_PLURAL_ENTITY$.edit', $$LOWER_SINGULAR_ENTITY$->id) !!}" class="btn btn-sm btn-default" title="Edit" data-toggle="tooltip"><i class="glyphicon glyphicon-edit"></i></a>
 							<button type="submit" class="btn btn-sm btn-default" title="Delete" data-toggle="tooltip"><i class="glyphicon glyphicon-trash"></i></button>
