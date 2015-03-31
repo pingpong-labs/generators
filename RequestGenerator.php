@@ -65,6 +65,8 @@ class RequestGenerator extends Generator {
      */
     public function getRules()
     {
+        if ( ! $this->rules) return 'return [];';
+
         $parser = new SchemaParser($this->rules);
 
         $results = 'return [' . PHP_EOL;
