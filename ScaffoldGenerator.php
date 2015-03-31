@@ -77,7 +77,7 @@ class ScaffoldGenerator {
      */
     public function getControllerName()
     {
-        $controller = Str::studly($this->getEntity()) . 'Controller';
+        $controller = Str::studly($this->getEntities()) . 'Controller';
 
         if ($this->console->option('prefix'))
         {
