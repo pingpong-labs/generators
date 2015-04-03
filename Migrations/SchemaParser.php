@@ -64,6 +64,8 @@ class SchemaParser implements Arrayable {
      */
     public function getSchemas()
     {
+        if (is_null($this->migration)) return [];
+        
         return explode(',', str_replace(' ', '', $this->migration));
     }
 
