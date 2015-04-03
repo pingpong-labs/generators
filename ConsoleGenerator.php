@@ -12,13 +12,13 @@ class ConsoleGenerator extends Generator {
     protected $stub = 'console';
 
     /**
-     * Get destination path for generated file.
+     * Get base path of destination file.
      *
      * @return string
      */
-    public function getPath()
+    public function getBasePath()
     {
-        return app_path() . '/Console/Commands/' . $this->getName() . '.php';
+        return app_path() . '/Console/Commands';
     }
 
     /**

@@ -92,11 +92,24 @@ abstract class Generator {
     }
 
     /**
+     * Get base path of destination file.
+     *
+     * @return string
+     */
+    public function getBasePath()
+    {
+        return base_path();
+    }
+
+    /**
      * Get destination path for generated file.
      *
      * @return string
      */
-    abstract public function getPath();
+    public function getPath()
+    {
+        return $this->getBasePath() . '/' . $this->getName() . '.php';
+    }
 
     /**
      * Get name input.

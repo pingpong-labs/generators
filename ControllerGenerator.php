@@ -46,13 +46,13 @@ class ControllerGenerator extends Generator {
     }
 
     /**
-     * Get destination path for generated file.
+     * Get base path of destination file.
      *
      * @return string
      */
-    public function getPath()
+    public function getBasePath()
     {
-        return app_path() . '/Http/Controllers/' . $this->getName() . '.php';
+        return app_path() . '/Http/Controllers';
     }
 
     /**

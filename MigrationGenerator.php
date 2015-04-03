@@ -15,13 +15,23 @@ class MigrationGenerator extends Generator {
     protected $stub = 'migration/plain';
 
     /**
+     * Get base path of destination file.
+     *
+     * @return string
+     */
+    public function getBasePath()
+    {
+        return base_path() . '/database/migrations/';
+    }
+
+    /**
      * Get destination path for generated file.
      *
      * @return string
      */
     public function getPath()
     {
-        return base_path() . '/database/migrations/' . $this->getFileName() . '.php';
+        return $this->getBasePath() . $this->getFileName() . '.php';
     }
 
     /**

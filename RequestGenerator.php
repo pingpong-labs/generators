@@ -14,13 +14,23 @@ class RequestGenerator extends Generator {
     protected $stub = 'request';
 
     /**
+     * Get base path of destination file.
+     *
+     * @return string
+     */
+    public function getBasePath()
+    {
+        return app_path() . '/Http/Requests/';
+    }
+
+    /**
      * Get destination path for generated file.
      *
      * @return string
      */
     public function getPath()
     {
-        return app_path() . '/Http/Requests/' . $this->getName() . '.php';
+        return $this->getBasePath() . $this->getName() . '.php';
     }
 
     /**

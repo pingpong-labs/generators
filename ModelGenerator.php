@@ -14,13 +14,23 @@ class ModelGenerator extends Generator {
     protected $stub = 'model';
 
     /**
+     * Get base path of destination file.
+     *
+     * @return string
+     */
+    public function getBasePath()
+    {
+        return app_path();
+    }
+
+    /**
      * Get destination path for generated file.
      *
      * @return string
      */
     public function getPath()
     {
-        return app_path() . '/' . $this->getName() . '.php';
+        return $this->getBasePath() . '/' . $this->getName() . '.php';
     }
     
     /**
