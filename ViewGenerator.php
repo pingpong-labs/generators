@@ -13,6 +13,11 @@ class ViewGenerator extends Generator {
      */
     protected $stub = 'view';
 
+    /**
+     * The array of custom replacements.
+     * 
+     * @var array
+     */
     protected $customReplacements = [];
 
     /**
