@@ -21,35 +21,35 @@ class SchemaParser implements Arrayable {
      *
      * @var string
      */
-    protected $migration;
+    protected $schema;
 
     /**
      * Create new instance.
      *
-     * @param string|null $migration
+     * @param string|null $schema
      */
-    public function __construct($migration = null)
+    public function __construct($schema = null)
     {
-        $this->migration = $migration;
+        $this->schema = $schema;
     }
 
     /**
      * Parse a string to array of formatted schema.
      *
-     * @param  string $migration
+     * @param  string $schema
      * @return array
      */
-    public function parse($migration)
+    public function parse($schema)
     {
-        $this->migration = $migration;
+        $this->schema = $schema;
 
         $parsed = [];
 
-        foreach ($this->getSchemas() as $schema)
+        foreach ($this->getSchemas() as $schemaArray)
         {
-            $column = $this->getColumn($schema);
+            $column = $this->getColumn($schemaArray);
 
-            $attributes = $this->getAttributes($column, $schema);
+            $attributes = $this->getAttributes($column, $schemaArray);
 
             $parsed[$column] = $attributes;
         }
@@ -64,9 +64,9 @@ class SchemaParser implements Arrayable {
      */
     public function getSchemas()
     {
-        if (is_null($this->migration)) return [];
-        
-        return explode(',', str_replace(' ', '', $this->migration));
+        if (is_null($this->schema)) return [];
+
+        return explode(',', str_replace(' ', '', $this->schema));
     }
 
     /**
@@ -76,7 +76,7 @@ class SchemaParser implements Arrayable {
      */
     public function toArray()
     {
-        return $this->parse($this->migration);
+        return $this->parse($this->schema);
     }
 
     /**
