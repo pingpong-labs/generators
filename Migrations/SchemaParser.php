@@ -160,6 +160,11 @@ class SchemaParser implements Arrayable {
             return '->' . $field . "('" . $column . "')";
         }
 
+        if (str_contains($field, '('))
+        {
+            return '->' . $field;
+        }
+
         return '->' . $field . '()';
     }
 
