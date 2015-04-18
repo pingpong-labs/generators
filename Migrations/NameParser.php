@@ -88,103 +88,52 @@ class NameParser {
     /**
      * Get the table will be used.
      *
-     * @return mixed|null
-     * @throws InvalidMigrationNameException
+     * @return string
      */
     public function getTableName()
     {
-        $table = null;
+        $matches = array_reverse($this->getMatches());
 
-        if ($this->isCreate())
-        {
-            $table = array_get($this->data, 1);
-        }
-        elseif ($this->isDrop())
-        {
-            $table = array_get($this->data, 1);
-        }
-        elseif ($this->isAdd())
-        {
-            $table = array_get($this->getMatchesWithAddSchema(), 2);
-        }
-        elseif ($this->isDelete())
-        {
-            $table = array_get($this->getMatchesWithDeleteSchema(), 2);
-        }
-
-        if ( ! is_null($table))
-        {
-            return $table;
-        }
-
-        throw new \InvalidArgumentException("Invalid migration name.");
+        return array_shift($matches);
     }
 
     /**
-     * Get the name of column will be altered.
-     *
-     * @throws InvalidMigrationNameException
+     * Get matches data from regex.
+     * 
+     * @return array
+     */
+    public function getMatches()
+    {
+        preg_match($this->getPattern(), $this->name, $matches);
+        
+        return $matches;
+    }
+
+    /**
+     * Get name pattern.
+     * 
      * @return string
      */
-    public function getAlterColumn()
+    public function getPattern()
     {
-        $table = null;
+        switch ($action = $this->getAction()) {
+            case 'add':
+            case 'append':
+            case 'update':
+            case 'insert':
+                return "/{$action}_(.*)_to_(.*)_table/";
+                break;
+            
+            case 'delete':
+            case 'remove':
+            case 'alter':
+                return "/{$action}_(.*)_from_(.*)_table/";
+                break;
 
-        if ($this->isAdd())
-        {
-            $table = array_get($this->getMatchesWithAddSchema(), 1);
+            default:
+                return "/{$action}_(.*)_table/";
+                break;
         }
-        elseif ($this->isDelete())
-        {
-            $table = array_get($this->getMatchesWithDeleteSchema(), 1);
-        }
-
-        if ( ! is_null($table))
-        {
-            return $table;
-        }
-
-        throw new \InvalidArgumentException("Invalid migration name.");
-    }
-
-    /**
-     * Get the matches data when using add schema.
-     *
-     * @return array
-     */
-    public function getMatchesWithAddSchema()
-    {
-        $matches = [];
-
-        foreach ($this->actions['add'] as $action)
-        {
-            if ($this->is($action))
-            {
-                preg_match("/{$action}_(.*)_to_(.*)_table/", $this->name, $matches);
-            }
-        }
-
-        return $matches;
-    }
-
-    /**
-     * Get the matches data when using delete schema.
-     *
-     * @return array
-     */
-    public function getMatchesWithDeleteSchema()
-    {
-        $matches = [];
-
-        foreach ($this->actions['delete'] as $action)
-        {
-            if ($this->is($action))
-            {
-                preg_match("/{$action}_(.*)_from_(.*)_table/", $this->name, $matches);
-            }
-        }
-
-        return $matches;
     }
 
     /**
