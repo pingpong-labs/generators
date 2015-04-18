@@ -102,8 +102,24 @@ class PivotGenerator extends Generator {
             'table_two' => $this->table_two,
             'column_one' => $this->getColumnOne(),
             'column_two' => $this->getColumnTwo(),
-            'table_pivot' => $this->getPivotTableName()
+            'table_pivot' => $this->getPivotTableName(),
+            'timestamp' => $this->getTimestampReplacement()
         ]);
+    }
+
+    /**
+     * Get replacement for TIMESTAMP.
+     * 
+     * @return string|null
+     */
+    public function getTimestampReplacement()
+    {
+        if ($this->timestamp)
+        {
+            return '$table->timestamps();';
+        }
+
+        return null;
     }
 
     /**

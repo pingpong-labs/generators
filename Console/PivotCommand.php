@@ -33,7 +33,8 @@ class PivotCommand extends Command {
         $generator = new PivotGenerator([
             'table_one' => $this->argument('table_one'),
             'table_two' => $this->argument('table_two'),
-            'force' => $this->option('force')
+            'timestamp' => $this->option('timestamp'),
+            'force' => $this->option('force'),
         ]);
 
         $generator->run();
@@ -62,6 +63,7 @@ class PivotCommand extends Command {
     public function getOptions()
     {
         return [
+            ['timestamp', 't', InputOption::VALUE_NONE, 'Add timestamp to migration schema.', null],
             ['force', 'f', InputOption::VALUE_NONE, 'Force the creation if file already exists.', null],
         ];
     }

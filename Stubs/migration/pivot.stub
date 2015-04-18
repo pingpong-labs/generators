@@ -18,6 +18,7 @@ class $CLASS$ extends Migration {
 			$table->foreign('$COLUMN_ONE$_id')->references('id')->on('$TABLE_ONE$')->onDelete('cascade');
 			$table->integer('$COLUMN_TWO$_id')->unsigned()->index();
 			$table->foreign('$COLUMN_TWO$_id')->references('id')->on('$TABLE_TWO$')->onDelete('cascade');
+			$TIMESTAMP$
 		});
 	}
 
