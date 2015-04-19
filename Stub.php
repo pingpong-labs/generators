@@ -10,6 +10,13 @@ class Stub {
     protected $path;
 
     /**
+     * The base path of stub file.
+     * 
+     * @var null|string
+     */
+    protected static $basePath = null;
+
+    /**
      * The replacements array.
      *
      * @var array
@@ -60,7 +67,18 @@ class Stub {
      */
     public function getPath()
     {
-        return $this->path;
+        return static::$basePath . $this->path;
+    }
+
+    /**
+     * Set base path.
+     * 
+     * @param  string $path
+     * @return void
+     */
+    public static function setBasePath($path)
+    {
+        static::$basePath = $path;
     }
 
     /**
