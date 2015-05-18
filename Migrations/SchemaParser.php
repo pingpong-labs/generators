@@ -4,7 +4,8 @@ namespace Pingpong\Generators\Migrations;
 
 use Illuminate\Contracts\Support\Arrayable;
 
-class SchemaParser implements Arrayable {
+class SchemaParser implements Arrayable
+{
 
     /**
      * The array of custom attributes.
@@ -45,8 +46,7 @@ class SchemaParser implements Arrayable {
 
         $parsed = [];
 
-        foreach ($this->getSchemas() as $schemaArray)
-        {
+        foreach ($this->getSchemas() as $schemaArray) {
             $column = $this->getColumn($schemaArray);
 
             $attributes = $this->getAttributes($column, $schemaArray);
@@ -64,7 +64,9 @@ class SchemaParser implements Arrayable {
      */
     public function getSchemas()
     {
-        if (is_null($this->schema)) return [];
+        if (is_null($this->schema)) {
+            return [];
+        }
 
         return explode(',', str_replace(' ', '', $this->schema));
     }
@@ -88,8 +90,7 @@ class SchemaParser implements Arrayable {
     {
         $results = '';
 
-        foreach ($this->toArray() as $column => $attributes)
-        {
+        foreach ($this->toArray() as $column => $attributes) {
             $results .= $this->createField($column, $attributes);
         }
 
@@ -115,8 +116,7 @@ class SchemaParser implements Arrayable {
     {
         $results = '';
 
-        foreach ($this->toArray() as $column => $attributes)
-        {
+        foreach ($this->toArray() as $column => $attributes) {
             $results .= $this->createField($column, $attributes, 'remove');
         }
 
@@ -134,8 +134,7 @@ class SchemaParser implements Arrayable {
     {
         $results = "\t\t\t" . '$table';
 
-        foreach ($attributes as $key => $field)
-        {
+        foreach ($attributes as $key => $field) {
             $results .= $this->{"{$type}Column"}($key, $field, $column);
         }
 
@@ -152,16 +151,15 @@ class SchemaParser implements Arrayable {
      */
     protected function addColumn($key, $field, $column)
     {
-        if ($this->hasCustomAttribute($column))
+        if ($this->hasCustomAttribute($column)) {
             return '->' . $field;
+        }
 
-        if ($key == 0)
-        {
+        if ($key == 0) {
             return '->' . $field . "('" . $column . "')";
         }
 
-        if (str_contains($field, '('))
-        {
+        if (str_contains($field, '(')) {
             return '->' . $field;
         }
 
@@ -178,8 +176,9 @@ class SchemaParser implements Arrayable {
      */
     protected function removeColumn($key, $field, $column)
     {
-        if ($this->hasCustomAttribute($column))
+        if ($this->hasCustomAttribute($column)) {
             return '->' . $field;
+        }
 
         return '->dropColumn(' . "'" . $column . "')";
     }
@@ -192,8 +191,7 @@ class SchemaParser implements Arrayable {
      */
     public function getColumn($schema)
     {
-        return array_first(explode(':', $schema), function ($key, $value)
-        {
+        return array_first(explode(':', $schema), function ($key, $value) {
             return $value;
         });
     }
@@ -233,5 +231,4 @@ class SchemaParser implements Arrayable {
     {
         return (array)$this->customAttributes[$column];
     }
-
 }

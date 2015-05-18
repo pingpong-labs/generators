@@ -4,7 +4,8 @@ namespace Pingpong\Generators;
 
 use Illuminate\Support\Str;
 
-class PivotGenerator extends Generator {
+class PivotGenerator extends Generator
+{
 
     /**
      * Get stub name.
@@ -109,13 +110,12 @@ class PivotGenerator extends Generator {
 
     /**
      * Get replacement for TIMESTAMP.
-     * 
+     *
      * @return string|null
      */
     public function getTimestampReplacement()
     {
-        if ($this->timestamp)
-        {
+        if ($this->timestamp) {
             return '$table->timestamps();';
         }
 
@@ -141,5 +141,4 @@ class PivotGenerator extends Generator {
     {
         return str_singular($this->table_two);
     }
-
 }

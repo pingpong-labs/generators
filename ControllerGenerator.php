@@ -4,7 +4,8 @@ namespace Pingpong\Generators;
 
 use Pingpong\Generators\Scaffolders\ControllerScaffolder;
 
-class ControllerGenerator extends Generator {
+class ControllerGenerator extends Generator
+{
 
     /**
      * Get stub name.
@@ -20,12 +21,9 @@ class ControllerGenerator extends Generator {
      */
     public function setUp()
     {
-        if ($this->resource)
-        {
+        if ($this->resource) {
             $this->stub = 'controller/resource';
-        }
-        elseif ($this->scaffold)
-        {
+        } elseif ($this->scaffold) {
             $this->stub = 'controller/scaffold';
             $this->scaffolder = new ControllerScaffolder($this->getClass(), $this->getPrefix());
         }
@@ -74,12 +72,10 @@ class ControllerGenerator extends Generator {
     {
         $replacements = array_merge(parent::getReplacements(), ['root_namespace' => $this->getAppNamespace()]);
 
-        if ($this->scaffold)
-        {
+        if ($this->scaffold) {
             return array_merge($replacements, $this->scaffolder->toArray());
         }
 
         return $replacements;
     }
-
 }

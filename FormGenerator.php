@@ -5,7 +5,8 @@ namespace Pingpong\Generators;
 use Pingpong\Generators\FormDumpers\FieldsDumper;
 use Pingpong\Generators\FormDumpers\TableDumper;
 
-class FormGenerator {
+class FormGenerator
+{
 
     /**
      * The name of entity.
@@ -40,8 +41,9 @@ class FormGenerator {
      */
     public function render()
     {
-        if ($this->fields)
+        if ($this->fields) {
             return $this->renderFromFields();
+        }
 
         return $this->renderFromDb();
     }
@@ -65,5 +67,4 @@ class FormGenerator {
     {
         return (new FieldsDumper($this->fields))->render();
     }
-
 }

@@ -7,7 +7,8 @@ use Pingpong\Generators\ConsoleGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class ConsoleCommand extends Command {
+class ConsoleCommand extends Command
+{
 
     /**
      * The name of command.

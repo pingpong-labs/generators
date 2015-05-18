@@ -2,7 +2,8 @@
 
 namespace Pingpong\Generators;
 
-class ConsoleGenerator extends Generator {
+class ConsoleGenerator extends Generator
+{
 
     /**
      * Get stub name.
@@ -43,5 +44,4 @@ class ConsoleGenerator extends Generator {
             'description' => $this->option('description', 'Command description'),
         ]);
     }
-
 }

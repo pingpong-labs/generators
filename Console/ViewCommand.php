@@ -7,7 +7,8 @@ use Pingpong\Generators\ViewGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class ViewCommand extends Command {
+class ViewCommand extends Command
+{
 
     /**
      * The name of command.

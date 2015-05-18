@@ -7,7 +7,8 @@ use Pingpong\Generators\ScaffoldGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class ScaffoldCommand extends Command {
+class ScaffoldCommand extends Command
+{
 
     /**
      * The name of command.

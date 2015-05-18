@@ -7,7 +7,8 @@ use Pingpong\Generators\FormGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class FormCommand extends Command {
+class FormCommand extends Command
+{
 
     /**
      * The name of command.

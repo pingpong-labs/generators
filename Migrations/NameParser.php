@@ -2,7 +2,8 @@
 
 namespace Pingpong\Generators\Migrations;
 
-class NameParser {
+class NameParser
+{
 
     /**
      * The migration name.
@@ -99,7 +100,7 @@ class NameParser {
 
     /**
      * Get matches data from regex.
-     * 
+     *
      * @return array
      */
     public function getMatches()
@@ -111,7 +112,7 @@ class NameParser {
 
     /**
      * Get name pattern.
-     * 
+     *
      * @return string
      */
     public function getPattern()
@@ -206,5 +207,4 @@ class NameParser {
     {
         return in_array($this->getAction(), $this->actions['drop']);
     }
-
-} 
+}

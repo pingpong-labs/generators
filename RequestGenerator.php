@@ -4,7 +4,8 @@ namespace Pingpong\Generators;
 
 use Pingpong\Generators\Migrations\SchemaParser;
 
-class RequestGenerator extends Generator {
+class RequestGenerator extends Generator
+{
 
     /**
      * Get stub name.
@@ -75,14 +76,15 @@ class RequestGenerator extends Generator {
      */
     public function getRules()
     {
-        if ( ! $this->rules) return 'return [];';
+        if (! $this->rules) {
+            return 'return [];';
+        }
 
         $parser = new SchemaParser($this->rules);
 
         $results = 'return [' . PHP_EOL;
 
-        foreach ($parser->toArray() as $field => $rules)
-        {
+        foreach ($parser->toArray() as $field => $rules) {
             $results .= $this->createRules($field, $rules);
         }
 
@@ -102,9 +104,10 @@ class RequestGenerator extends Generator {
     {
         $rule = str_replace(['(', ')', ';'], [':', '', ','], implode('|', $rules));
 
-        if ($this->scaffold) $rule = 'required';
+        if ($this->scaffold) {
+            $rule = 'required';
+        }
 
         return "\t\t\t'{$field}' => '" . $rule . "'," . PHP_EOL;
     }
-
 }

@@ -7,7 +7,8 @@ use Pingpong\Generators\PivotGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class PivotCommand extends Command {
+class PivotCommand extends Command
+{
 
     /**
      * The name of command.

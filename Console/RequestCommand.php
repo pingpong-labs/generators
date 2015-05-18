@@ -7,7 +7,8 @@ use Pingpong\Generators\RequestGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class RequestCommand extends Command {
+class RequestCommand extends Command
+{
 
     /**
      * The name of command.
@@ -69,5 +70,4 @@ class RequestCommand extends Command {
             ['force', 'f', InputOption::VALUE_NONE, 'Force the creation if file already exists.', null],
         ];
     }
-    
 }

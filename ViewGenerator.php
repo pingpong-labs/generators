@@ -4,7 +4,8 @@ namespace Pingpong\Generators;
 
 use Pingpong\Generators\Stub;
 
-class ViewGenerator extends Generator {
+class ViewGenerator extends Generator
+{
 
     /**
      * Get stub name.
@@ -15,7 +16,7 @@ class ViewGenerator extends Generator {
 
     /**
      * The array of custom replacements.
-     * 
+     *
      * @var array
      */
     protected $customReplacements = [];
@@ -27,8 +28,7 @@ class ViewGenerator extends Generator {
      */
     public function setUp()
     {
-        if ($this->master)
-        {
+        if ($this->master) {
             $this->stub = 'views/master';
         }
     }
@@ -60,11 +60,13 @@ class ViewGenerator extends Generator {
      */
     public function getStub()
     {
-        if ($this->plain)
+        if ($this->plain) {
             return $this->getPath();
+        }
 
-        if ($template = $this->template)
+        if ($template = $this->template) {
             return Stub::create($template, $this->getReplacements())->render();
+        }
 
         return parent::getStub();
     }
@@ -85,7 +87,7 @@ class ViewGenerator extends Generator {
      * @return array
      */
     public function getReplacements()
-    {        
+    {
         $replaces = [
             'extends' => $this->extends,
             'section' => $this->section,
@@ -97,7 +99,7 @@ class ViewGenerator extends Generator {
 
     /**
      * Append a custom replacements to this instance.
-     * 
+     *
      * @param  array $replacements
      * @return self
      */
@@ -107,5 +109,4 @@ class ViewGenerator extends Generator {
 
         return $this;
     }
-
 }

@@ -7,7 +7,8 @@ use Pingpong\Generators\ModelGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class ModelCommand extends Command {
+class ModelCommand extends Command
+{
 
     /**
      * The name of command.

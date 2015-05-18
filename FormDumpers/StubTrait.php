@@ -4,7 +4,8 @@ namespace Pingpong\Generators\FormDumpers;
 
 use Pingpong\Generators\Stub;
 
-trait StubTrait {
+trait StubTrait
+{
 
     /**
      * The array of types.
@@ -63,8 +64,9 @@ trait StubTrait {
      */
     public function getStub($type, $name)
     {
-        if (in_array($name, $this->ignores))
+        if (in_array($name, $this->ignores)) {
             return null;
+        }
 
         $type = $this->getInputType($type, $name);
 
@@ -83,13 +85,11 @@ trait StubTrait {
      */
     public function getInputType($type, $name)
     {
-        if (in_array($name, $this->specials))
-        {
+        if (in_array($name, $this->specials)) {
             return $name;
         }
 
-        if (array_key_exists($type, $this->types))
-        {
+        if (array_key_exists($type, $this->types)) {
             return $this->types[$type];
         }
 
@@ -104,10 +104,8 @@ trait StubTrait {
      */
     public function getFieldType($types)
     {
-        return array_first($types, function ($key, $value)
-        {
+        return array_first($types, function ($key, $value) {
             return $value;
         });
     }
-
 }

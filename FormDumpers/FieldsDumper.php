@@ -5,7 +5,8 @@ namespace Pingpong\Generators\FormDumpers;
 use Pingpong\Generators\Migrations\SchemaParser;
 use Pingpong\Generators\Stub;
 
-class FieldsDumper {
+class FieldsDumper
+{
 
     use StubTrait;
 
@@ -45,8 +46,7 @@ class FieldsDumper {
     {
         $results = '';
 
-        foreach ($this->getParser()->toArray() as $name => $types)
-        {
+        foreach ($this->getParser()->toArray() as $name => $types) {
             $results .= $this->getStub($this->getFieldType($types), $name) . PHP_EOL;
         }
 
@@ -55,16 +55,17 @@ class FieldsDumper {
 
     /**
      * Convert the fields to html heading.
-     * 
+     *
      * @return string
      */
     public function toHeading()
     {
         $results = '';
 
-        foreach ($this->getParser()->toArray() as $name => $types)
-        {
-            if (in_array($name, $this->ignores)) continue;
+        foreach ($this->getParser()->toArray() as $name => $types) {
+            if (in_array($name, $this->ignores)) {
+                continue;
+            }
             
             $results .= "\t\t\t".'<th>' . ucwords($name) . '</th>'.PHP_EOL;
         }
@@ -82,19 +83,20 @@ class FieldsDumper {
     {
         $results = '';
 
-        foreach ($this->getParser()->toArray() as $name => $types)
-        {
-            if (in_array($name, $this->ignores)) continue;
+        foreach ($this->getParser()->toArray() as $name => $types) {
+            if (in_array($name, $this->ignores)) {
+                continue;
+            }
 
-            $results .= "\t\t\t\t\t".'<td>{!! $'.$var.'->' . $name . ' !!}</td>'.PHP_EOL;    
+            $results .= "\t\t\t\t\t".'<td>{!! $'.$var.'->' . $name . ' !!}</td>'.PHP_EOL;
         }
 
-        return $results;   
+        return $results;
     }
 
     /**
      * Get replacements for $SHOW_BODY$.
-     * 
+     *
      * @param  string $var
      * @return string
      */
@@ -102,18 +104,18 @@ class FieldsDumper {
     {
         $results = PHP_EOL;
 
-        foreach ($this->getParser()->toArray() as $name => $types)
-        {
-            if (in_array($name, $this->ignores)) continue;
+        foreach ($this->getParser()->toArray() as $name => $types) {
+            if (in_array($name, $this->ignores)) {
+                continue;
+            }
 
             $results .= Stub::create(__DIR__ . '/../Stubs/scaffold/row.stub', [
                 'label' => ucwords($name),
                 'column' => $name,
                 'var' => $var
-            ])->render();  
+            ])->render();
         }
 
         return $results . PHP_EOL;
     }
-
 }

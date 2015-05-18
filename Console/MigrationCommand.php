@@ -8,7 +8,8 @@ use Pingpong\Generators\MigrationGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class MigrationCommand extends Command {
+class MigrationCommand extends Command
+{
 
     /**
      * The name of command.

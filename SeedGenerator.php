@@ -2,7 +2,8 @@
 
 namespace Pingpong\Generators;
 
-class SeedGenerator extends Generator {
+class SeedGenerator extends Generator
+{
 
     /**
      * Get stub name.
@@ -54,5 +55,4 @@ class SeedGenerator extends Generator {
     {
         return false;
     }
-
 }

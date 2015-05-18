@@ -4,7 +4,8 @@ namespace Pingpong\Generators;
 
 use Illuminate\Support\ServiceProvider;
 
-class GeneratorsServiceProvider extends ServiceProvider {
+class GeneratorsServiceProvider extends ServiceProvider
+{
 
     /**
      * The array of consoles.
@@ -31,10 +32,8 @@ class GeneratorsServiceProvider extends ServiceProvider {
      */
     public function register()
     {
-        foreach ($this->consoles as $console)
-        {
+        foreach ($this->consoles as $console) {
             $this->commands('Pingpong\Generators\Console\\' . $console . 'Command');
         }
     }
-
 }

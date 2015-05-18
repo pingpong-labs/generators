@@ -5,7 +5,8 @@ namespace Pingpong\Generators\Scaffolders;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Str;
 
-class ControllerScaffolder implements Arrayable {
+class ControllerScaffolder implements Arrayable
+{
 
     /**
      * The name of controller.

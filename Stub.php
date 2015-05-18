@@ -1,6 +1,7 @@
 <?php namespace Pingpong\Generators;
 
-class Stub {
+class Stub
+{
 
     /**
      * The stub path.
@@ -11,7 +12,7 @@ class Stub {
 
     /**
      * The base path of stub file.
-     * 
+     *
      * @var null|string
      */
     protected static $basePath = null;
@@ -72,7 +73,7 @@ class Stub {
 
     /**
      * Set base path.
-     * 
+     *
      * @param  string $path
      * @return void
      */
@@ -90,8 +91,7 @@ class Stub {
     {
         $contents = file_get_contents($this->getPath());
 
-        foreach ($this->replaces as $search => $replace)
-        {
+        foreach ($this->replaces as $search => $replace) {
             $contents = str_replace('$' . strtoupper($search) . '$', $replace, $contents);
         }
 
@@ -140,5 +140,4 @@ class Stub {
     {
         return $this->render();
     }
-
-} 
+}

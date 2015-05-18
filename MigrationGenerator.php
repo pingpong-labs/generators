@@ -5,7 +5,8 @@ namespace Pingpong\Generators;
 use Pingpong\Generators\Migrations\NameParser;
 use Pingpong\Generators\Migrations\SchemaParser;
 
-class MigrationGenerator extends Generator {
+class MigrationGenerator extends Generator
+{
 
     /**
      * Get stub name.
@@ -93,34 +94,27 @@ class MigrationGenerator extends Generator {
     {
         $parser = $this->getNameParser();
 
-        if ($parser->isCreate())
-        {
+        if ($parser->isCreate()) {
             return Stub::create(__DIR__ . '/Stubs/migration/create.stub', [
                 'class' => $this->getClass(),
                 'table' => $parser->getTable(),
                 'fields' => $this->getSchemaParser()->render()
             ]);
-        }
-        elseif ($parser->isAdd())
-        {
+        } elseif ($parser->isAdd()) {
             return Stub::create(__DIR__ . '/Stubs/migration/add.stub', [
                 'class' => $this->getClass(),
                 'table' => $parser->getTable(),
                 'fields_up' => $this->getSchemaParser()->up(),
                 'fields_down' => $this->getSchemaParser()->down()
             ]);
-        }
-        elseif ($parser->isDelete())
-        {
+        } elseif ($parser->isDelete()) {
             return Stub::create(__DIR__ . '/Stubs/migration/delete.stub', [
                 'class' => $this->getClass(),
                 'table' => $parser->getTable(),
                 'fields_down' => $this->getSchemaParser()->up(),
                 'fields_up' => $this->getSchemaParser()->down()
             ]);
-        }
-        elseif ($parser->isDrop())
-        {
+        } elseif ($parser->isDrop()) {
             return Stub::create(__DIR__ . '/Stubs/migration/drop.stub', [
                 'class' => $this->getClass(),
                 'table' => $parser->getTable(),
@@ -130,5 +124,4 @@ class MigrationGenerator extends Generator {
 
         return parent::getStub();
     }
-
 }

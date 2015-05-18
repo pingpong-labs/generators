@@ -2,6 +2,6 @@
 
 use Exception;
 
-class FileAlreadyExistsException extends Exception {
-
+class FileAlreadyExistsException extends Exception
+{
 }

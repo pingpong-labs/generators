@@ -8,7 +8,8 @@ use Pingpong\Generators\SeedGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class SeedCommand extends Command {
+class SeedCommand extends Command
+{
 
     /**
      * The name of command.

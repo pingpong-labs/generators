@@ -5,7 +5,8 @@ namespace Pingpong\Generators\FormDumpers;
 use Illuminate\Support\Facades\DB;
 use Pingpong\Generators\Stub;
 
-class TableDumper {
+class TableDumper
+{
 
     use StubTrait;
 
@@ -57,8 +58,7 @@ class TableDumper {
 
         $results = '';
 
-        foreach ($columns as $column)
-        {
+        foreach ($columns as $column) {
             $results .= $this->getStub($column->getType()->getName(), $column->getName());
         }
 
@@ -67,16 +67,17 @@ class TableDumper {
 
     /**
      * Convert the fields to html heading.
-     * 
+     *
      * @return string
      */
     public function toHeading()
     {
         $results = '';
 
-        foreach ($this->getColumns() as $column)
-        {
-            if (in_array($name = $column->getName(), $this->ignores)) continue;
+        foreach ($this->getColumns() as $column) {
+            if (in_array($name = $column->getName(), $this->ignores)) {
+                continue;
+            }
 
             $results .= "\t\t\t".'<th>' . ucwords($name) . '</th>'.PHP_EOL;
         }
@@ -94,19 +95,20 @@ class TableDumper {
     {
         $results = '';
 
-        foreach ($this->getColumns() as $column)
-        {
-            if (in_array($name = $column->getName(), $this->ignores)) continue;
+        foreach ($this->getColumns() as $column) {
+            if (in_array($name = $column->getName(), $this->ignores)) {
+                continue;
+            }
 
-            $results .= "\t\t\t\t\t".'<td>{!! $'.$var.'->' . $name . ' !!}</td>'.PHP_EOL;    
+            $results .= "\t\t\t\t\t".'<td>{!! $'.$var.'->' . $name . ' !!}</td>'.PHP_EOL;
         }
 
-        return $results;   
+        return $results;
     }
 
     /**
      * Get replacements for $SHOW_BODY$.
-     * 
+     *
      * @param  string $var
      * @return string
      */
@@ -114,18 +116,18 @@ class TableDumper {
     {
         $results = PHP_EOL;
 
-        foreach ($this->getColumns() as $column)
-        {
-            if (in_array($name = $column->getName(), $this->ignores)) continue;
+        foreach ($this->getColumns() as $column) {
+            if (in_array($name = $column->getName(), $this->ignores)) {
+                continue;
+            }
 
             $results .= Stub::create(__DIR__ . '/../Stubs/scaffold/row.stub', [
                 'label' => ucwords($name),
                 'column' => $name,
                 'var' => $var
-            ])->render();  
+            ])->render();
         }
 
         return $results . PHP_EOL;
     }
-
 }
