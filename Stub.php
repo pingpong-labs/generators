@@ -2,5 +2,4 @@
 
 class Stub extends \Pingpong\Support\Stub
 {
-	
 }
