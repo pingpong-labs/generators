@@ -70,7 +70,7 @@ trait StubTrait
 
         $type = $this->getInputType($type, $name);
 
-        return Stub::create(__DIR__ . '/../Stubs/form/' . $type . '.stub', [
+        return Stub::createFromPath(__DIR__ . '/../Stubs/form/' . $type . '.stub', [
             'name' => $name,
             'label' => ucwords($name),
         ])->render();
