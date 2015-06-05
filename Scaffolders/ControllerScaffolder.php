@@ -7,7 +7,6 @@ use Illuminate\Support\Str;
 
 class ControllerScaffolder implements Arrayable
 {
-
     /**
      * The name of controller.
      *
@@ -32,7 +31,7 @@ class ControllerScaffolder implements Arrayable
     /**
      * The constructor.
      *
-     * @param string $name
+     * @param string      $name
      * @param string|null $prefix
      */
     public function __construct($name, $prefix = null)
@@ -109,7 +108,7 @@ class ControllerScaffolder implements Arrayable
      */
     public function getPrefixDot()
     {
-        return $this->prefix ? $this->prefix . '.' : '';
+        return $this->prefix ? $this->prefix.'.' : '';
     }
 
     /**
@@ -119,7 +118,7 @@ class ControllerScaffolder implements Arrayable
      */
     public function getPrefixSlash()
     {
-        return $this->prefix ? Str::studly($this->prefix . '\\') : '';
+        return $this->prefix ? Str::studly($this->prefix.'\\') : '';
     }
 
     /**

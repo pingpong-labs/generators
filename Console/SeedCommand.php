@@ -10,7 +10,6 @@ use Symfony\Component\Console\Input\InputOption;
 
 class SeedCommand extends Command
 {
-
     /**
      * The name of command.
      *
@@ -27,8 +26,6 @@ class SeedCommand extends Command
 
     /**
      * Execute the command.
-     *
-     * @return void
      */
     public function fire(Composer $composer)
     {
@@ -40,7 +37,7 @@ class SeedCommand extends Command
 
         $generator->run();
 
-        $this->info("Seed created successfully.");
+        $this->info('Seed created successfully.');
 
         $composer->dumpAutoloads();
     }

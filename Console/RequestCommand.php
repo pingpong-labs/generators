@@ -9,7 +9,6 @@ use Symfony\Component\Console\Input\InputOption;
 
 class RequestCommand extends Command
 {
-
     /**
      * The name of command.
      *
@@ -26,8 +25,6 @@ class RequestCommand extends Command
 
     /**
      * Execute the command.
-     *
-     * @return void
      */
     public function fire()
     {
@@ -41,7 +38,7 @@ class RequestCommand extends Command
 
         $generator->run();
 
-        $this->info("Form request created successfully.");
+        $this->info('Form request created successfully.');
     }
 
     /**

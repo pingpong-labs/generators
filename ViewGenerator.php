@@ -2,11 +2,8 @@
 
 namespace Pingpong\Generators;
 
-use Pingpong\Generators\Stub;
-
 class ViewGenerator extends Generator
 {
-
     /**
      * Get stub name.
      *
@@ -23,8 +20,6 @@ class ViewGenerator extends Generator
 
     /**
      * Setup.
-     *
-     * @return void
      */
     public function setUp()
     {
@@ -40,7 +35,7 @@ class ViewGenerator extends Generator
      */
     public function getBasePath()
     {
-        return base_path() . '/resources/views/';
+        return base_path().'/resources/views/';
     }
 
     /**
@@ -50,7 +45,7 @@ class ViewGenerator extends Generator
      */
     public function getPath()
     {
-        return $this->getBasePath() . strtolower($this->getName()) . '.blade.php';
+        return $this->getBasePath().strtolower($this->getName()).'.blade.php';
     }
 
     /**
@@ -100,7 +95,8 @@ class ViewGenerator extends Generator
     /**
      * Append a custom replacements to this instance.
      *
-     * @param  array $replacements
+     * @param array $replacements
+     *
      * @return self
      */
     public function appendReplacement(array $replacements)

@@ -9,7 +9,6 @@ use Symfony\Component\Console\Input\InputOption;
 
 class ScaffoldCommand extends Command
 {
-
     /**
      * The name of command.
      *
@@ -26,8 +25,6 @@ class ScaffoldCommand extends Command
 
     /**
      * Execute the command.
-     *
-     * @return void
      */
     public function fire()
     {

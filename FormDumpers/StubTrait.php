@@ -6,7 +6,6 @@ use Pingpong\Generators\Stub;
 
 trait StubTrait
 {
-
     /**
      * The array of types.
      *
@@ -52,25 +51,26 @@ trait StubTrait
         'remember_token',
         'deleted_at',
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
 
     /**
      * Get stub template.
      *
-     * @param  string $type
-     * @param  string $name
+     * @param string $type
+     * @param string $name
+     *
      * @return string
      */
     public function getStub($type, $name)
     {
         if (in_array($name, $this->ignores)) {
-            return null;
+            return;
         }
 
         $type = $this->getInputType($type, $name);
 
-        return Stub::createFromPath(__DIR__ . '/../Stubs/form/' . $type . '.stub', [
+        return Stub::createFromPath(__DIR__.'/../Stubs/form/'.$type.'.stub', [
             'name' => $name,
             'label' => ucwords($name),
         ])->render();
@@ -79,8 +79,9 @@ trait StubTrait
     /**
      * Get input type.
      *
-     * @param  string $type
-     * @param  string $name
+     * @param string $type
+     * @param string $name
+     *
      * @return string
      */
     public function getInputType($type, $name)
@@ -99,7 +100,8 @@ trait StubTrait
     /**
      * Get field type.
      *
-     * @param  array $types
+     * @param array $types
+     *
      * @return string
      */
     public function getFieldType($types)

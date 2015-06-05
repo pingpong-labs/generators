@@ -7,7 +7,6 @@ use Pingpong\Generators\Stub;
 
 class TableDumper
 {
-
     use StubTrait;
 
     /**
@@ -79,7 +78,7 @@ class TableDumper
                 continue;
             }
 
-            $results .= "\t\t\t".'<th>' . ucwords($name) . '</th>'.PHP_EOL;
+            $results .= "\t\t\t".'<th>'.ucwords($name).'</th>'.PHP_EOL;
         }
 
         return $results;
@@ -88,7 +87,8 @@ class TableDumper
     /**
      * Convert the fields to formatted php script.
      *
-     * @param  string $var
+     * @param string $var
+     *
      * @return string
      */
     public function toBody($var)
@@ -100,7 +100,7 @@ class TableDumper
                 continue;
             }
 
-            $results .= "\t\t\t\t\t".'<td>{!! $'.$var.'->' . $name . ' !!}</td>'.PHP_EOL;
+            $results .= "\t\t\t\t\t".'<td>{!! $'.$var.'->'.$name.' !!}</td>'.PHP_EOL;
         }
 
         return $results;
@@ -109,7 +109,8 @@ class TableDumper
     /**
      * Get replacements for $SHOW_BODY$.
      *
-     * @param  string $var
+     * @param string $var
+     *
      * @return string
      */
     public function toRows($var)
@@ -121,13 +122,13 @@ class TableDumper
                 continue;
             }
 
-            $results .= Stub::create(__DIR__ . '/../Stubs/scaffold/row.stub', [
+            $results .= Stub::create(__DIR__.'/../Stubs/scaffold/row.stub', [
                 'label' => ucwords($name),
                 'column' => $name,
-                'var' => $var
+                'var' => $var,
             ])->render();
         }
 
-        return $results . PHP_EOL;
+        return $results.PHP_EOL;
     }
 }

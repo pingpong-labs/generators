@@ -1,4 +1,6 @@
-<?php namespace Pingpong\Generators;
+<?php
+
+namespace Pingpong\Generators;
 
 use Illuminate\Console\AppNamespaceDetectorTrait;
 use Illuminate\Filesystem\Filesystem;
@@ -6,7 +8,6 @@ use Illuminate\Support\Str;
 
 abstract class Generator
 {
-
     use AppNamespaceDetectorTrait;
 
     /**
@@ -37,7 +38,7 @@ abstract class Generator
      */
     public function __construct(array $options = array())
     {
-        $this->filesystem = new Filesystem;
+        $this->filesystem = new Filesystem();
         $this->options = $options;
     }
 
@@ -55,6 +56,7 @@ abstract class Generator
      * Set the filesystem instance.
      *
      * @param \Illuminate\Filesystem\Filesystem $filesystem
+     *
      * @return $this
      */
     public function setFilesystem(Filesystem $filesystem)
@@ -71,9 +73,9 @@ abstract class Generator
      */
     public function getStub()
     {
-        $stub = new Stub($this->stub . '.stub', $this->getReplacements());
+        $stub = new Stub($this->stub.'.stub', $this->getReplacements());
 
-        $stub->setBasePath(__DIR__ . '/Stubs/');
+        $stub->setBasePath(__DIR__.'/Stubs/');
 
         return $stub->render();
     }
@@ -88,7 +90,7 @@ abstract class Generator
         return [
             'class' => $this->getClass(),
             'namespace' => $this->getNamespace(),
-            'root_namespace' => $this->getRootNamespace()
+            'root_namespace' => $this->getRootNamespace(),
         ];
     }
 
@@ -109,7 +111,7 @@ abstract class Generator
      */
     public function getPath()
     {
-        return $this->getBasePath() . '/' . $this->getName() . '.php';
+        return $this->getBasePath().'/'.$this->getName().'.php';
     }
 
     /**
@@ -176,16 +178,14 @@ abstract class Generator
         $rootNamespace = $this->getRootNamespace();
 
         if ($rootNamespace == false) {
-            return null;
+            return;
         }
 
-        return 'namespace ' . rtrim($rootNamespace . implode($segments, '\\'), '\\') . ';';
+        return 'namespace '.rtrim($rootNamespace.implode($segments, '\\'), '\\').';';
     }
 
     /**
      * Setup some hook.
-     *
-     * @return void
      */
     public function setUp()
     {
@@ -196,17 +196,18 @@ abstract class Generator
      * Run the generator.
      *
      * @return int
+     *
      * @throws FileAlreadyExistsException
      */
     public function run()
     {
         $this->setUp();
 
-        if ($this->filesystem->exists($path = $this->getPath()) && ! $this->force) {
+        if ($this->filesystem->exists($path = $this->getPath()) && !$this->force) {
             throw new FileAlreadyExistsException($path);
         }
 
-        if (! $this->filesystem->isDirectory($dir = dirname($path))) {
+        if (!$this->filesystem->isDirectory($dir = dirname($path))) {
             $this->filesystem->makeDirectory($dir, 0777, true, true);
         }
 
@@ -226,8 +227,9 @@ abstract class Generator
     /**
      * Determinte whether the given key exist in options array.
      *
-     * @param  string $key
-     * @return boolean
+     * @param string $key
+     *
+     * @return bool
      */
     public function hasOption($key)
     {
@@ -237,13 +239,14 @@ abstract class Generator
     /**
      * Get value from options by given key.
      *
-     * @param  string $key
-     * @param  string|null $default
+     * @param string      $key
+     * @param string|null $default
+     *
      * @return string
      */
     public function getOption($key, $default = null)
     {
-        if (! $this->hasOption($key)) {
+        if (!$this->hasOption($key)) {
             return $default;
         }
 
@@ -253,8 +256,9 @@ abstract class Generator
     /**
      * Helper method for "getOption".
      *
-     * @param  string $key
-     * @param  string|null $default
+     * @param string      $key
+     * @param string|null $default
+     *
      * @return string
      */
     public function option($key, $default = null)
@@ -265,7 +269,8 @@ abstract class Generator
     /**
      * Handle call to __get method.
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return string|mixed
      */
     public function __get($key)

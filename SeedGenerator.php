@@ -4,7 +4,6 @@ namespace Pingpong\Generators;
 
 class SeedGenerator extends Generator
 {
-
     /**
      * Get stub name.
      *
@@ -19,7 +18,7 @@ class SeedGenerator extends Generator
      */
     public function getBasePath()
     {
-        return base_path() . '/database/seeds/';
+        return base_path().'/database/seeds/';
     }
 
     /**
@@ -29,7 +28,7 @@ class SeedGenerator extends Generator
      */
     public function getPath()
     {
-        return $this->getBasePath() . $this->getName() . '.php';
+        return $this->getBasePath().$this->getName().'.php';
     }
 
     /**
@@ -43,7 +42,7 @@ class SeedGenerator extends Generator
 
         $suffix = $this->master ? 'DatabaseSeeder' : 'TableSeeder';
 
-        return $name . $suffix;
+        return $name.$suffix;
     }
 
     /**

@@ -6,7 +6,6 @@ use Illuminate\Support\ServiceProvider;
 
 class GeneratorsServiceProvider extends ServiceProvider
 {
-
     /**
      * The array of consoles.
      *
@@ -27,13 +26,11 @@ class GeneratorsServiceProvider extends ServiceProvider
 
     /**
      * Register the service provider.
-     *
-     * @return void
      */
     public function register()
     {
         foreach ($this->consoles as $console) {
-            $this->commands('Pingpong\Generators\Console\\' . $console . 'Command');
+            $this->commands('Pingpong\Generators\Console\\'.$console.'Command');
         }
     }
 }

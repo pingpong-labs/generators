@@ -7,7 +7,6 @@ use Pingpong\Generators\Stub;
 
 class FieldsDumper
 {
-
     use StubTrait;
 
     /**
@@ -47,7 +46,7 @@ class FieldsDumper
         $results = '';
 
         foreach ($this->getParser()->toArray() as $name => $types) {
-            $results .= $this->getStub($this->getFieldType($types), $name) . PHP_EOL;
+            $results .= $this->getStub($this->getFieldType($types), $name).PHP_EOL;
         }
 
         return $results;
@@ -66,8 +65,8 @@ class FieldsDumper
             if (in_array($name, $this->ignores)) {
                 continue;
             }
-            
-            $results .= "\t\t\t".'<th>' . ucwords($name) . '</th>'.PHP_EOL;
+
+            $results .= "\t\t\t".'<th>'.ucwords($name).'</th>'.PHP_EOL;
         }
 
         return $results;
@@ -76,7 +75,8 @@ class FieldsDumper
     /**
      * Convert the fields to formatted php script.
      *
-     * @param  string $var
+     * @param string $var
+     *
      * @return string
      */
     public function toBody($var)
@@ -88,7 +88,7 @@ class FieldsDumper
                 continue;
             }
 
-            $results .= "\t\t\t\t\t".'<td>{!! $'.$var.'->' . $name . ' !!}</td>'.PHP_EOL;
+            $results .= "\t\t\t\t\t".'<td>{!! $'.$var.'->'.$name.' !!}</td>'.PHP_EOL;
         }
 
         return $results;
@@ -97,7 +97,8 @@ class FieldsDumper
     /**
      * Get replacements for $SHOW_BODY$.
      *
-     * @param  string $var
+     * @param string $var
+     *
      * @return string
      */
     public function toRows($var)
@@ -109,13 +110,13 @@ class FieldsDumper
                 continue;
             }
 
-            $results .= Stub::createFromPath(__DIR__ . '/../Stubs/scaffold/row.stub', [
+            $results .= Stub::createFromPath(__DIR__.'/../Stubs/scaffold/row.stub', [
                 'label' => ucwords($name),
                 'column' => $name,
-                'var' => $var
+                'var' => $var,
             ])->render();
         }
 
-        return $results . PHP_EOL;
+        return $results.PHP_EOL;
     }
 }

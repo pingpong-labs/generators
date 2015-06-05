@@ -4,7 +4,6 @@ namespace Pingpong\Generators;
 
 class ConsoleGenerator extends Generator
 {
-
     /**
      * Get stub name.
      *
@@ -19,7 +18,7 @@ class ConsoleGenerator extends Generator
      */
     public function getBasePath()
     {
-        return app_path() . '/Console/Commands';
+        return app_path().'/Console/Commands';
     }
 
     /**
@@ -29,7 +28,7 @@ class ConsoleGenerator extends Generator
      */
     public function getRootNamespace()
     {
-        return $this->getAppNamespace() . 'Console\\Commands\\';
+        return $this->getAppNamespace().'Console\\Commands\\';
     }
 
     /**

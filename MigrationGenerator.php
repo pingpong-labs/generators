@@ -7,7 +7,6 @@ use Pingpong\Generators\Migrations\SchemaParser;
 
 class MigrationGenerator extends Generator
 {
-
     /**
      * Get stub name.
      *
@@ -22,7 +21,7 @@ class MigrationGenerator extends Generator
      */
     public function getBasePath()
     {
-        return base_path() . '/database/migrations/';
+        return base_path().'/database/migrations/';
     }
 
     /**
@@ -32,7 +31,7 @@ class MigrationGenerator extends Generator
      */
     public function getPath()
     {
-        return $this->getBasePath() . $this->getFileName() . '.php';
+        return $this->getBasePath().$this->getFileName().'.php';
     }
 
     /**
@@ -62,7 +61,7 @@ class MigrationGenerator extends Generator
      */
     public function getFileName()
     {
-        return date('Y_m_d_His_') . $this->getMigrationName();
+        return date('Y_m_d_His_').$this->getMigrationName();
     }
 
     /**
@@ -95,30 +94,30 @@ class MigrationGenerator extends Generator
         $parser = $this->getNameParser();
 
         if ($parser->isCreate()) {
-            return Stub::createFromPath(__DIR__ . '/Stubs/migration/create.stub', [
+            return Stub::createFromPath(__DIR__.'/Stubs/migration/create.stub', [
                 'class' => $this->getClass(),
                 'table' => $parser->getTable(),
-                'fields' => $this->getSchemaParser()->render()
+                'fields' => $this->getSchemaParser()->render(),
             ]);
         } elseif ($parser->isAdd()) {
-            return Stub::createFromPath(__DIR__ . '/Stubs/migration/add.stub', [
+            return Stub::createFromPath(__DIR__.'/Stubs/migration/add.stub', [
                 'class' => $this->getClass(),
                 'table' => $parser->getTable(),
                 'fields_up' => $this->getSchemaParser()->up(),
-                'fields_down' => $this->getSchemaParser()->down()
+                'fields_down' => $this->getSchemaParser()->down(),
             ]);
         } elseif ($parser->isDelete()) {
-            return Stub::createFromPath(__DIR__ . '/Stubs/migration/delete.stub', [
+            return Stub::createFromPath(__DIR__.'/Stubs/migration/delete.stub', [
                 'class' => $this->getClass(),
                 'table' => $parser->getTable(),
                 'fields_down' => $this->getSchemaParser()->up(),
-                'fields_up' => $this->getSchemaParser()->down()
+                'fields_up' => $this->getSchemaParser()->down(),
             ]);
         } elseif ($parser->isDrop()) {
-            return Stub::createFromPath(__DIR__ . '/Stubs/migration/drop.stub', [
+            return Stub::createFromPath(__DIR__.'/Stubs/migration/drop.stub', [
                 'class' => $this->getClass(),
                 'table' => $parser->getTable(),
-                'fields' => $this->getSchemaParser()->render()
+                'fields' => $this->getSchemaParser()->render(),
             ]);
         }
 
