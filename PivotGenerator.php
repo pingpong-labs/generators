@@ -6,7 +6,6 @@ use Illuminate\Support\Str;
 
 class PivotGenerator extends Generator
 {
-
     /**
      * Get stub name.
      *
@@ -21,7 +20,7 @@ class PivotGenerator extends Generator
      */
     public function getBasePath()
     {
-        return base_path() . '/database/migrations/';
+        return base_path().'/database/migrations/';
     }
 
     /**
@@ -31,7 +30,7 @@ class PivotGenerator extends Generator
      */
     public function getPath()
     {
-        return $this->getBasePath() . $this->getFilename() . '.php';
+        return $this->getBasePath().$this->getFilename().'.php';
     }
 
     /**
@@ -41,7 +40,7 @@ class PivotGenerator extends Generator
      */
     public function getFilename()
     {
-        return date('Y_m_d_His_') . $this->getMigrationName();
+        return date('Y_m_d_His_').$this->getMigrationName();
     }
 
     /**
@@ -51,7 +50,7 @@ class PivotGenerator extends Generator
      */
     public function getMigrationName()
     {
-        return 'create_' . $this->getPivotTableName() . '_pivot_table';
+        return 'create_'.$this->getPivotTableName().'_pivot_table';
     }
 
     /**
@@ -104,7 +103,7 @@ class PivotGenerator extends Generator
             'column_one' => $this->getColumnOne(),
             'column_two' => $this->getColumnTwo(),
             'table_pivot' => $this->getPivotTableName(),
-            'timestamp' => $this->getTimestampReplacement()
+            'timestamp' => $this->getTimestampReplacement(),
         ]);
     }
 
@@ -119,7 +118,7 @@ class PivotGenerator extends Generator
             return '$table->timestamps();';
         }
 
-        return null;
+        return;
     }
 
     /**

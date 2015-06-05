@@ -6,7 +6,6 @@ use Pingpong\Generators\Migrations\SchemaParser;
 
 class RequestGenerator extends Generator
 {
-
     /**
      * Get stub name.
      *
@@ -21,7 +20,7 @@ class RequestGenerator extends Generator
      */
     public function getBasePath()
     {
-        return app_path() . '/Http/Requests/';
+        return app_path().'/Http/Requests/';
     }
 
     /**
@@ -31,7 +30,7 @@ class RequestGenerator extends Generator
      */
     public function getPath()
     {
-        return $this->getBasePath() . $this->getName() . '.php';
+        return $this->getBasePath().$this->getName().'.php';
     }
 
     /**
@@ -41,7 +40,7 @@ class RequestGenerator extends Generator
      */
     public function getRootNamespace()
     {
-        return $this->getAppNamespace() . 'Http\Requests\\';
+        return $this->getAppNamespace().'Http\Requests\\';
     }
 
     /**
@@ -53,7 +52,7 @@ class RequestGenerator extends Generator
     {
         return array_merge(parent::getReplacements(), [
             'auth' => $this->getAuth(),
-            'rules' => $this->getRules()
+            'rules' => $this->getRules(),
         ]);
     }
 
@@ -66,7 +65,7 @@ class RequestGenerator extends Generator
     {
         $authorize = $this->auth ? 'true' : 'false';
 
-        return 'return ' . $authorize . ';';
+        return 'return '.$authorize.';';
     }
 
     /**
@@ -76,13 +75,13 @@ class RequestGenerator extends Generator
      */
     public function getRules()
     {
-        if (! $this->rules) {
+        if (!$this->rules) {
             return 'return [];';
         }
 
         $parser = new SchemaParser($this->rules);
 
-        $results = 'return [' . PHP_EOL;
+        $results = 'return ['.PHP_EOL;
 
         foreach ($parser->toArray() as $field => $rules) {
             $results .= $this->createRules($field, $rules);
@@ -96,8 +95,9 @@ class RequestGenerator extends Generator
     /**
      * Create a rule.
      *
-     * @param  string $field
-     * @param  string $rules
+     * @param string $field
+     * @param string $rules
+     *
      * @return string
      */
     protected function createRules($field, $rules)
@@ -108,6 +108,6 @@ class RequestGenerator extends Generator
             $rule = 'required';
         }
 
-        return "\t\t\t'{$field}' => '" . $rule . "'," . PHP_EOL;
+        return "\t\t\t'{$field}' => '".$rule."',".PHP_EOL;
     }
 }

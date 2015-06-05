@@ -9,7 +9,6 @@ use Symfony\Component\Console\Input\InputOption;
 
 class FormCommand extends Command
 {
-
     /**
      * The name of command.
      *
@@ -26,8 +25,6 @@ class FormCommand extends Command
 
     /**
      * Execute the command.
-     *
-     * @return void
      */
     public function fire()
     {

@@ -6,7 +6,6 @@ use Pingpong\Generators\Scaffolders\ControllerScaffolder;
 
 class ControllerGenerator extends Generator
 {
-
     /**
      * Get stub name.
      *
@@ -16,8 +15,6 @@ class ControllerGenerator extends Generator
 
     /**
      * Configure some data.
-     *
-     * @return void
      */
     public function setUp()
     {
@@ -50,7 +47,7 @@ class ControllerGenerator extends Generator
      */
     public function getBasePath()
     {
-        return app_path() . '/Http/Controllers';
+        return app_path().'/Http/Controllers';
     }
 
     /**
@@ -60,7 +57,7 @@ class ControllerGenerator extends Generator
      */
     public function getRootNamespace()
     {
-        return $this->getAppNamespace() . 'Http\\Controllers\\';
+        return $this->getAppNamespace().'Http\\Controllers\\';
     }
 
     /**

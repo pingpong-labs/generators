@@ -1,4 +1,6 @@
-<?php namespace Pingpong\Generators;
+<?php
+
+namespace Pingpong\Generators;
 
 use Exception;
 

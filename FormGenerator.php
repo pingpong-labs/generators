@@ -7,7 +7,6 @@ use Pingpong\Generators\FormDumpers\TableDumper;
 
 class FormGenerator
 {
-
     /**
      * The name of entity.
      *
