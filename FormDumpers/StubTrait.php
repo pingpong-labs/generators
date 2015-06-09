@@ -72,7 +72,7 @@ trait StubTrait
 
         return Stub::createFromPath(__DIR__.'/../Stubs/form/'.$type.'.stub', [
             'name' => $name,
-            'label' => ucwords($name),
+            'label' => ucwords(str_replace('_', ' ', $name)),
         ])->render();
     }
 
