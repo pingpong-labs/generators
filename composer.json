@@ -15,8 +15,8 @@
   ],
   "require": {
     "php": ">=5.4.0",
-    "illuminate/filesystem": "5.1.*@dev",
-    "illuminate/support": "5.1.*@dev",
+    "illuminate/filesystem": "5.1.*",
+    "illuminate/support": "5.1.*",
     "pingpong/support": "2.1.*@dev",
     "doctrine/dbal": "~2.5"
   },
