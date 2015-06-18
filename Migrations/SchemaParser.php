@@ -117,6 +117,7 @@ class SchemaParser implements Arrayable
         $results = '';
 
         foreach ($this->toArray() as $column => $attributes) {
+            $attributes = [head($attributes)];
             $results .= $this->createField($column, $attributes, 'remove');
         }
 
