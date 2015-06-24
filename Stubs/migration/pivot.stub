@@ -3,33 +3,33 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class $CLASS$ extends Migration {
+class $CLASS$ extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('$TABLE_PIVOT$', function(Blueprint $table)
+        {
+            $table->integer('$COLUMN_ONE$_id')->unsigned()->index();
+            $table->foreign('$COLUMN_ONE$_id')->references('id')->on('$TABLE_ONE$')->onDelete('cascade');
+            $table->integer('$COLUMN_TWO$_id')->unsigned()->index();
+            $table->foreign('$COLUMN_TWO$_id')->references('id')->on('$TABLE_TWO$')->onDelete('cascade');
+            $TIMESTAMP$
+        });
+    }
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::create('$TABLE_PIVOT$', function(Blueprint $table)
-		{
-			$table->integer('$COLUMN_ONE$_id')->unsigned()->index();
-			$table->foreign('$COLUMN_ONE$_id')->references('id')->on('$TABLE_ONE$')->onDelete('cascade');
-			$table->integer('$COLUMN_TWO$_id')->unsigned()->index();
-			$table->foreign('$COLUMN_TWO$_id')->references('id')->on('$TABLE_TWO$')->onDelete('cascade');
-			$TIMESTAMP$
-		});
-	}
-
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::drop('$TABLE_PIVOT$');
-	}
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('$TABLE_PIVOT$');
+    }
 
 }

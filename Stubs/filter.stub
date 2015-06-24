@@ -2,9 +2,9 @@
 
 class $CLASS_NAME$ {
 
-	public function filter()
-	{
-		//
-	}
+    public function filter()
+    {
+        //
+    }
 
 } 
