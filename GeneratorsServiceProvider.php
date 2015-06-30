@@ -25,6 +25,30 @@ class GeneratorsServiceProvider extends ServiceProvider
     ];
 
     /**
+     * Boot the package.
+     * 
+     * @return void
+     */
+    public function boot()
+    {
+        $templatePath = config('generators.template_path');
+
+        $this->publishes([
+            __DIR__ . '/Stubs/' => $templatePath
+        ], 'stubs');
+
+        $configPath = config_path('generators.php');
+       
+        $this->publishes([
+            __DIR__.'/config.php' => $configPath,
+        ], 'config');
+
+        if (file_exists($configPath)) {
+            $this->mergeConfigFrom($configPath, 'generators');
+        }
+    }
+
+    /**
      * Register the service provider.
      */
     public function register()

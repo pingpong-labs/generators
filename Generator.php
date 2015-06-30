@@ -75,8 +75,6 @@ abstract class Generator
     {
         $stub = new Stub($this->stub.'.stub', $this->getReplacements());
 
-        $stub->setBasePath(__DIR__.'/Stubs/');
-
         return $stub->render();
     }
 
