@@ -31,7 +31,7 @@ class GeneratorsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $templatePath = config('generators.template_path');
+        $templatePath = config('generators.template_path', base_path('resources/pingpong/generators/stubs'));
 
         $this->publishes([
             __DIR__ . '/Stubs/' => $templatePath
