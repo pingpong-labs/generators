@@ -1,4 +1,6 @@
-<?php $NAMESPACE$
+<?php
+
+$NAMESPACE$
 
 use $ROOT_NAMESPACE$Http\Requests;
 use $ROOT_NAMESPACE$Http\Controllers\Controller;
