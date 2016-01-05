@@ -276,7 +276,9 @@ class ScaffoldGenerator
         }
 
         $contents = $this->laravel['files']->get($path = app_path('Http/routes.php'));
-        $contents .= PHP_EOL."Route::resource('{$this->getRouteName()}', '{$this->getControllerName()}');";
+        $contents .= PHP_EOL."Route::group(['middleware' => ['web']], function () {";
+        $contents .= PHP_EOL."\tRoute::resource('{$this->getRouteName()}', '{$this->getControllerName()}');";
+        $contents .= PHP_EOL."});";
 
         $this->laravel['files']->put($path, $contents);
 
