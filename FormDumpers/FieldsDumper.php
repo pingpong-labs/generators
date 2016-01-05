@@ -110,7 +110,7 @@ class FieldsDumper
                 continue;
             }
 
-            $results .= Stub::createFromPath(__DIR__.'/../Stubs/scaffold/row.stub', [
+            $results .= Stub::create('/scaffold/row.stub', [
                 'label' => ucwords($name),
                 'column' => $name,
                 'var' => $var,

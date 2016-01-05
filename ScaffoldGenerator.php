@@ -248,7 +248,7 @@ class ScaffoldGenerator
         $generator = new ViewGenerator([
             'name' => $this->getPrefix('/').$this->getEntities().'/'.$view,
             'extends' => str_replace('/', '.', $this->getViewLayout()),
-            'template' => __DIR__.'/Stubs/scaffold/views/'.$view.'.stub',
+            'template' => '/scaffold/views/'.$view.'.stub',
             'force' => $this->console->option('force'),
         ]);
 
