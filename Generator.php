@@ -43,6 +43,17 @@ abstract class Generator
     }
 
     /**
+     * Quick run via static-method.
+     * 
+     * @param  array  $options
+     * @return mixed
+     */
+    public static function generate(array $options = [])
+    {
+        return (new static($options))->run();
+    }
+
+    /**
      * Get the filesystem instance.
      *
      * @return \Illuminate\Filesystem\Filesystem
