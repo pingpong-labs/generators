@@ -4,6 +4,7 @@ namespace Pingpong\Generators\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Composer;
+use Pingpong\Generators\FileAlreadyExistsException;
 use Pingpong\Generators\SeedGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
@@ -29,17 +30,19 @@ class SeedCommand extends Command
      */
     public function fire(Composer $composer)
     {
-        $generator = new SeedGenerator([
-            'name' => $this->argument('name'),
-            'master' => $this->option('master'),
-            'force' => $this->option('force'),
-        ]);
+        try {
+            SeedGenerator::generate([
+                'name' => $this->argument('name'),
+                'master' => $this->option('master'),
+                'force' => $this->option('force'),
+            ]);
 
-        $generator->run();
+            $this->info('Seed created successfully.');
 
-        $this->info('Seed created successfully.');
-
-        $composer->dumpAutoloads();
+            $composer->dumpAutoloads();
+        } catch (FileAlreadyExistsException $e) {
+            $this->comment($e->getMessage());
+        }
     }
 
     /**

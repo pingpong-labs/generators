@@ -4,6 +4,7 @@ namespace Pingpong\Generators\Console;
 
 use Illuminate\Console\Command;
 use Pingpong\Generators\ConsoleGenerator;
+use Pingpong\Generators\FileAlreadyExistsException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -28,16 +29,18 @@ class ConsoleCommand extends Command
      */
     public function fire()
     {
-        $generator = new ConsoleGenerator([
-            'name' => $this->argument('name'),
-            'force' => $this->option('force'),
-            'command' => $this->option('command'),
-            'description' => $this->option('description'),
-        ]);
+        try {
+            ConsoleGenerator::generate([
+                'name' => $this->argument('name'),
+                'force' => $this->option('force'),
+                'command' => $this->option('command'),
+                'description' => $this->option('description'),
+            ]);
 
-        $generator->run();
-
-        $this->info('Console created successfully.');
+            $this->info('Console created successfully.');
+        } catch (FileAlreadyExistsException $e) {
+            $this->comment($e->getMessage());
+        }
     }
 
     /**

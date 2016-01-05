@@ -3,6 +3,7 @@
 namespace Pingpong\Generators\Console;
 
 use Illuminate\Console\Command;
+use Pingpong\Generators\FileAlreadyExistsException;
 use Pingpong\Generators\ModelGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
@@ -28,15 +29,16 @@ class ModelCommand extends Command
      */
     public function fire()
     {
-        $generator = new ModelGenerator([
-            'name' => $this->argument('name'),
-            'fillable' => $this->option('fillable'),
-            'force' => $this->option('force'),
-        ]);
-
-        $generator->run();
-
-        $this->info('Model created successfully.');
+        try {
+            ModelGenerator::generate([
+                'name' => $this->argument('name'),
+                'fillable' => $this->option('fillable'),
+                'force' => $this->option('force'),
+            ]);
+            $this->info('Model created successfully.');
+        } catch (FileAlreadyExistsException $e) {
+            $this->comment($e->getMessage());
+        }
     }
 
     /**

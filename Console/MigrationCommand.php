@@ -4,6 +4,7 @@ namespace Pingpong\Generators\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Composer;
+use Pingpong\Generators\FileAlreadyExistsException;
 use Pingpong\Generators\MigrationGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
@@ -29,17 +30,19 @@ class MigrationCommand extends Command
      */
     public function fire(Composer $composer)
     {
-        $generator = new MigrationGenerator([
-            'name' => $this->argument('name'),
-            'fields' => $this->option('fields'),
-            'force' => $this->option('force'),
-        ]);
-
-        $generator->run();
-
-        $this->info('Migration created successfully.');
-
-        $composer->dumpAutoloads();
+        try {
+            MigrationGenerator::generate([
+                'name' => $this->argument('name'),
+                'fields' => $this->option('fields'),
+                'force' => $this->option('force'),
+            ]);
+         
+            $this->info('Migration created successfully.');
+         
+            $composer->dumpAutoloads();
+        } catch (FileAlreadyExistsException $e) {
+            $this->comment($e->getMessage());       
+        }
     }
 
     /**

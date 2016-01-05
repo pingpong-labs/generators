@@ -4,6 +4,7 @@ namespace Pingpong\Generators\Console;
 
 use Illuminate\Console\Command;
 use Pingpong\Generators\ControllerGenerator;
+use Pingpong\Generators\FileAlreadyExistsException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -28,16 +29,18 @@ class ControllerCommand extends Command
      */
     public function fire()
     {
-        $generator = new ControllerGenerator([
-            'name' => $this->argument('name'),
-            'resource' => $this->option('resource'),
-            'scaffold' => $this->option('scaffold'),
-            'force' => $this->option('force'),
-        ]);
+        try {
+            ControllerGenerator::generate([
+                'name' => $this->argument('name'),
+                'resource' => $this->option('resource'),
+                'scaffold' => $this->option('scaffold'),
+                'force' => $this->option('force'),
+            ]);
 
-        $generator->run();
-
-        $this->info('Controller created successfully.');
+            $this->info('Controller created successfully.');
+        } catch (FileAlreadyExistsException $e) {
+            $this->comment($e->getMessage());
+        }
     }
 
     /**

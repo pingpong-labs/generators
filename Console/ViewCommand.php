@@ -3,6 +3,7 @@
 namespace Pingpong\Generators\Console;
 
 use Illuminate\Console\Command;
+use Pingpong\Generators\FileAlreadyExistsException;
 use Pingpong\Generators\ViewGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
@@ -28,18 +29,22 @@ class ViewCommand extends Command
      */
     public function fire()
     {
-        (new ViewGenerator([
-            'name' => $this->argument('name'),
-            'extends' => $this->option('extends'),
-            'section' => $this->option('section'),
-            'master' => $this->option('master'),
-            'plain' => $this->option('plain'),
-            'content' => $this->option('content'),
-            'template' => $this->option('template'),
-            'force' => $this->option('force'),
-        ]))->run();
+        try {
+            ViewGenerator::generate([
+                'name' => $this->argument('name'),
+                'extends' => $this->option('extends'),
+                'section' => $this->option('section'),
+                'master' => $this->option('master'),
+                'plain' => $this->option('plain'),
+                'content' => $this->option('content'),
+                'template' => $this->option('template'),
+                'force' => $this->option('force'),
+            ]);
 
-        $this->info('View created successfully.');
+            $this->info('View created successfully.');
+        } catch (FileAlreadyExistsException $e) {
+            $this->comment($e->getMessage());
+        }
     }
 
     /**

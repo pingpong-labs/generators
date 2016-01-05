@@ -3,6 +3,7 @@
 namespace Pingpong\Generators\Console;
 
 use Illuminate\Console\Command;
+use Pingpong\Generators\FileAlreadyExistsException;
 use Pingpong\Generators\RequestGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
@@ -28,17 +29,19 @@ class RequestCommand extends Command
      */
     public function fire()
     {
-        $generator = new RequestGenerator([
-            'name' => $this->argument('name'),
-            'rules' => $this->option('rules'),
-            'auth' => $this->option('auth'),
-            'scaffold' => $this->option('scaffold'),
-            'force' => $this->option('force'),
-        ]);
+        try {
+            RequestGenerator::generate([
+                'name' => $this->argument('name'),
+                'rules' => $this->option('rules'),
+                'auth' => $this->option('auth'),
+                'scaffold' => $this->option('scaffold'),
+                'force' => $this->option('force'),
+            ]);
 
-        $generator->run();
-
-        $this->info('Form request created successfully.');
+            $this->info('Form request created successfully.');
+        } catch (FileAlreadyExistsException $e) {
+            $this->comment($e->getMessage());
+        }
     }
 
     /**
