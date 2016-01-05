@@ -46,6 +46,18 @@ class GeneratorsServiceProvider extends ServiceProvider
         if (file_exists($configPath)) {
             $this->mergeConfigFrom($configPath, 'generators');
         }
+
+        $this->setStubBasePath();   
+    }
+
+    /**
+     * Set stub base path.
+     *
+     * @return void 
+     */
+    protected function setStubBasePath()
+    {
+        Stub::setBasePath(config('generators.template_path', __DIR__.'/Stubs').'/');
     }
 
     /**
