@@ -84,6 +84,8 @@ abstract class Generator
      */
     public function getStub()
     {
+        Stub::setBasePath(config('generators.template_path', __DIR__.'/Stubs').'/');
+
         $stub = new Stub($this->stub.'.stub', $this->getReplacements());
 
         return $stub->render();
