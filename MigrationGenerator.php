@@ -93,32 +93,40 @@ class MigrationGenerator extends Generator
     {
         $parser = $this->getNameParser();
 
+        $this->setStubBasePath();
+
         if ($parser->isCreate()) {
-            return Stub::create('/migration/create.stub', [
+            $stub = Stub::create('/migration/create.stub', [
                 'class' => $this->getClass(),
                 'table' => $parser->getTable(),
                 'fields' => $this->getSchemaParser()->render(),
             ]);
         } elseif ($parser->isAdd()) {
-            return Stub::create('/migration/add.stub', [
+            $stub = Stub::create('/migration/add.stub', [
                 'class' => $this->getClass(),
                 'table' => $parser->getTable(),
                 'fields_up' => $this->getSchemaParser()->up(),
                 'fields_down' => $this->getSchemaParser()->down(),
             ]);
         } elseif ($parser->isDelete()) {
-            return Stub::create('/migration/delete.stub', [
+            $stub = Stub::create('/migration/delete.stub', [
                 'class' => $this->getClass(),
                 'table' => $parser->getTable(),
                 'fields_down' => $this->getSchemaParser()->up(),
                 'fields_up' => $this->getSchemaParser()->down(),
             ]);
         } elseif ($parser->isDrop()) {
-            return Stub::create('/migration/drop.stub', [
+            $stub = Stub::create('/migration/drop.stub', [
                 'class' => $this->getClass(),
                 'table' => $parser->getTable(),
                 'fields' => $this->getSchemaParser()->render(),
             ]);
+        } else {
+            $stub = false;
+        }
+
+        if ($stub) {
+            return $stub->render();
         }
 
         return parent::getStub();
