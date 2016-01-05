@@ -24,6 +24,15 @@ class SchemaParser implements Arrayable
     protected $schema;
 
     /**
+     * The relationship keys.
+     * 
+     * @var array
+     */
+    protected $relationshipKeys = [
+        'belongsTo',
+    ];
+
+    /**
      * Create new instance.
      *
      * @param string|null $schema
@@ -137,10 +146,32 @@ class SchemaParser implements Arrayable
         $results = "\t\t\t".'$table';
 
         foreach ($attributes as $key => $field) {
-            $results .= $this->{"{$type}Column"}($key, $field, $column);
+            if (in_array($column, $this->relationshipKeys)) {
+                $results .= $this->addRelationColumn($key, $field, $column);
+            } else {
+                $results .= $this->{"{$type}Column"}($key, $field, $column);
+            }
         }
 
         return $results .= ';'.PHP_EOL;
+    }
+
+    /**
+     * Add relation column.
+     *
+     * @param int    $key
+     * @param string $field
+     * @param string $column
+     *
+     * @return string
+     */
+    protected function addRelationColumn($key, $field, $column)
+    {
+        $relatedColumn = snake_case(class_basename($field)).'_id';
+
+        $method = 'integer';
+
+        return "->{$method}('{$relatedColumn}')";
     }
 
     /**
