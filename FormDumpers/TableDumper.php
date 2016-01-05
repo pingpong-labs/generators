@@ -47,6 +47,22 @@ class TableDumper
     }
 
     /**
+     * Convert table description to migration schema.
+     * 
+     * @return string
+     */
+    public function toSchema()
+    {
+        $schema = [];
+
+        foreach ($this->getColumns() as $column) {
+            $schema[] = $column->getName().':'.strtolower($column->getType());
+        }
+
+        return implode(', ', $schema);
+    }
+
+    /**
      * Render the form.
      *
      * @return string
