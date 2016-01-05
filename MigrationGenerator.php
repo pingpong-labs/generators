@@ -2,6 +2,7 @@
 
 namespace Pingpong\Generators;
 
+use Pingpong\Generators\FormDumpers\TableDumper;
 use Pingpong\Generators\Migrations\NameParser;
 use Pingpong\Generators\Migrations\SchemaParser;
 
@@ -51,6 +52,10 @@ class MigrationGenerator extends Generator
      */
     public function getMigrationName()
     {
+        if ($this->existing) {
+            return 'create_'.str_plural($this->name).'_table';
+        }
+
         return strtolower($this->name);
     }
 
@@ -93,9 +98,20 @@ class MigrationGenerator extends Generator
     {
         $parser = $this->getNameParser();
 
-        $this->setStubBasePath();
+        if ($this->existing) {
+            $this->name = 'create_'.str_plural($this->name).'_table';
+            
+            $parser = $this->getNameParser();
+                
+            $fields = (new TableDumper($parser->getTable()))->toSchema();
 
-        if ($parser->isCreate()) {
+            $stub = Stub::create('/migration/create.stub', [
+                'class' => $this->getClass(),
+                'table' => $parser->getTable(),
+                'fields' => (new SchemaParser($fields))->render(),
+            ]);
+        }
+        elseif ($parser->isCreate()) {
             $stub = Stub::create('/migration/create.stub', [
                 'class' => $this->getClass(),
                 'table' => $parser->getTable(),

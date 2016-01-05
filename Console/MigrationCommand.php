@@ -35,6 +35,7 @@ class MigrationCommand extends Command
                 'name' => $this->argument('name'),
                 'fields' => $this->option('fields'),
                 'force' => $this->option('force'),
+                'existing' => $this->option('existing'),
             ]);
          
             $this->info('Migration created successfully.');
@@ -66,6 +67,7 @@ class MigrationCommand extends Command
     {
         return [
             ['fields', 'c', InputOption::VALUE_OPTIONAL, 'The fields of migration. Separated with comma (,).', null],
+            ['existing', 'e', InputOption::VALUE_NONE, 'Create migration from an existing table.', null],
             ['force', 'f', InputOption::VALUE_NONE, 'Force the creation if file already exists.', null],
         ];
     }
