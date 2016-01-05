@@ -3,7 +3,7 @@
 namespace Pingpong\Generators\Console;
 
 use Illuminate\Console\Command;
-use Illuminate\Foundation\Composer;
+use Illuminate\Support\Composer;
 use Pingpong\Generators\SeedGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
