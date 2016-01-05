@@ -78,24 +78,12 @@ abstract class Generator
     }
 
     /**
-     * Set stub base path.
-     *
-     * @return void 
-     */
-    protected function setStubBasePath()
-    {
-        Stub::setBasePath(config('generators.template_path', __DIR__.'/Stubs').'/');
-    }
-
-    /**
      * Get stub template for generated file.
      *
      * @return string
      */
     public function getStub()
     {
-        $this->setStubBasePath();
-
         $stub = new Stub($this->stub.'.stub', $this->getReplacements());
 
         return $stub->render();
