@@ -70,6 +70,30 @@ class ScaffoldGenerator
     }
 
     /**
+     * Determine whether the creation is from an existing table.
+     * 
+     * @return boolen
+     */
+    public function existing()
+    {
+        return $this->console->option('existing');
+    }
+
+    /**
+     * Get schema fields.
+     * 
+     * @return string
+     */
+    public function getFields()
+    {
+        if ($this->existing()) {
+            return TableDumper::make($this->getEntities())->toSchema();
+        }
+
+        return $this->console->option('fields');
+    }
+
+    /**
      * Get controller name.
      *
      * @return string
@@ -112,7 +136,7 @@ class ScaffoldGenerator
 
         $this->console->call('generate:model', [
             'name' => $this->getEntity(),
-            '--fillable' => $this->console->option('fields'),
+            '--fillable' => $this->getFields(),
             '--force' => $this->console->option('force'),
         ]);
     }
@@ -141,10 +165,14 @@ class ScaffoldGenerator
             return;
         }
 
+        $existing = $this->existing();
+        $table = $this->getEntities();
+
         $this->console->call('generate:migration', [
-            'name' => "create_{$this->getEntities()}_table",
+            'name' => $existing ? $table : "create_{$table}_table",
             '--fields' => $this->console->option('fields'),
             '--force' => $this->console->option('force'),
+            '--existing' => $existing,
         ]);
     }
 
@@ -205,7 +233,7 @@ class ScaffoldGenerator
      */
     public function getFormGenerator()
     {
-        return new FormGenerator($this->getEntities(), $this->console->option('fields'));
+        return new FormGenerator($this->getEntities(), $this->getFields());
     }
 
     /**
@@ -219,7 +247,12 @@ class ScaffoldGenerator
             return new TableDumper($this->getEntities());
         }
 
-        return new FieldsDumper($this->console->option('fields'));
+        if ($this->existing()) {
+            return TableDumper::make($this->getEntities())
+                ->except(['id', 'created_at', 'updated_at', 'deleted_at']);
+        }
+
+        return new FieldsDumper($fields);
     }
 
     /**
@@ -345,7 +378,7 @@ class ScaffoldGenerator
                 'name' => $name,
                 '--scaffold' => true,
                 '--auth' => true,
-                '--rules' => $this->console->option('fields'),
+                '--rules' => $this->existing() ? $this->getTableDumper()->toSchema() : $this->getFields(),
                 '--force' => $this->console->option('force'),
             ]);
         }
@@ -361,7 +394,9 @@ class ScaffoldGenerator
         $this->generateSeed();
         $this->generateRequest();
         $this->generateController();
-        $this->runMigration();
+        if (!$this->existing()) {
+            $this->runMigration();
+        }
         $this->generateViews();
         $this->appendRoute();
     }
