@@ -23,7 +23,7 @@ class $CLASS$ extends Controller
      */
     public function index()
     {
-        $$LOWER_ENTITIES$ = $STUDLY_ENTITY$::latest()->paginate(20);
+        $$LOWER_ENTITIES$ = $STUDLY_ENTITY$::paginate(20);
 
         $index = $$LOWER_ENTITIES$->firstItem();
 
