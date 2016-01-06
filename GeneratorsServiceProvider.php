@@ -31,7 +31,11 @@ class GeneratorsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $templatePath = config('generators.template_path', base_path('resources/pingpong/generators/stubs'));
+        $templatePath = config('generators.template_path', $fallbackTemplatePath = __DIR__.'/Stubs').'/';
+        
+        if (!is_dir($templatePath)) {
+            $templatePath = $fallbackTemplatePath . '/';
+        }
 
         $this->publishes([
             __DIR__ . '/Stubs/' => $templatePath
@@ -47,17 +51,18 @@ class GeneratorsServiceProvider extends ServiceProvider
             $this->mergeConfigFrom($configPath, 'generators');
         }
 
-        $this->setStubBasePath();   
+        $this->setStubBasePath($templatePath);   
     }
 
     /**
      * Set stub base path.
      *
+     * @param string $templatePath
      * @return void 
      */
-    protected function setStubBasePath()
+    protected function setStubBasePath($templatePath)
     {
-        Stub::setBasePath(config('generators.template_path', __DIR__.'/Stubs').'/');
+        Stub::setBasePath($templatePath);
     }
 
     /**
