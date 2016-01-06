@@ -27,6 +27,17 @@ class TableDumper
     }
 
     /**
+     * Make a new instance of this class.
+     * 
+     * @param  string $table
+     * @return self
+     */
+    public static function make($table)
+    {
+        return new static($table);
+    }
+
+    /**
      * Get table name.
      *
      * @return string
