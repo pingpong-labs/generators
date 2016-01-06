@@ -18,7 +18,7 @@ $TABLE_HEADING$
 		<tbody>
 			@foreach ($$LOWER_PLURAL_ENTITY$ as $$LOWER_SINGULAR_ENTITY$)
 				<tr>
-					<td class="text-center">{!! $no !!}</td>
+					<td class="text-center">{!! $index !!}</td>
 $TABLE_BODY$		
 					<td>{!! $$LOWER_SINGULAR_ENTITY$->created_at !!}</td>
 					<td class="text-center">
@@ -31,7 +31,7 @@ $TABLE_BODY$
 						</div>
 					</td>
 				</tr>
-				<?php $no++; ?>
+				<?php $index++; ?>
 			@endforeach
 		</tbody>
 	</table>
