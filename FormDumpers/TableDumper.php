@@ -17,6 +17,13 @@ class TableDumper
     protected $table;
 
     /**
+     * The array of excepted fields.
+     * 
+     * @var array
+     */
+    protected $except = [];
+
+    /**
      * The constructor.
      *
      * @param string $table
@@ -35,6 +42,19 @@ class TableDumper
     public static function make($table)
     {
         return new static($table);
+    }
+
+    /**
+     * Set excepted fields.
+     * 
+     * @param  array|string $except
+     * @return self
+     */
+    public function except($except)
+    {
+        $this->except = $except;
+
+        return $this;
     }
 
     /**
@@ -67,7 +87,9 @@ class TableDumper
         $schema = [];
 
         foreach ($this->getColumns() as $column) {
-            $schema[] = $column->getName().':'.strtolower($column->getType());
+            if (! in_array($name = $column->getName(), $this->except)) {
+                $schema[] = $name.':'.strtolower($column->getType());
+            }
         }
 
         return implode(', ', $schema);
