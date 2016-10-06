@@ -33,7 +33,7 @@ class GeneratorsServiceProvider extends ServiceProvider
     {
         $templatePath = config('generators.template_path', $fallbackTemplatePath = __DIR__.DIRECTORY_SEPARATOR.'Stubs').DIRECTORY_SEPARATOR;
         if (!\File::exists($templatePath) || !is_dir($templatePath)) {
-            throw new \Symfony\Component\Filesystem\Exception\FileNotFoundException("Directort $templatePath dose not exist. Please create it first !");
+            throw new \Symfony\Component\Filesystem\Exception\FileNotFoundException("Directory $templatePath dose not exist. Please create it first !");
         }
 
         $this->publishes([
