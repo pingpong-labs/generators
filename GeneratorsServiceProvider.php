@@ -31,10 +31,9 @@ class GeneratorsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $templatePath = config('generators.template_path', $fallbackTemplatePath = __DIR__.'/Stubs').'/';
-        
-        if (!is_dir($templatePath)) {
-            $templatePath = $fallbackTemplatePath . '/';
+        $templatePath = config('generators.template_path', $fallbackTemplatePath = __DIR__.DIRECTORY_SEPARATOR.'Stubs').DIRECTORY_SEPARATOR;
+        if (!\File::exists($templatePath) || !is_dir($templatePath)) {
+            throw new \Symfony\Component\Filesystem\Exception\FileNotFoundException("Directort $templatePath dose not exist. Please create it first !");
         }
 
         $this->publishes([
