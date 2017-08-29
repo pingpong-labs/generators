@@ -252,7 +252,7 @@ class ScaffoldGenerator
                 ->except(['id', 'created_at', 'updated_at', 'deleted_at']);
         }
 
-        return new FieldsDumper($this->console->option('fields'));
+        return new FieldsDumper($fields);
     }
 
     /**
