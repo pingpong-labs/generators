@@ -1,4 +1,4 @@
 Laravel 5 Generators
 ==============
 
-Official documentation is located [here](http://sky.pingpong-labs.com/docs/2.0/generators)
+Document : https://github.com/pingpong-labs/docs/blob/2.2/generators.md
